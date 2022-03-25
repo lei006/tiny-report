@@ -3,8 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import TinyReport from '../src/index'
 
 Vue.config.productionTip = false
+
+
+Vue.use(TinyReport)
 
 /* eslint-disable no-new */
 new Vue({

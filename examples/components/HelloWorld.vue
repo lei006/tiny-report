@@ -78,13 +78,19 @@
         >
           awesome-vue
         </a>
+        <TinyPaper />
+        <TinyTitle />
+        <TinyRich />
+        <TinyRect />
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+
 export default {
+  components: { },
   name: 'HelloWorld',
   data () {
     return {
