@@ -1,9 +1,10 @@
 {
   "name": "tiny-report",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A Vue.js project",
   "author": "lei <lei006@qq.com>",
-  "private": true,
+  "private": false,
+  "main": "./src/index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
@@ -12,6 +13,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "tiny-report": "^0.0.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

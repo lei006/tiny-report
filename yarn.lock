@@ -7954,6 +7954,14 @@ timsort@^0.3.0:
   resolved "https://registry.npmjs.org/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
+tiny-report@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/tiny-report/-/tiny-report-0.0.1.tgz#9a2fd91df8dd82e78007904978c77335ce908f3a"
+  integrity sha512-Gm72kMaYlSD8aAP3eOQR+tfGDrYOYkq2/X4jN1ewC0r4ILea1SPn7pcCA+M40CNVhjG2iZC70ITCcIO3w1Hb9w==
+  dependencies:
+    vue "^2.5.2"
+    vue-router "^3.0.1"
+
 tmpl@1.0.5:
   version "1.0.5"
   resolved "https://registry.npmjs.org/tmpl/-/tmpl-1.0.5.tgz#8683e0b902bb9c20c4f726e3c0b69f36518c07cc"
