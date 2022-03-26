@@ -9,6 +9,7 @@
     >
       <div class="tiny-report-item-area">
         <slot>基本组件1</slot>
+        <div class="tiny-report-item-mask"></div>
       </div>
     </VueDragResize>
   </div>
@@ -80,9 +81,22 @@ export default {
 .tiny-report-item-area {
   width:100%;
   height:100%;
+  position: relative;
 
   border-style:dashed;
   border-width:1px;
+}
+
+.tiny-report-item-mask {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+
+      top: 0;
+      left: 0;
+      background-color: rgba(100, 0, 0,0.05);
+
+
 }
 
 

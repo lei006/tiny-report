@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <report-base-item>
-      <el-image style="width: 100px; height: 100px" :src="url" :fit="fit"></el-image>
+      <el-image style="width: 100%; height: 100%" :src="url" :fit="fit"></el-image>
     </report-base-item>
   </div>
 </template>
