@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    矩形组件
+    矩形组件11
   </div>
 </template>
 
