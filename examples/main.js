@@ -33,6 +33,22 @@ Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
 
+
+
+
+
+//本地的包--用来开发
+import TinyReport from '../src/index'
+
+//从NPM下载的包--用来测试
+//import TinyReport from 'tiny-report'    
+
+Vue.use(TinyReport)
+
+
+
+
+
 Vue.config.productionTip = false
 
 new Vue({
