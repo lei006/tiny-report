@@ -8,6 +8,7 @@
         <TinyTitle />
         <TinyRich />
         <TinyRect />
+        <tp-image />
 
   </div>
 </template>

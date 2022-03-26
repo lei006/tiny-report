@@ -1,15 +1,24 @@
 <template>
   <div class="hello">
-    TinyTitle 组件
+    <report-base-item>
+      <el-image style="width: 100px; height: 100px" :src="url" :fit="fit"></el-image>
+    </report-base-item>
   </div>
 </template>
 
 <script>
+
+import ReportBaseItem from './ReportItem/index.vue'
+
 export default {
-  name: 'TinyTitle',
+  name: 'TpImage',
+  components:{ReportBaseItem},
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+      fit:"contain",
+      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'      
     }
   }
 }

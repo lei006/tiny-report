@@ -7,10 +7,9 @@
       @resizestop="onResizestop(reportItem, $event)"
       @deactivated="onDeactivated(reportItem)"
     >
-      <div class="tiny-report-area">
-      基本组件
+      <div class="tiny-report-item-area">
+        <slot>基本组件1</slot>
       </div>
-
     </VueDragResize>
   </div>
 </template>
@@ -78,7 +77,7 @@ export default {
 
 
 
-.tiny-report-area {
+.tiny-report-item-area {
   width:100%;
   height:100%;
 
