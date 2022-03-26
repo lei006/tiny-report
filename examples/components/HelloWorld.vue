@@ -10,6 +10,7 @@
         >
           Core Docs
         </a>
+        <ReportItem />
       </li>
       <li>
         <a
