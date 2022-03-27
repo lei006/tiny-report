@@ -9,7 +9,7 @@
     <li class="form-edit-widget-label"><a><i class="icon iconfont icon-check-box"></i><span>多选框组</span></a></li>
     <li class="form-edit-widget-label"><a><i class="icon iconfont icon-select"></i><span>下拉选择框</span></a></li>
     <li class="form-edit-widget-label"><a><i class="icon iconfont icon-time"></i><span>时间选择器</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-date"></i><span>日期选择器</span></a></li>
+    <li class="form-edit-widget-label"><a><i class="icon iconfont el-icon-edit"></i><span>日期选择器</span></a></li>
     <li class="form-edit-widget-label"><a><i class="icon iconfont icon-pingfen1"></i><span>评分</span></a></li>
     <li class="form-edit-widget-label"><a><i class="icon iconfont icon-color"></i><span>颜色选择器</span></a></li>
     <li class="form-edit-widget-label"><a><i class="icon iconfont icon-switch"></i><span>开关</span></a></li>
@@ -41,6 +41,11 @@ export default {
     padding: 8px 0;
     width: 100%;
     height: 100%;
+
+    border:1px solid #cccccc;
+
+    overflow:auto;
+
 }
 
 .components-list .widget-cate {
@@ -70,6 +75,7 @@ export default {
     margin: 1%;
     color: #333;
     border: 1px solid #f4f6fc;
+
 }
 
 
@@ -83,12 +89,23 @@ export default {
     color: #333;
 }
 
+.components-list .form-edit-widget-label:hover a {
+    color: #409eff;
+}
 
 
+.components-list .form-edit-widget-label:hover {
+    color: #409eff;
+    border: 1px dashed #409eff;
+}
 
-
-
-
+.components-list .form-edit-widget-label>a .icon {
+    margin-right: 6px;
+    margin-left: 8px;
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
+}
 
 
 

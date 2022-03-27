@@ -6,10 +6,12 @@
       </el-aside>
         <el-main>
           <el-container>
-            <el-header>
-              顶部
+            <el-header style="height: 45px;">
+              <TinyDesignerTop />
             </el-header>
-            <el-main>我是报告单-设计器</el-main>
+            <el-main>
+              <TinyPaper></TinyPaper>
+            </el-main>
           </el-container>
         </el-main>
       <el-aside>
@@ -23,11 +25,13 @@
 
 import TinyComponentsList from './TinyComponentsList.vue'
 import TinyProperties from './TinyProperties.vue'
+import TinyPaper from './TinyPaper.vue'
+import TinyDesignerTop from './TinyDesignerTop.vue'
 
 
 export default {
   name: 'TinyDesigner',
-  components:{TinyComponentsList,TinyProperties},
+  components:{TinyComponentsList,TinyProperties,TinyPaper, TinyDesignerTop},
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
@@ -39,6 +43,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+
 .tiny-designer {
 
   min-width: 800px;
@@ -48,12 +53,9 @@ export default {
   height: 100%;
   
 
-  border:1px solid #c22159;
 
-    background-color: #edeef3;
     margin-left: 20px;
     box-shadow: inset 0 0 3px 2px #dadada;
-
 
 }
 
