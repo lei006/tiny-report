@@ -1,12 +1,12 @@
 <template>
-  <div class="hello rd-f5">
-    ReportPaper组件1
+  <div class="hello">
+    我是报告单
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TinyPaper',
+  name: 'TinyReport',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
@@ -17,12 +17,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-
-
-.rd-f5 {
-    background-color: #fff;
-    box-shadow: 0 3px 6px 0 rgba(0,0,0,.3);
-}
 
 </style>

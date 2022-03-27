@@ -56,6 +56,22 @@ export const constantRoutes = [
   },
 
   {
+    path: '/designer',
+    component: Layout,
+    redirect: '/designer/index',
+    name: 'Designer',
+    meta: { title: '报告设计器', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'index',
+        name: 'DesignerHome',
+        component: () => import('@/views/Designer/index'),
+        meta: { title: '报告设计器', icon: 'el-icon-s-help' }
+      },
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
@@ -66,7 +82,7 @@ export const constantRoutes = [
         path: 'table',
         name: 'Table',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        meta: { title: 'Table11', icon: 'table' }
       },
       {
         path: 'tree',
