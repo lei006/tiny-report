@@ -44,6 +44,16 @@ export default {
 <style scoped>
 
 
+
+
+
+
+
+.el-header {
+    padding: 0 0px;
+}
+
+
 .tiny-designer {
 
   min-width: 800px;
@@ -53,10 +63,15 @@ export default {
   height: 100%;
   
 
+  border:1px solid #fc0c0c;
 
     margin-left: 20px;
     box-shadow: inset 0 0 3px 2px #dadada;
 
+}
+
+.el-container {
+  height: 100%;
 }
 
 

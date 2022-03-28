@@ -30,10 +30,6 @@ export default {
 
   background-color: #edeef3;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   overflow:scroll;
 }
 
@@ -47,7 +43,7 @@ export default {
 
 .tiny-paper {
   width: 500px;
-  height: 400px;
+  height: 1400px;
   padding: 15px;
 }
 

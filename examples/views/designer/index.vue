@@ -32,11 +32,18 @@ export default {
 <style lang="scss" scoped>
 .dashboard {
   &-container {
-    margin: 30px;
+    margin: 0px;
   }
   &-text {
     font-size: 30px;
     line-height: 46px;
   }
 }
+
+.dashboard-container {
+  height: 100%;
+  width: 100%;
+
+}
+
 </style>
