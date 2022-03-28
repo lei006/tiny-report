@@ -1,6 +1,5 @@
 <template>
   <div class="tiny-report-item">
-    <!--
     <VueDragResize :x='reportItem.left' :y='reportItem.top' :w='reportItem.width'  :h='reportItem.height' :minw='1' :minh='1' :enableNativeDrag='true'
       :draggable='reportItem.isActive'  :resizable='reportItem.isActive' :preventDeactivation='true' :parentLimitation='true'
       @dragging="onDragging(reportItem, $event)"
@@ -13,19 +12,12 @@
         <div class="tiny-report-item-mask"></div>
       </div>
     </VueDragResize>
-    -->
-    <VueDragResize :isActive="true" :x='reportItem.left' :y='reportItem.top' :w='reportItem.width'  :h='reportItem.height' :parentLimitation='true' v-on:resizing="resize" v-on:dragging="resize">
-        <h3>Hello World!</h3>
-        <p>{{ top }} х {{ left }} </p>
-        <p>{{ width }} х {{ height }}</p>
-    </VueDragResize>
-
   </div>
 </template>
 
 <script>
 
-import VueDragResize from 'vue-drag-resize'
+import VueDragResize from '../DragResize/index.vue';
 
 
 export default {
@@ -54,11 +46,7 @@ export default {
 
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      width: 0,
-      height: 0,
-      top: 0,
-      left: 0          
+      msg: 'Welcome to Your Vue.js App'
     }
   },
   methods:{
@@ -78,9 +66,7 @@ export default {
       item.left = val.left
       item.top = val.top
     },
-    resize(){
 
-    }
 
   }
 }
