@@ -7,10 +7,10 @@
         <el-main>
           <el-container>
             <el-header style="height: 45px;">
-              <TinyDesignerTop />
+              <TinyDesignerTop @onBtnHit="onBtnHit"/>
             </el-header>
             <el-main>
-              <TinyPaper></TinyPaper>
+              <TinyPaper ref="reportPaper"></TinyPaper>
             </el-main>
           </el-container>
         </el-main>
@@ -35,6 +35,22 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods:{
+    onBtnHit(btn, data){
+      if (btn == "onReportSize") {
+
+        if (data == "A4") {
+          this.$refs.reportPaper.SetSize(1440,900);
+        } else if (data == "B5") {
+          this.$refs.reportPaper.SetSize(800,600);
+        }
+
+      }else if (btn == "onReportModel"){
+
+      }
+
     }
   }
 }

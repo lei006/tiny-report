@@ -1,6 +1,6 @@
 <template>
   <div class="tiny-paper-box">
-    <div class="tiny-paper rd-f5">
+    <div class="tiny-paper rd-f5" :style="{'width':paper.size.width + 'px','height':paper.size.height + 'px',fontSize:paper.font.size + 'px'}">
       <div class="tiny-paper-content">
         ReportPaper组件1
       </div>
@@ -13,8 +13,28 @@ export default {
   name: 'TinyPaper',
   data () {
     return {
+      paper:{
+        size:{
+          width:1440,
+          height:400
+        },
+        font:{
+          size:12,
+        },
+        model:"design", //设计，填写，预览，打印
+      },
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  methods:{
+    SetSize(width, height){
+      this.paper.size.width = width;
+      this.paper.size.height = height;
+    },
+    SetModel(mod){
+      this.paper.model = mod;
+    }
+
   }
 }
 </script>
