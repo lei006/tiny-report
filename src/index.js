@@ -4,6 +4,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 
+
 import TinyPaper from './TinyPaper.vue'
 import TinyReport from './TinyReport.vue'
 import TinyDesigner from './TinyDesigner.vue'
@@ -15,8 +16,13 @@ import TinyImage from './TinyImage.vue'
 import ReportBaseItem from './ReportItem/index.vue'
 
 
+
+
 const components = {
     install:function(Vue){
+
+        Vue.use(ElementUI, { locale })
+
         Vue.component(TinyPaper.name, TinyPaper)
         Vue.component(TinyReport.name, TinyReport)
         Vue.component(TinyDesigner.name, TinyDesigner)
@@ -28,10 +34,6 @@ const components = {
         Vue.component(ReportBaseItem.name, ReportBaseItem)
 
 
-        // set ElementUI lang to EN
-        Vue.use(ElementUI, { locale })
-        // 如果想要中文版 element-ui，按如下方式声明
-        // Vue.use(ElementUI)
 
 
     }

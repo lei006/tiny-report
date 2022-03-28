@@ -3,14 +3,27 @@
     <div class="tiny-paper rd-f5" :style="{'width':paper.size.width + 'px','height':paper.size.height + 'px',fontSize:paper.font.size + 'px'}">
       <div class="tiny-paper-content">
         ReportPaper组件1
+
+          <VueDragResize :isActive="true" :x='60' :y='60' :w='250'  :h='250' :parentLimitation='true' v-on:resizing="resize" v-on:dragging="resize">
+              <h3>Hello World!</h3>
+              <p>{{ top }} х {{ left }} </p>
+              <p>{{ width }} х {{ height }}</p>
+          </VueDragResize>
+
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
+import VueDragResize from 'vue-drag-resize'
+
+
 export default {
   name: 'TinyPaper',
+  components:{VueDragResize},
   data () {
     return {
       paper:{
@@ -23,7 +36,11 @@ export default {
         },
         model:"design", //设计，填写，预览，打印
       },
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      width: 0,
+      height: 0,
+      top: 0,
+      left: 0      
     }
   },
   methods:{
@@ -33,6 +50,9 @@ export default {
     },
     SetModel(mod){
       this.paper.model = mod;
+    },
+    resize(){
+
     }
 
   }
@@ -65,6 +85,7 @@ export default {
   width: 500px;
   height: 1400px;
   padding: 15px;
+
 }
 
 .tiny-paper-content {
@@ -72,6 +93,9 @@ export default {
   height: 100%;
 
   border:1px dashed #cccccc;
+
+  position: relative;
+
 }
 
 

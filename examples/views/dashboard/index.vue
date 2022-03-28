@@ -4,11 +4,9 @@
 
         <ReportItem />
 
-        <TinyPaper />
         <TinyTitle />
         <TinyRich />
         <TinyRect />
-        <tp-image />
 
   </div>
 </template>
