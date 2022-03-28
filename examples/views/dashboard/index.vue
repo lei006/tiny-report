@@ -2,11 +2,6 @@
   <div class="dashboard-container">
     <div class="dashboard-text">name: {{ name }}</div>
 
-        <ReportItem />
-
-        <TinyTitle />
-        <TinyRich />
-        <TinyRect />
 
   </div>
 </template>

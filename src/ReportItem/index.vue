@@ -9,7 +9,7 @@
     >
       <div class="tiny-report-item-area">
         <slot>基本组件1</slot>
-        <div class="tiny-report-item-mask"></div>
+        <div class="tiny-report-item-mask">{{reportItem}}</div>
       </div>
     </VueDragResize>
   </div>
@@ -33,21 +33,22 @@ export default {
           default: ()=> {
             return {left:100,top:10,width:100,height:200,isActive:true}
           },
-      },
-      model: {
-          type: String,
-          default: "edit",
-      },
-      disabled: {
-          type: Boolean,
-          default: false,
-      },
+      }
+  },
+  watch:{
+    reportItem(val) {
+        console.log("watch reportItem -->", val)
+
+    }
   },
 
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  mounted(){
+    console.log("reportItem -->", this.reportItem)
   },
   methods:{
     onDragging(item, val){

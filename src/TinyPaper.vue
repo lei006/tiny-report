@@ -2,9 +2,15 @@
   <div class="tiny-paper-box">
     <div class="tiny-paper rd-f5" :style="{'width':paper.size.width + 'px','height':paper.size.height + 'px',fontSize:paper.font.size + 'px'}">
       <div class="tiny-paper-content">
-        ReportPaper组件1
 
-        <TinyImage />
+          <template v-for="(item,key) in paper.items">
+            <TinyImage :key="key" v-if="item.class == 'image'" v-model="paper.items[key]" />
+            <TinyRect :key="key" v-if="item.class == 'rect'" v-model="paper.items[key]" :item1="msg"/>
+            <TinyLabel :key="key" v-if="item.class == 'label'" v-model="paper.items[key]" />
+            <TinyEllipse :key="key" v-if="item.class == 'ellipse'" v-model="paper.items[key]" />
+          </template>
+          <TinyLabel v-model="item_test" />
+
       </div>
     </div>
   </div>
@@ -13,10 +19,13 @@
 <script>
 
 import TinyImage from './TinyImage.vue'
+import TinyEllipse from './TinyEllipse.vue'
+import TinyRect from './TinyRect.vue'
+import TinyLabel from './TinyLabel.vue'
 
 export default {
   name: 'TinyPaper',
-  components:{TinyImage},
+  components:{TinyImage,TinyEllipse, TinyRect, TinyLabel},
   data () {
     return {
       paper:{
@@ -28,9 +37,17 @@ export default {
           size:12,
         },
         model:"design", //设计，填写，预览，打印
+        items:[],       //报告项列表...
       },
+      item_test:{class:"label",left:120,top:30,width:100,height:200,isActive:true},
       msg: 'Welcome to Your Vue.js App',  
     }
+  },
+  mounted(){
+    this.paper.items.push({class:"image",left:100,top:10,width:100,height:200,isActive:true});
+    this.paper.items.push({class:"rect",left:110,top:20,width:100,height:200,isActive:true});
+    this.paper.items.push({class:"label",left:120,top:30,width:100,height:200,isActive:true});
+    this.paper.items.push({class:"ellipse",left:130,top:40,width:100,height:200,isActive:true});
   },
   methods:{
     SetSize(width, height){
