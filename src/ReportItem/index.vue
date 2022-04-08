@@ -9,7 +9,7 @@
     >
       <div class="tiny-report-item-area">
         <slot>基本组件1</slot>
-        <div class="tiny-report-item-mask">{{reportItem}}</div>
+        <div class="tiny-report-item-mask"></div>
       </div>
     </VueDragResize>
   </div>
