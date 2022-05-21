@@ -1,6 +1,6 @@
 <template>
-  <div class="tiny-report-item">
-    <VueDragResize :x='reportItem.left' :y='reportItem.top' :w='reportItem.width'  :h='reportItem.height' :minw='1' :minh='1' :enableNativeDrag='true'
+
+    <vue-draggable-resizable :parent="true" :x='reportItem.left' :y='reportItem.top' :w='reportItem.width'  :h='reportItem.height' :minw='1' :minh='1' :enableNativeDrag='true'
       :draggable='reportItem.isActive'  :resizable='reportItem.isActive' :preventDeactivation='true' :parentLimitation='true'
       @dragging="onDragging(reportItem, $event)"
       @resizing="onResizing(reportItem, $event)"
@@ -11,18 +11,17 @@
         <slot>基本组件1</slot>
         <div class="tiny-report-item-mask"></div>
       </div>
-    </VueDragResize>
-  </div>
+    </vue-draggable-resizable>
 </template>
 
 <script>
 
-import VueDragResize from '../DragResize/index.vue';
-
+import VueDraggableResizable from 'vue-draggable-resizable'
+import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 
 export default {
   name: 'ReportItem',
-  components:{VueDragResize},
+  components:{VueDraggableResizable},
   model: {
       prop: "reportItem",
       event: "eventReportItem"
