@@ -1,18 +1,6 @@
 <template>
   <div class="dashboard-container">
-        <!--
-        <ReportItem />
-
-        <TinyPaper />
-        <TinyTitle />
-        <TinyRich />
-        <TinyRect />
-        -->
         <TinyDesigner />
-        <!--
-        <tp-image />
-        -->
-
   </div>
 </template>
 
