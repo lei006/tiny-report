@@ -10,7 +10,7 @@
               <TinyDesignerTop @onBtnHit="onBtnHit"/>
             </el-header>
             <el-main>
-              <TinyPaper ref="reportPaper"></TinyPaper>
+              <TinyReport ref="reportPaper"></TinyReport>
             </el-main>
           </el-container>
         </el-main>
@@ -25,14 +25,14 @@
 
 import TinyComponentsList from './TinyComponentsList.vue'
 import TinyProperties from './TinyProperties.vue'
-import TinyPaper from './TinyPaper.vue'
+import TinyReport from './TinyReport.vue'
 import TinyDesignerTop from './TinyDesignerTop.vue'
 import TinyImage from './TinyImage.vue'
 
 
 export default {
   name: 'TinyDesigner',
-  components:{TinyComponentsList,TinyProperties,TinyPaper, TinyDesignerTop,TinyImage},
+  components:{TinyComponentsList,TinyProperties,TinyReport, TinyDesignerTop,TinyImage},
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

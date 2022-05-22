@@ -24,7 +24,7 @@ import TinyRect from './TinyRect.vue'
 import TinyLabel from './TinyLabel.vue'
 
 export default {
-  name: 'TinyPaper',
+  name: 'TinyReport',
   components:{TinyImage,TinyEllipse, TinyRect, TinyLabel},
   data () {
     return {

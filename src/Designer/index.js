@@ -1,12 +1,12 @@
 
-import TinyPaper from './TinyPaper.vue'
+import TinyReport from './TinyReport.vue'
 import TinyTitle from './TinyTitle.vue'
 import TinyInput from './TinyInput.vue'
 import TinyRich from './TinyRich.vue'
 import TinyRect from './TinyRect.vue'
 const components = {
     install:function(Vue){
-        Vue.component(TinyPaper.name, TinyPaper)
+        Vue.component(TinyReport.name, TinyReport)
         Vue.component(TinyTitle.name, TinyTitle)
         Vue.component(TinyInput.name, TinyInput)
         Vue.component(TinyRich.name, TinyRich)
