@@ -6,7 +6,6 @@ import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 
 import TinyPaper from './TinyPaper.vue'
-import TinyReport from './TinyReport.vue'
 import TinyDesigner from './TinyDesigner.vue'
 
 
@@ -17,7 +16,6 @@ const components = {
         Vue.use(ElementUI, { locale })
 
         Vue.component(TinyPaper.name, TinyPaper)
-        Vue.component(TinyReport.name, TinyReport)
         Vue.component(TinyDesigner.name, TinyDesigner)
 
     }
