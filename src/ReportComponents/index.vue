@@ -7,7 +7,7 @@
       @resizestop="onResizestop(reportItem, $event)"
       @deactivated="onDeactivated(reportItem)"
     >
-      <div class="tiny-report-item-area">
+      <div class="tiny-report-item-area tiny-report-no-select">
         <slot>基本组件1</slot>
         <div class="tiny-report-item-mask"></div>
       </div>

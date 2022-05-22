@@ -1,5 +1,5 @@
 <template>
-  <div class="components-list">
+  <div class="components-list tiny-report-no-select">
     <div class="widget-cate">属性栏</div>
     <ul>
     <li class="form-edit-widget-label"><a><i class="icon iconfont icon-input"></i><span>单行文本</span></a></li>

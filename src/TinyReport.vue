@@ -18,10 +18,10 @@
 
 <script>
 
-import TinyImage from './ReportItem/TinyImage.vue'
-import TinyEllipse from './ReportItem/TinyEllipse.vue'
-import TinyRect from './ReportItem/TinyRect.vue'
-import TinyLabel from './ReportItem/TinyLabel.vue'
+import TinyImage from './ReportComponents/TinyImage.vue'
+import TinyEllipse from './ReportComponents/TinyEllipse.vue'
+import TinyRect from './ReportComponents/TinyRect.vue'
+import TinyLabel from './ReportComponents/TinyLabel.vue'
 
 export default {
   name: 'TinyReport',
@@ -100,5 +100,22 @@ export default {
 
 }
 
+
+</style>
+
+<style>
+
+.tiny-report-no-select{
+
+/* Chrome all / Safari all /opera15+*/ 
+-webkit-user-select: none;   
+/* Firefox all */  
+-moz-user-select: none;     
+/* IE 10+ */ 
+-ms-user-select: none;       
+/* 通用 */
+user-select: none; 
+
+}
 
 </style>

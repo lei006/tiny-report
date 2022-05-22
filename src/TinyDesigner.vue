@@ -23,10 +23,10 @@
 
 <script>
 
-import TinyComponentsList from './TinyComponentsList.vue'
-import TinyProperties from './TinyProperties.vue'
+import TinyComponentsList from './DesignComponents/TinyComponentsList.vue'
+import TinyProperties from './DesignComponents/TinyProperties.vue'
 import TinyReport from './TinyReport.vue'
-import TinyDesignerTop from './TinyDesignerTop.vue'
+import TinyDesignerTop from './DesignComponents/TinyDesignerTop.vue'
 
 
 export default {
