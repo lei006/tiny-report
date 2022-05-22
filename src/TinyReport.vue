@@ -18,10 +18,10 @@
 
 <script>
 
-import TinyImage from './TinyImage.vue'
-import TinyEllipse from './TinyEllipse.vue'
-import TinyRect from './TinyRect.vue'
-import TinyLabel from './TinyLabel.vue'
+import TinyImage from './ReportItem/TinyImage.vue'
+import TinyEllipse from './ReportItem/TinyEllipse.vue'
+import TinyRect from './ReportItem/TinyRect.vue'
+import TinyLabel from './ReportItem/TinyLabel.vue'
 
 export default {
   name: 'TinyReport',

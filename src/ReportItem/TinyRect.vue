@@ -1,15 +1,15 @@
 <template>
     <report-base-item>
-      <div class="ellipse"></div>
+      <div class="tiny-report-rect"></div>
     </report-base-item>
 </template>
 
 <script>
 
-import ReportBaseItem from './ReportItem/index.vue'
+import ReportBaseItem from './index.vue'
 
 export default {
-  name: 'TpImage',
+  name: 'TinyReportRect',
   components:{ReportBaseItem},
   data () {
     return {
@@ -22,12 +22,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.ellipse{
+.tiny-report-rect{
   width: 100%;
   height: 100%;
   margin: 0px;
   background: #FFD900;
-  border-radius: 50% / 50%;
 }
 
 

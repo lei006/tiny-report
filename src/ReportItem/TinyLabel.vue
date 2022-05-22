@@ -6,7 +6,7 @@
 
 <script>
 
-import ReportBaseItem from './ReportItem/index.vue'
+import ReportBaseItem from './index.vue'
 
 export default {
   name: 'TinyReportLabel',

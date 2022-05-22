@@ -10,7 +10,7 @@
         >
           Core Docs
         </a>
-        <ReportItem />
+        <ReportItems />
       </li>
       <li>
         <a
@@ -79,7 +79,7 @@
         >
           awesome-vue
         </a>
-        <TinyPaper />
+        <TinyReport />
         <TinyTitle />
         <TinyRich />
         <TinyRect />

@@ -27,12 +27,11 @@ import TinyComponentsList from './TinyComponentsList.vue'
 import TinyProperties from './TinyProperties.vue'
 import TinyReport from './TinyReport.vue'
 import TinyDesignerTop from './TinyDesignerTop.vue'
-import TinyImage from './TinyImage.vue'
 
 
 export default {
   name: 'TinyDesigner',
-  components:{TinyComponentsList,TinyProperties,TinyReport, TinyDesignerTop,TinyImage},
+  components:{TinyComponentsList,TinyProperties,TinyReport, TinyDesignerTop},
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
