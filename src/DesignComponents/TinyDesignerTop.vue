@@ -2,9 +2,9 @@
   <div class="tiny-designer-top">
     <div class="designer-layout-box">
       <el-radio-group v-model="radio1"  size="mini" @change="onReportModel">
-        <el-radio-button label="设计"></el-radio-button>
-        <el-radio-button label="填写"></el-radio-button>
-        <el-radio-button label="打印"></el-radio-button>
+        <el-radio-button label="design">设计</el-radio-button>
+        <el-radio-button label="write">填写</el-radio-button>
+        <el-radio-button label="preview">预览</el-radio-button>
       </el-radio-group>
       <div class="btn-diviler"></div>    
       <el-radio-group v-model="radio2"  size="mini" @change="onReportSize">

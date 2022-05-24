@@ -1,6 +1,6 @@
 <template>
     <report-base-item v-model="reportItem">
-      <div class="tiny-report-label">1331</div>
+      <div class="tiny-report-label"><slot>标签</slot></div>
     </report-base-item>
 </template>
 

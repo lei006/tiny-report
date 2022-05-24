@@ -48,6 +48,8 @@ export default {
         }
 
       }else if (btn == "onReportModel"){
+        console.log(btn, data);
+          this.$refs.reportPaper.SetModel(data);
 
       }
 
