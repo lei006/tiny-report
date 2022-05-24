@@ -92,8 +92,10 @@ export default {
   width: 500px;
   height: 1400px;
   padding: 15px;
+  margin:auto;
 
   position: relative;
+
 
 }
 

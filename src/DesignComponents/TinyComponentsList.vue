@@ -2,29 +2,38 @@
   <div class="components-list tiny-report-no-select">
     <div class="widget-cate">基础字段</div>
     <ul>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-input"></i><span>单行文本</span></a></li>
-    <li class="form-edit-widget-label" draggable="false" style=""><a draggable="false"><i class="icon iconfont icon-diy-com-textarea"></i><span>多行文本</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-number"></i><span>计数器</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-radio-active"></i><span>单选框组</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-check-box"></i><span>多选框组</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-select"></i><span>下拉选择框</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-time"></i><span>时间选择器</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont el-icon-edit"></i><span>日期选择器</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-pingfen1"></i><span>评分</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-color"></i><span>颜色选择器</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-switch"></i><span>开关</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-slider"></i><span>滑块</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-wenzishezhi-"></i><span>文字</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-html"></i><span>HTML</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-button"></i><span>按钮</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-lianjie"></i><span>文字链接</span></a></li>
+      <draggable :group="{ name: 'my-group', pull: 'clone', put: false}">
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-input"></i><span>单行文本</span></a></li>
+      <li class="form-edit-widget-label" draggable="false" style=""><a draggable="false"><i class="icon iconfont icon-diy-com-textarea"></i><span>多行文本</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-number"></i><span>计数器</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-radio-active"></i><span>单选框组</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-check-box"></i><span>多选框组</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-select"></i><span>下拉选择框</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-time"></i><span>时间选择器</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont el-icon-edit"></i><span>日期选择器</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-pingfen1"></i><span>评分</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-color"></i><span>颜色选择器</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-switch"></i><span>开关</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-slider"></i><span>滑块</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-wenzishezhi-"></i><span>文字</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-html"></i><span>HTML</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-button"></i><span>按钮</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-lianjie"></i><span>文字链接</span></a></li>
+      </draggable>
     </ul>
   </div>
 </template>
 
 <script>
+
+import draggable from "vuedraggable";
+
+
 export default {
   name: 'TinyComponentsList',
+  components: {
+    draggable,
+  },  
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
