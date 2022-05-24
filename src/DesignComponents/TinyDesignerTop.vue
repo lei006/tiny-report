@@ -2,14 +2,16 @@
   <div class="tiny-designer-top">
     <div class="designer-layout-box">
       <el-radio-group v-model="radio1"  size="mini" @change="onReportModel">
-        <el-radio-button label="design">设计</el-radio-button>
-        <el-radio-button label="write">填写</el-radio-button>
-        <el-radio-button label="preview">预览</el-radio-button>
+        <el-radio-button label="btn_design">设计</el-radio-button>
+        <el-radio-button label="btn_write">填写</el-radio-button>
+        <el-radio-button label="btn_preview">预览</el-radio-button>
       </el-radio-group>
       <div class="btn-diviler"></div>    
+      <el-button size="mini" @click="onToolHit('btn_print')">打印</el-button>
+      <div class="btn-diviler"></div>    
       <el-radio-group v-model="radio2"  size="mini" @change="onReportSize">
-        <el-radio-button label="A4"></el-radio-button>
-        <el-radio-button label="B5"></el-radio-button>
+        <el-radio-button label="btn_paper_a4">A4</el-radio-button>
+        <el-radio-button label="btn_paper_b5">B5</el-radio-button>
       </el-radio-group>
     </div>
     <div class="designer-toolsbar">
@@ -37,17 +39,17 @@ export default {
   },
   methods:{
 
-    onBtnHit(event, data){
-      this.$emit('onBtnHit', event,data)
+    onBtnHit(data, data1){
+      this.$emit('onBtnHit', data, data1)
     },
     onToolHit(data){
-      this.onBtnHit('onToolHit',data);
+      this.onBtnHit(data);
     },
     onReportModel(data){
-      this.onBtnHit('onReportModel',data);
+      this.onBtnHit(data);
     },
     onReportSize(data){
-      this.onBtnHit('onReportSize',data);
+      this.onBtnHit(data);
     }
   }
 

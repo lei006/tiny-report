@@ -39,18 +39,20 @@ export default {
   },
   methods:{
     onBtnHit(btn, data){
-      if (btn == "onReportSize") {
-
-        if (data == "A4") {
+      if (btn == "btn_paper_a4") {
           this.$refs.reportPaper.SetSize(1440,900);
-        } else if (data == "B5") {
+      }else if (btn == "btn_paper_b5"){
           this.$refs.reportPaper.SetSize(800,600);
-        }
-
-      }else if (btn == "onReportModel"){
-        console.log(btn, data);
-          this.$refs.reportPaper.SetModel(data);
-
+      }else if (btn == "btn_print"){
+        console.log(btn)
+      }else if (btn == "btn_design"){
+          this.$refs.reportPaper.SetModel("design");
+      }else if (btn == "btn_write"){
+          this.$refs.reportPaper.SetModel("write");
+      }else if (btn == "btn_preview"){
+          this.$refs.reportPaper.SetModel("preview");
+      }else{
+        console.log("未处理事件", btn);
       }
 
     }
