@@ -1,11 +1,13 @@
 <template>
 
-    <vue-draggable-resizable :parent="true" :x='reportItem.left' :y='reportItem.top' :w='reportItem.width'  :h='reportItem.height' :minw='1' :minh='1' :enableNativeDrag='true'
+    <vue-draggable-resizable ref="item" :parent="true" :x='reportItem.left' :y='reportItem.top' :w='reportItem.width'  :h='reportItem.height' :minw='1' :minh='1' :enableNativeDrag='true'
       :draggable='reportItem.isActive'  :resizable='reportItem.isActive' :preventDeactivation='true' :parentLimitation='true'
       @dragging="onDragging(reportItem, $event)"
       @resizing="onResizing(reportItem, $event)"
       @resizestop="onResizestop(reportItem, $event)"
       @deactivated="onDeactivated(reportItem)"
+      @activated="onActivated"
+      :on-drag-start="onDragStartCallback"
     >
       <div class="tiny-report-item-area tiny-report-no-select">
         <slot>基本组件1</slot>
@@ -51,6 +53,9 @@ export default {
   },
   methods:{
     onDragging(item, val){
+
+
+
       item.left = val.left
       item.top = val.top
     },
@@ -66,6 +71,11 @@ export default {
       item.left = val.left
       item.top = val.top
     },
+    onActivated(){
+    },
+    onDragStartCallback(){
+      this.$refs.item.checkParentSize();
+    }
 
 
   }
