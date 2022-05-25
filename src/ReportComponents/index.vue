@@ -2,10 +2,10 @@
 
     <vue-draggable-resizable ref="item" :parent="true" :x='reportItem.left' :y='reportItem.top' :w='reportItem.width'  :h='reportItem.height' :minw='1' :minh='1' :enableNativeDrag='true'
       :draggable='reportItem.isActive'  :resizable='reportItem.isActive' :preventDeactivation='true' :parentLimitation='true'
-      @dragging="onDragging(reportItem, $event)"
-      @resizing="onResizing(reportItem, $event)"
-      @resizestop="onResizestop(reportItem, $event)"
-      @deactivated="onDeactivated(reportItem)"
+      @dragging="onDragging"
+      @resizing="onResize"
+      @resizestop="onResize"
+      @deactivated="onDeactivated"
       @activated="onActivated"
       :on-drag-start="onDragStartCallback"
     >
@@ -52,24 +52,20 @@ export default {
     console.log("reportItem -->", this.reportItem)
   },
   methods:{
-    onDragging(item, val){
-
-
-
-      item.left = val.left
-      item.top = val.top
+    onDragging(left, top){
+      this.reportItem.left = left;
+      this.reportItem.top = top;
     },
-    onResizing(item,val){
-      item.width = val.width
-      item.height = val.height
-      item.left = val.left
-      item.top = val.top
+    onResize(left, top, width, height){
+      
+      this.reportItem.left = left;
+      this.reportItem.top = top;
+      this.reportItem.width = width;
+      this.reportItem.height = height;
+      
     },
-    onResizestop(item,val){
-      item.width = val.width
-      item.height = val.height
-      item.left = val.left
-      item.top = val.top
+    onDeactivated(){
+      
     },
     onActivated(){
     },
