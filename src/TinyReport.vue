@@ -1,7 +1,7 @@
 <template>
   <div class="tiny-paper-box">
     <div class="tiny-paper rd-f5" :style="{'width':paper.layout.size.width + 'px','height':paper.layout.size.height + 'px',fontSize:paper.layout.font.size + 'px'}">
-      <div class="tiny-paper-content">
+      <div class="tiny-paper-content" @click="onClick">
 
           <template v-for="(item,key) in paper.layout.items">
             <TinyImage :key="key" v-if="item.class == 'image'" v-model="paper.layout.items[key]" />
@@ -51,8 +51,8 @@ export default {
   mounted(){
     this.paper.layout.items.push({class:"image",left:100,top:10,width:100,height:200,isActive:true});
     this.paper.layout.items.push({class:"rect",left:110,top:20,width:100,height:200,isActive:true});
-    this.paper.layout.items.push({class:"label",left:120,top:30,width:100,height:200,isActive:true});
-    this.paper.layout.items.push({class:"ellipse",left:130,top:40,width:100,height:200,isActive:true});
+    this.paper.layout.items.push({class:"label",left:120,top:30,width:180,height:290,isActive:true});
+    this.paper.layout.items.push({class:"ellipse",left:130,top:40,width:160,height:200,isActive:true});
   },
   methods:{
     SetSize(width, height){
@@ -61,6 +61,11 @@ export default {
     },
     SetModel(mod){
       this.paper.model = mod;
+    },
+    onClick(){
+      for (let i = 0; i < this.paper.layout.items.length; i++) {
+        this.paper.layout.items[i].isActive = false;
+      }
     },
   }
 }

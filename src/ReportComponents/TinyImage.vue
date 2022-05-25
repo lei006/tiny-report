@@ -1,5 +1,5 @@
 <template>
-    <report-base-item>
+    <report-base-item  v-model="reportItem">
       <el-image style="width: 100%; height: 100%" :src="url" :fit="fit"></el-image>
     </report-base-item>
 </template>
@@ -11,6 +11,15 @@ import ReportBaseItem from './index.vue'
 export default {
   name: 'TpImage',
   components:{ReportBaseItem},
+  model: {
+      prop: "reportItem",
+      event: "eventReportItem"
+  },
+  props: {
+      reportItem: {
+          type: Object
+      },
+  },   
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',

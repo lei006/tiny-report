@@ -9,9 +9,9 @@
       @activated="onActivated"
       :on-drag-start="onDragStartCallback"
     >
-      <div class="tiny-report-item-area tiny-report-no-select">
+      <div class="tiny-report-item-area tiny-report-no-select" @click.stop="onClick">
         <slot>基本组件1</slot>
-        <div class="tiny-report-item-mask"></div>
+        <div class="tiny-report-item-mask">{{reportItem}}</div>
       </div>
     </vue-draggable-resizable>
 </template>
@@ -32,7 +32,7 @@ export default {
       reportItem: {
           type: Object,
           default: ()=> {
-            return {left:100,top:10,width:100,height:200,isActive:true}
+            return {left:10,top:20,isActive:true}
           },
       }
   },
@@ -73,6 +73,9 @@ export default {
     },
     onActivated(){
     },
+    onClick(event){
+      this.reportItem.isActive = true;
+    },
     onDragStartCallback(){
       this.$refs.item.checkParentSize();
     }
@@ -94,7 +97,7 @@ export default {
   position: relative;
 
   border-style:dashed;
-  border-width:1px;
+  border-width:0px;
 }
 
 .tiny-report-item-mask {

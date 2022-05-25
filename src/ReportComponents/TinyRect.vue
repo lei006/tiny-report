@@ -1,5 +1,5 @@
 <template>
-    <report-base-item>
+    <report-base-item v-model="reportItem">
       <div class="tiny-report-rect"></div>
     </report-base-item>
 </template>
@@ -11,6 +11,15 @@ import ReportBaseItem from './index.vue'
 export default {
   name: 'TinyReportRect',
   components:{ReportBaseItem},
+  model: {
+      prop: "reportItem",
+      event: "eventReportItem"
+  },
+  props: {
+      reportItem: {
+          type: Object
+      },
+  }, 
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
