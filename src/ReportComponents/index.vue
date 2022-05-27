@@ -9,7 +9,7 @@
       @activated="onActivated"
       :on-drag-start="onDragStartCallback"
     >
-      <div class="tiny-report-item-area tiny-report-no-select" @click.stop="onClick">
+      <div class="tiny-report-item-area tiny-report-no-select" @click.stop="onClick" @mousedown="onMouseDown">
         <slot>基本组件1</slot>
         <div class="tiny-report-item-mask">{{reportItem}}</div>
       </div>
@@ -70,6 +70,9 @@ export default {
     onActivated(){
     },
     onClick(event){
+      this.reportItem.isActive = true;
+    },
+    onMouseDown(){
       this.reportItem.isActive = true;
     },
     onDragStartCallback(){
