@@ -24,4 +24,16 @@ npm run unit
 npm test
 ```
 
+``` bash
+# install dependencies
+1. 划线选中
+2. 拖动增加无素
+3. 属性调整
+4. 各种对齐
+5. 分页打印
+6. 设计，填写，预览
+
+```
+
+
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

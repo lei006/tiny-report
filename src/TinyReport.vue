@@ -126,7 +126,11 @@ export default {
       this.drag.prevOffsetY = offsetY;
       return ret;
     },
-
+    // 对齐--
+    align(){
+      
+    },
+    
 
     SetSize(width, height){
       this.paper.layout.size.width = width;
