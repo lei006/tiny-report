@@ -1,8 +1,17 @@
 <template>
 
-    <vue-draggable-resizable ref="item" :parent="true" :x='reportItem.left' :y='reportItem.top' :w='reportItem.width'  :h='reportItem.height' :minw='1' :minh='1' :enableNativeDrag='true'
+    <vue-draggable-resizable ref="item" :parent="true" 
+    :x='reportItem.left' 
+    :y='reportItem.top' 
+    :w='reportItem.width'  
+    :h='reportItem.height' 
+    :minw='1' 
+    :minh='1' 
+    :enableNativeDrag='true'
+    :z="reportItem.zindex"
       :draggable='reportItem.isActive'  :resizable='reportItem.isActive' :preventDeactivation='true' :parentLimitation='true'
-      @dragging="onDragging"
+      @dragging="dragging"
+      @dragstop="dragstop"
       @resizing="onResize"
       @resizestop="onResize"
       @deactivated="onDeactivated"
@@ -37,24 +46,29 @@ export default {
       }
   },
   watch:{
-    reportItem(val) {
-        console.log("watch reportItem -->", val)
-
+    reportItem:{
+      handler(newVal, oldVal){
+        newVal.zindex = newVal.isActive?100:0;
+      },
+      deep:true,
+      immediate:true,
     }
   },
 
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
     }
   },
   mounted(){
     console.log("reportItem -->", this.reportItem)
   },
   methods:{
-    onDragging(left, top){
-      this.reportItem.left = left;
-      this.reportItem.top = top;
+    dragging(left, top){
+      this.$emit("dragging", this.reportItem.id, left, top);
+    },
+    dragstop(left, top){
+      this.$emit("dragstop", this.reportItem.id, left, top);
     },
     onResize(left, top, width, height){
       

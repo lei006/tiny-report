@@ -1,5 +1,5 @@
 <template>
-    <report-base-item  v-model="reportItem">
+    <report-base-item  v-model="reportItem"  @dragging="dragging" @dragstop="dragstop">
       <div class="ellipse"></div>
     </report-base-item>
 </template>
@@ -24,7 +24,15 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
     }
-  }
+  },
+  methods:{
+    dragging(id, left, top){
+      this.$emit("dragging", id, left, top);
+    },
+    dragstop(id, left, top){
+      this.$emit("dragstop", id, left, top);
+    },    
+  }  
 }
 </script>
 
