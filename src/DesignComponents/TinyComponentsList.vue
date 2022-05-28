@@ -2,7 +2,7 @@
   <div class="components-list tiny-report-no-select">
     <div class="widget-cate">基础字段</div>
     <ul>
-      <draggable :group="{ name: 'my-group', pull: 'clone', put: false}">
+      <draggable :group="{ name: 'report-item-group', pull: 'clone', put: false}">
       <li class="form-edit-widget-label"><a><i class="icon iconfont icon-input"></i><span>单行文本</span></a></li>
       <li class="form-edit-widget-label" draggable="false" style=""><a draggable="false"><i class="icon iconfont icon-diy-com-textarea"></i><span>多行文本</span></a></li>
       <li class="form-edit-widget-label"><a><i class="icon iconfont icon-number"></i><span>计数器</span></a></li>

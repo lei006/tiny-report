@@ -1,16 +1,16 @@
 <template>
   <div class="tiny-paper-box">
     <div class="tiny-paper rd-f5" :style="{'width':paper.layout.size.width + 'px','height':paper.layout.size.height + 'px',fontSize:paper.layout.font.size + 'px'}">
-      <div class="tiny-paper-content" @click="onClick">
+      <div class="tiny-paper-content" @click="onClick" @dragover="onAllowDrag">
 
           <template v-for="(item,key) in paper.layout.items">
-            <TinyImage :key="key" v-if="item.class == 'image'" v-model="paper.layout.items[key]" @dragging="dragging" @dragstop="dragstop"/>
-            <TinyRect :key="key" v-if="item.class == 'rect'" v-model="paper.layout.items[key]"  @dragging="dragging" @dragstop="dragstop"/>
-            <TinyLabel :key="key" v-if="item.class == 'label'" v-model="paper.layout.items[key]"  @dragging="dragging" @dragstop="dragstop"/>
-            <TinyEllipse :key="key" v-if="item.class == 'ellipse'" v-model="paper.layout.items[key]"  @dragging="dragging" @dragstop="dragstop"/>
+            <TinyImage :key="key" :mode="mode" v-if="item.class == 'image'" v-model="paper.layout.items[key]" @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyRect :key="key" :mode="mode" v-if="item.class == 'rect'" v-model="paper.layout.items[key]"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyLabel :key="key" :mode="mode" v-if="item.class == 'label'" v-model="paper.layout.items[key]"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyEllipse :key="key" :mode="mode" v-if="item.class == 'ellipse'" v-model="paper.layout.items[key]"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
           </template>
       </div>
-      <TinyTop>模式:{{paper.model}} size:{{paper.layout.size}}, {{drag}}</TinyTop>
+      <TinyTop>模式:{{mode}} size:{{paper.layout.size}}, {{drag}}</TinyTop>
     </div>
   </div>
 </template>
@@ -22,6 +22,12 @@ import TinyEllipse from './ReportComponents/TinyEllipse.vue'
 import TinyRect from './ReportComponents/TinyRect.vue'
 import TinyLabel from './ReportComponents/TinyLabel.vue'
 import TinyTop from './ReportComponents/TinyTop.vue'
+
+import Var from './TinyVariable'
+
+        
+
+
 
 export default {
   name: 'TinyReport',
@@ -39,13 +45,15 @@ export default {
           },
           items:[],       //报告项列表...
         },
-        model:"design", //设计，填写，预览，打印 ---design,write,print,preview
         data:{
           items:[],       //报告数据列表...
         }
       },
-      item_test:{class:"label",left:120,top:30,width:100,height:200,isActive:true},
-      msg: 'Welcome to Your Vue.js App',
+      mode: Var.TINY_REPORT__WRITE,  //模式
+      isAllowResize:true, 
+      isAllowDrag:true,
+      isShowBackArea:true,
+      
       // 同步拖动....
       drag:{
         sync: false,
@@ -64,11 +72,10 @@ export default {
   },
 
   mounted(){
-    this.paper.layout.items.push({id: 1, class:"image",left:100,top:10,width:100,height:200,isActive:true});
-    this.paper.layout.items.push({id: 2, class:"rect",left:110,top:20,width:100,height:200,isActive:true});
-    this.paper.layout.items.push({id: 3, class:"label",left:120,top:30,width:180,height:290,isActive:true});
-    this.paper.layout.items.push({id: 4, class:"ellipse",left:130,top:40,width:160,height:200,isActive:true});
-
+    this.paper.layout.items.push({id: 1, class:"image",left:100,top:10,width:100,height:200,isActive:true, zindex:0, selectted:false});
+    this.paper.layout.items.push({id: 2, class:"rect",left:110,top:20,width:100,height:200,isActive:true, zindex:0, selectted:false});
+    this.paper.layout.items.push({id: 3, class:"label",left:120,top:30,width:180,height:290,isActive:true, zindex:0, selectted:false});
+    this.paper.layout.items.push({id: 4, class:"ellipse",left:130,top:40,width:160,height:200,isActive:true, zindex:0, selectted:false});
 
     window.addEventListener('keydown', ev => {
       if (ev.key === "Control") {
@@ -91,12 +98,10 @@ export default {
         const offsetX = left - this.draggingElement.left;
         const offsetY = top - this.draggingElement.top;
 
-        console.log("dragging", id, left, top);
-
         const deltaX = this.deltaX(offsetX);
         const deltaY = this.deltaY(offsetY);
         this.paper.layout.items.map(el => {
-          if ( (el.isActive) && (el.id !== id) ) {
+          if ( (el.selectted) && (el.id !== id) ) {
             el.left += deltaX;
             el.top += deltaY;
           }
@@ -104,7 +109,6 @@ export default {
         });
     },
     dragstop(id, left, top){
-      console.log("dragstop", id, left, top);
       this.paper.layout.items.map(el => {
           if ( el.id === id) {
           el.left = left;
@@ -130,18 +134,39 @@ export default {
     align(){
       
     },
-    
+    onAllowDrag(ev, item){
+      console.log("allowDrag", ev, item);
+    },
 
     SetSize(width, height){
       this.paper.layout.size.width = width;
       this.paper.layout.size.height = height;
     },
-    SetModel(mod){
-      this.paper.model = mod;
+    SetModel(mode){
+      if (mode == Var.TINY_REPORT__DESIGN) {
+        this.isAllowResize = true;
+        this.isAllowDrag = true;
+        this.isShowBackArea = true;
+      }
+
+      if (mode == Var.TINY_REPORT__PREVIEW) {
+        this.isAllowResize = false;
+        this.isAllowDrag = true;
+        this.isShowBackArea = false;
+      }
+
+      if (mode == Var.TINY_REPORT__WRITE) {
+        this.isAllowResize = false;
+        this.isAllowDrag = false;
+        this.isShowBackArea = false;
+      }
+
+      this.mode = mode;
+
     },
     onClick(){
       for (let i = 0; i < this.paper.layout.items.length; i++) {
-        this.paper.layout.items[i].isActive = false;
+        this.paper.layout.items[i].selectted = false;
       }
     },
   }

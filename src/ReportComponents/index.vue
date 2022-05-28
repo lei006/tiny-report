@@ -8,24 +8,27 @@
     :minw='1' 
     :minh='1' 
     :enableNativeDrag='true'
-    :z="reportItem.zindex"
-      :draggable='reportItem.isActive'  :resizable='reportItem.isActive' :preventDeactivation='true' :parentLimitation='true'
+    :z="zindex"
+      :draggable='allowDrag'  :resizable='allowResize' :preventDeactivation='true' :parentLimitation='true'
       @dragging="dragging"
       @dragstop="dragstop"
       @resizing="onResize"
       @resizestop="onResize"
       @deactivated="onDeactivated"
       @activated="onActivated"
+      class-name="draggable-item-class"
       :on-drag-start="onDragStartCallback"
     >
-      <div class="tiny-report-item-area tiny-report-no-select" @click.stop="onClick" @mousedown="onMouseDown">
+      <div class="tiny-report-item-class tiny-report-no-select" v-bind:class="{ 'tiny-report-item-area': showBackArea }" @click.stop="onClick" @mousedown="onMouseDown">
         <slot>基本组件1</slot>
-        <div class="tiny-report-item-mask">{{reportItem}}</div>
+        <div class="tiny-report-item-mask">{{reportItem}}==drag:{{allowDrag}}, resize:{{allowResize}}</div>
       </div>
     </vue-draggable-resizable>
 </template>
 
 <script>
+
+import Var from '../TinyVariable'
 
 import VueDraggableResizable from 'vue-draggable-resizable'
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
@@ -43,7 +46,25 @@ export default {
           default: ()=> {
             return {left:10,top:20,isActive:true}
           },
-      }
+      },
+      //允许选中
+      allowResize:{
+        type:Boolean,
+        default:false,
+      },
+      allowDrag:{
+        type:Boolean,
+        default:true,
+      },
+      //显示背景区域
+      showBackArea:{
+        type:Boolean,
+        default:true,
+      },
+      zindex:{
+        type:Number,
+        default:0,
+      },
   },
   watch:{
     reportItem:{
@@ -84,10 +105,10 @@ export default {
     onActivated(){
     },
     onClick(event){
-      this.reportItem.isActive = true;
+      this.reportItem.selectted = true;
     },
     onMouseDown(){
-      this.reportItem.isActive = true;
+      this.reportItem.selectted = true;
     },
     onDragStartCallback(){
       this.$refs.item.checkParentSize();
@@ -102,16 +123,28 @@ export default {
 <style scoped>
 
 
+.draggable-item-class {
+
+    position: absolute;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
 
 
-.tiny-report-item-area {
+
+.tiny-report-item-class {
   width:100%;
   height:100%;
   position: relative;
-
-  border-style:dashed;
-  border-width:0px;
 }
+
+.tiny-report-item-area {
+  border-style:dashed;
+  border-width:1px;
+}
+
+
 
 .tiny-report-item-mask {
       width: 100%;

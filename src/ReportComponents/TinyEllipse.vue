@@ -1,6 +1,13 @@
 <template>
-    <report-base-item  v-model="reportItem"  @dragging="dragging" @dragstop="dragstop">
-      <div class="ellipse"></div>
+    <report-base-item  v-model="reportItem"  
+        @dragging="dragging" 
+        @dragstop="dragstop"
+        :allowResize="allowResize"
+        :allowDrag="allowDrag"
+        :showBackArea="showBackArea"
+        :zindex="zindex"
+      >
+      <div class="ellipse"></div>mode:{{mode}}
     </report-base-item>
 </template>
 
@@ -19,6 +26,27 @@ export default {
       reportItem: {
           type: Object
       },
+      mode:{
+        type:String
+      },
+      //允许选中
+      allowResize:{
+        type:Boolean,
+        default:false,
+      },
+      allowDrag:{
+        type:Boolean,
+        default:true,
+      },
+      //显示背景区域
+      showBackArea:{
+        type:Boolean,
+        default:true,
+      },
+      zindex:{
+        type:Number,
+        default:0,
+      },          
   },  
   data () {
     return {
