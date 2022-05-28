@@ -131,8 +131,87 @@ export default {
       return ret;
     },
     // 对齐--
-    align(){
+    align(mode){
+      if(mode === "align_left") {
+        // 找到最左的..
+        let report_layout_items = this.paper.layout.items;
+        let left_pos = 99999999999;
+        for (let i = 0; i < report_layout_items.length; i++) {
+          const element = report_layout_items[i];
+          if(element.selectted===true){
+            left_pos = element.left < left_pos? element.left:left_pos;
+          }
+        }
+        for (let i = 0; i < report_layout_items.length; i++) {
+          const element = report_layout_items[i];
+          if(element.selectted===true){
+            report_layout_items[i].left = left_pos;
+          }
+        }
+      }
       
+      if(mode === "align_right") {
+        // 找到最左的..
+        let report_layout_items = this.paper.layout.items;
+        let right_pos = -99999999999;
+        for (let i = 0; i < report_layout_items.length; i++) {
+          const element = report_layout_items[i];
+          if(element.selectted===true){
+            right_pos = (element.left+element.width) > right_pos? (element.left+element.width):right_pos;
+          }
+        }
+        for (let i = 0; i < report_layout_items.length; i++) {
+          const element = report_layout_items[i];
+          if(element.selectted===true){
+            report_layout_items[i].left = right_pos - report_layout_items[i].width;
+          }
+        }
+      }
+
+      if(mode === "align_top") {
+
+        let report_layout_items = this.paper.layout.items;
+        let top_pos = 99999999999;
+        for (let i = 0; i < report_layout_items.length; i++) {
+          const element = report_layout_items[i];
+          if(element.selectted===true){
+            top_pos = element.top < top_pos? element.top:top_pos;
+          }
+        }
+        for (let i = 0; i < report_layout_items.length; i++) {
+          const element = report_layout_items[i];
+          if(element.selectted===true){
+            report_layout_items[i].top = top_pos;
+          }
+        }
+
+      }
+
+      if(mode === "align_bottom") {
+        let report_layout_items = this.paper.layout.items;
+        let bottom_pos = -99999999999;
+        for (let i = 0; i < report_layout_items.length; i++) {
+          const element = report_layout_items[i];
+          if(element.selectted===true){
+            bottom_pos = (element.top+element.height) > bottom_pos? (element.top+element.height):bottom_pos;
+          }
+        }
+        for (let i = 0; i < report_layout_items.length; i++) {
+          const element = report_layout_items[i];
+          if(element.selectted===true){
+            report_layout_items[i].top = bottom_pos - report_layout_items[i].height;
+          }
+        }
+      }
+
+      if(mode === "align_width") {
+
+
+
+      }
+
+
+
     },
     onAllowDrag(ev, item){
       console.log("allowDrag", ev, item);

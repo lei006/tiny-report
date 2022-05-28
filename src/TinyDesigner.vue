@@ -51,6 +51,18 @@ export default {
           this.$refs.reportPaper.SetModel("write");
       }else if (btn == "btn_preview"){
           this.$refs.reportPaper.SetModel("preview");
+      }else if (btn == "align_left"){
+          this.$refs.reportPaper.align(btn);
+      }else if (btn == "align_right"){
+          this.$refs.reportPaper.align(btn);
+      }else if (btn == "align_top"){
+          this.$refs.reportPaper.align(btn);
+      }else if (btn == "align_bottom"){
+          this.$refs.reportPaper.align(btn);
+      }else if (btn == "align_width"){
+          this.$refs.reportPaper.align(btn);
+      }else if (btn == "align_height"){
+          this.$refs.reportPaper.align(btn);
       }else{
         console.log("未处理事件", btn);
       }

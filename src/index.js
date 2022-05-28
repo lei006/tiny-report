@@ -8,6 +8,8 @@ import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 import TinyReport from './TinyReport.vue'
 import TinyDesigner from './TinyDesigner.vue'
 
+import './Resource/iconfont.css'
+import './Resource/iconfont.js'
 
 
 const components = {
