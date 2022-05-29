@@ -1,7 +1,7 @@
 <template>
   <div class="tiny-paper-box">
     <div class="tiny-paper rd-f5" :style="{'width':paper.layout.size.width + 'px','height':paper.layout.size.height + 'px',fontSize:paper.layout.font.size + 'px'}">
-      <div class="tiny-paper-content" @dragover="onAllowDrag" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
+      <div class="tiny-paper-content" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
 
       
           <template v-for="(item,key) in paper.layout.items">
@@ -294,18 +294,8 @@ export default {
           this.paper.layout.items[i].selectted = true;
         }
       }
-      
-
     },
     
-    onAllowDrag(ev, item){
-      console.log("allowDrag", ev, item);
-    },
-    onActivated(item){
-
-      console.log("1111111111111111 22");
-    },
-
     SetSize(width, height){
       this.paper.layout.size.width = width;
       this.paper.layout.size.height = height;

@@ -35,7 +35,6 @@
       <TinyToolbarBox>
         <el-button size="mini" @click="onToolHit('qr_code')">导入JSON</el-button>
         <el-button size="mini" @click="onToolHit('qr_code')">预览</el-button>
-        <el-button size="mini" @click="onToolHit('qr_code')">清空</el-button>
         <el-button size="mini" @click="onToolHit('qr_code')">导出JSON</el-button>
         <el-button size="mini" @click="onToolHit('qr_code')">生成代码</el-button>
       </TinyToolbarBox>
