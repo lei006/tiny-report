@@ -1,6 +1,8 @@
 <template>
   <div class="tiny-designer-top">
     <TinyToolbarBox>
+      <el-button size="mini" @click="onToolHit('btn_undo')">撤消</el-button>
+      <div class="btn-diviler"></div>
       <el-radio-group v-model="radio1"  size="mini" @change="onReportModel">
         <el-radio-button label="btn_design">设计</el-radio-button>
         <el-radio-button label="btn_write">填写</el-radio-button>
@@ -13,6 +15,7 @@
         <el-radio-button label="btn_paper_a4">A4</el-radio-button>
         <el-radio-button label="btn_paper_b5">B5</el-radio-button>
       </el-radio-group>
+      <div class="btn-diviler"></div>    
       <!--对齐部分-->
       <el-popover placement="top" trigger="hover">
             <div class="tiny-toolbar-btn" @click="onToolHit('align_left')"><i class="icon iconfont icon-tiny-reportzuoduiqi"></i></div>

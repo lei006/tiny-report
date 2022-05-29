@@ -16,10 +16,13 @@
       @resizestop="onResize"
       class-name="draggable-item-class"
       :on-drag-start="onDragStartCallback"
+      @mouseup="onMouseUp"
     >
-      <div class="tiny-report-item-class tiny-report-no-select" v-bind:class="{ 'tiny-report-item-area': showBackArea }" @click.stop="onClick" @mousedown="onMouseDown">
+      <div class="tiny-report-item-class tiny-report-no-select" v-bind:class="{ 'tiny-report-item-area': showBackArea }" @click.stop="onClick" @mousedown="onMouseDown" @mousemove.stop="onMouseMove" @mouseup.stop="onMouseUp">
         <slot>基本组件1</slot>
+        <!--
         <div class="tiny-report-item-mask">{{reportItem}}==drag:{{allowDrag}}, resize:{{allowResize}}</div>
+        -->
       </div>
     </vue-draggable-resizable>
 </template>
@@ -80,7 +83,7 @@ export default {
     }
   },
   mounted(){
-    console.log("reportItem -->", this.reportItem)
+
   },
   methods:{
     dragging(left, top){
@@ -108,6 +111,12 @@ export default {
 
     onDragStartCallback(){
       this.$refs.item.checkParentSize();
+    },
+    onMouseMove(){
+
+    },
+    onMouseUp(){
+      //加这个是为了阻止向上传递事件..
     }
 
 

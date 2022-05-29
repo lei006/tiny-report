@@ -1,17 +1,16 @@
 <template>
   <div class="tiny-paper-box">
     <div class="tiny-paper rd-f5" :style="{'width':paper.layout.size.width + 'px','height':paper.layout.size.height + 'px',fontSize:paper.layout.font.size + 'px'}">
-      <div class="tiny-paper-content" @click="onClick" @dragover="onAllowDrag">
+      <div class="tiny-paper-content" @dragover="onAllowDrag" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
 
       
-
-
           <template v-for="(item,key) in paper.layout.items">
-            <TinyImage :key="key" :mode="mode" v-if="item.class == 'image'" v-model="paper.layout.items[key]" @mousedown="onMouseDown" @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
-            <TinyRect :key="key" :mode="mode" v-if="item.class == 'rect'" v-model="paper.layout.items[key]"  @mousedown="onMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
-            <TinyLabel :key="key" :mode="mode" v-if="item.class == 'label'" v-model="paper.layout.items[key]"  @mousedown="onMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
-            <TinyEllipse :key="key" :mode="mode" v-if="item.class == 'ellipse'" v-model="paper.layout.items[key]"  @mousedown="onMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyImage :key="key" :mode="mode" v-if="item.class == 'image'" v-model="paper.layout.items[key]" @mousedown="onItemMouseDown" @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyRect :key="key" :mode="mode" v-if="item.class == 'rect'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyLabel :key="key" :mode="mode" v-if="item.class == 'label'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyEllipse :key="key" :mode="mode" v-if="item.class == 'ellipse'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
           </template>
+          <div v-if="selectRect.show == true" :style="{'left': selectRect.left + 'px', 'top': selectRect.top+ 'px', 'width': selectRect.width+ 'px', 'height': selectRect.height+ 'px'}" class="tiny-paper-selected-rect"></div>
       </div>
       <TinyTop>模式:{{mode}} size:{{paper.layout.size}}, {{drag}},{{this.activeItem}}</TinyTop>
     </div>
@@ -66,6 +65,15 @@ export default {
         prevOffsetX: 0,
         prevOffsetY: 0,
       },
+      selectRect:{
+        show:false,
+        left:0,
+        top:0,
+        width:0,
+        height:0,
+        startX:0,
+        startY:0,
+      },
     }
   },
   computed: {
@@ -92,8 +100,9 @@ export default {
         this.drag.sync = false;
       }
     });
-
-
+    window.addEventListener('mouseup', ev=>{
+      this.selectRect.show = false;
+    });
 
   },
   methods:{
@@ -216,10 +225,79 @@ export default {
 
 
     },
-    onMouseDown(item){
+    onItemMouseDown(item){
       this.activeItem = item;
-      console.log(" paper onMouseDown", item.id, item);
     },
+    onMouseDown(ev){
+      this.selectRect.show = false; //暂时屏蔽
+      this.selectRect.startX = ev.offsetX;
+      this.selectRect.startY = ev.offsetY;
+      this.selectRect.width = 0;
+      this.selectRect.height = 0;
+    },
+    onMouseMove(ev){
+      if(this.selectRect.show == false) {
+        return;
+      }
+
+      if (ev.offsetX >= this.selectRect.startX) {
+        this.selectRect.left = this.selectRect.startX;
+        this.selectRect.width = ev.offsetX - this.selectRect.startX;
+      }else{
+        this.selectRect.left = ev.offsetX;
+        this.selectRect.width = this.selectRect.startX - ev.offsetX;
+      }
+
+      if(ev.offsetY >= this.selectRect.startY) {
+        this.selectRect.top = this.selectRect.startY;
+        this.selectRect.height = ev.offsetY - this.selectRect.startY;
+      }else{
+        this.selectRect.top = ev.offsetY;
+        this.selectRect.height = this.selectRect.startY - ev.offsetY;
+      }
+    },
+    onMouseUp(ev){
+
+      // 按下与抬起相同，则取消所有选择
+      if(this.selectRect.startX == ev.offsetX && this.selectRect.startY == ev.offsetY){
+        this.onCancelAllSelectted();
+        return ;
+      }
+
+
+      if(this.selectRect.show == false) {
+        //this._cancel_all_selectted();
+        return;
+      }
+      let select_item = this.selectRect;
+      let report_layout_items = this.paper.layout.items;
+
+      // 判断矩形是否相交
+      function is_collide(rect1,rect2){
+        var maxX,maxY,minX,minY
+
+
+        maxX = rect1.left+rect1.width >= rect2.left+rect2.width ? rect1.left+rect1.width : rect2.left+rect2.width
+        maxY = rect1.top+rect1.height >= rect2.top+rect2.height ? rect1.top+rect1.height : rect2.top+rect2.height
+        minX = rect1.left <= rect2.left ? rect1.left : rect2.left
+        minY = rect1.top <= rect2.top ? rect1.top : rect2.left
+
+        if( ( (maxX - minX) <= (rect1.width+rect2.width) ) && ( (maxY - minY) <= (rect1.height+rect2.height) ) ){
+          return true
+        }else{
+          return false
+        }
+      }
+
+      for (let i = 0; i < this.paper.layout.items.length; i++) {
+        if(is_collide(this.paper.layout.items[i], select_item) == true){
+          this.paper.layout.items[i].selectted = true;
+        }
+      }
+      
+
+    },
+    
     onAllowDrag(ev, item){
       console.log("allowDrag", ev, item);
     },
@@ -254,18 +332,22 @@ export default {
       this.mode = mode;
 
     },
-    onClick(){
+    onCancelAllSelectted(ev){
       for (let i = 0; i < this.paper.layout.items.length; i++) {
         this.paper.layout.items[i].selectted = false;
       }
       this.activeItem = null;
-    },
+    }
+    
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+
+
 
 .tiny-paper-box {
   width: 100%;
@@ -306,6 +388,15 @@ export default {
   position: relative;
 
 }
+
+.tiny-paper-selected-rect {
+  position:absolute;
+  width: 0px;
+  height: 0px;
+  background-color: #ccfcccaa;
+  z-index: 5000;
+}
+
 
 
 </style>
