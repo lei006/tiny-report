@@ -13,18 +13,18 @@
         <el-radio-button label="btn_paper_a4">A4</el-radio-button>
         <el-radio-button label="btn_paper_b5">B5</el-radio-button>
       </el-radio-group>
-      <div class="btn-diviler"></div>
-        <div class="tiny-toolbar-btn" @click="onToolHit('align_left')"><i class="icon iconfont icon-tiny-reportzuoduiqi"></i></div>
-        <div class="tiny-toolbar-btn" @click="onToolHit('align_left')"><i class="icon iconfont icon-tiny-reportjurassic_horizalign-center"></i></div>
-        <div class="tiny-toolbar-btn" @click="onToolHit('align_right')"><i class="icon iconfont icon-tiny-reportyouduiqi"></i></div>
-      <div class="btn-diviler"></div>
-
-        <div class="tiny-toolbar-btn" @click="onToolHit('align_top')"><i class="icon iconfont icon-tiny-reportshangduiqi1"></i></div>
-        <div class="tiny-toolbar-btn" @click="onToolHit('align_left')"><i class="icon iconfont icon-tiny-reportchuizhijuzhongduiqi2"></i></div>
-        <div class="tiny-toolbar-btn" @click="onToolHit('align_bottom')"><i class="icon iconfont icon-tiny-reportxiaduiqi1"></i></div>
-      <div class="btn-diviler"></div>
-        <div class="tiny-toolbar-btn" @click="onToolHit('align_left')"><i class="icon iconfont icon-tiny-reportdengkuan1"></i></div>
-        <div class="tiny-toolbar-btn" @click="onToolHit('align_left')"><i class="icon iconfont icon-tiny-reportdenggao1"></i></div>
+      <!--对齐部分-->
+      <el-popover placement="top" trigger="hover">
+            <div class="tiny-toolbar-btn" @click="onToolHit('align_left')"><i class="icon iconfont icon-tiny-reportzuoduiqi"></i></div>
+            <div class="tiny-toolbar-btn" @click="onToolHit('align_left')"><i class="icon iconfont icon-tiny-reportjurassic_horizalign-center"></i></div>
+            <div class="tiny-toolbar-btn" @click="onToolHit('align_right')"><i class="icon iconfont icon-tiny-reportyouduiqi"></i></div>
+            <div class="tiny-toolbar-btn" @click="onToolHit('align_top')"><i class="icon iconfont icon-tiny-reportshangduiqi1"></i></div>
+            <div class="tiny-toolbar-btn" @click="onToolHit('align_left')"><i class="icon iconfont icon-tiny-reportchuizhijuzhongduiqi2"></i></div>
+            <div class="tiny-toolbar-btn" @click="onToolHit('align_bottom')"><i class="icon iconfont icon-tiny-reportxiaduiqi1"></i></div>
+            <div class="tiny-toolbar-btn" @click="onToolHit('align_width')"><i class="icon iconfont icon-tiny-reportdengkuan1"></i></div>
+            <div class="tiny-toolbar-btn" @click="onToolHit('align_height')"><i class="icon iconfont icon-tiny-reportdenggao1"></i></div>
+        <el-button size="mini" slot="reference">对齐</el-button>
+      </el-popover>
 
 
     </TinyToolbarBox>
@@ -53,7 +53,25 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       radio1:"3",
-      radio2:"A4"
+      radio2:"A4",
+        gridData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }]      
+
     }
   },
   methods:{

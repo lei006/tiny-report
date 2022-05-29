@@ -14,8 +14,6 @@
       @dragstop="dragstop"
       @resizing="onResize"
       @resizestop="onResize"
-      @deactivated="onDeactivated"
-      @activated="onActivated"
       class-name="draggable-item-class"
       :on-drag-start="onDragStartCallback"
     >
@@ -99,17 +97,15 @@ export default {
       this.reportItem.height = height;
       
     },
-    onDeactivated(){
-      
-    },
-    onActivated(){
-    },
     onClick(event){
       this.reportItem.selectted = true;
     },
+
     onMouseDown(){
       this.reportItem.selectted = true;
+      this.$emit("mousedown");
     },
+
     onDragStartCallback(){
       this.$refs.item.checkParentSize();
     }

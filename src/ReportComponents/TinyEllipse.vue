@@ -2,6 +2,7 @@
     <report-base-item  v-model="reportItem"  
         @dragging="dragging" 
         @dragstop="dragstop"
+        @mousedown="onMouseDown"
         :allowResize="allowResize"
         :allowDrag="allowDrag"
         :showBackArea="showBackArea"
@@ -59,7 +60,10 @@ export default {
     },
     dragstop(id, left, top){
       this.$emit("dragstop", id, left, top);
-    },    
+    }, 
+    onMouseDown(){
+      this.$emit("mousedown", this.reportItem);
+    }       
   }  
 }
 </script>

@@ -3,14 +3,17 @@
     <div class="tiny-paper rd-f5" :style="{'width':paper.layout.size.width + 'px','height':paper.layout.size.height + 'px',fontSize:paper.layout.font.size + 'px'}">
       <div class="tiny-paper-content" @click="onClick" @dragover="onAllowDrag">
 
+      
+
+
           <template v-for="(item,key) in paper.layout.items">
-            <TinyImage :key="key" :mode="mode" v-if="item.class == 'image'" v-model="paper.layout.items[key]" @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
-            <TinyRect :key="key" :mode="mode" v-if="item.class == 'rect'" v-model="paper.layout.items[key]"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
-            <TinyLabel :key="key" :mode="mode" v-if="item.class == 'label'" v-model="paper.layout.items[key]"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
-            <TinyEllipse :key="key" :mode="mode" v-if="item.class == 'ellipse'" v-model="paper.layout.items[key]"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyImage :key="key" :mode="mode" v-if="item.class == 'image'" v-model="paper.layout.items[key]" @mousedown="onMouseDown" @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyRect :key="key" :mode="mode" v-if="item.class == 'rect'" v-model="paper.layout.items[key]"  @mousedown="onMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyLabel :key="key" :mode="mode" v-if="item.class == 'label'" v-model="paper.layout.items[key]"  @mousedown="onMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyEllipse :key="key" :mode="mode" v-if="item.class == 'ellipse'" v-model="paper.layout.items[key]"  @mousedown="onMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
           </template>
       </div>
-      <TinyTop>模式:{{mode}} size:{{paper.layout.size}}, {{drag}}</TinyTop>
+      <TinyTop>模式:{{mode}} size:{{paper.layout.size}}, {{drag}},{{this.activeItem}}</TinyTop>
     </div>
   </div>
 </template>
@@ -54,6 +57,8 @@ export default {
       isAllowDrag:true,
       isShowBackArea:true,
       
+      activeItem:null,
+
       // 同步拖动....
       drag:{
         sync: false,
@@ -132,16 +137,14 @@ export default {
     },
     // 对齐--
     align(mode){
+
+      if(!this.activeItem) return;
+
+
       if(mode === "align_left") {
         // 找到最左的..
         let report_layout_items = this.paper.layout.items;
-        let left_pos = 99999999999;
-        for (let i = 0; i < report_layout_items.length; i++) {
-          const element = report_layout_items[i];
-          if(element.selectted===true){
-            left_pos = element.left < left_pos? element.left:left_pos;
-          }
-        }
+        let left_pos = this.activeItem.left;
         for (let i = 0; i < report_layout_items.length; i++) {
           const element = report_layout_items[i];
           if(element.selectted===true){
@@ -153,13 +156,7 @@ export default {
       if(mode === "align_right") {
         // 找到最左的..
         let report_layout_items = this.paper.layout.items;
-        let right_pos = -99999999999;
-        for (let i = 0; i < report_layout_items.length; i++) {
-          const element = report_layout_items[i];
-          if(element.selectted===true){
-            right_pos = (element.left+element.width) > right_pos? (element.left+element.width):right_pos;
-          }
-        }
+        let right_pos = this.activeItem.left + this.activeItem.width;
         for (let i = 0; i < report_layout_items.length; i++) {
           const element = report_layout_items[i];
           if(element.selectted===true){
@@ -171,13 +168,7 @@ export default {
       if(mode === "align_top") {
 
         let report_layout_items = this.paper.layout.items;
-        let top_pos = 99999999999;
-        for (let i = 0; i < report_layout_items.length; i++) {
-          const element = report_layout_items[i];
-          if(element.selectted===true){
-            top_pos = element.top < top_pos? element.top:top_pos;
-          }
-        }
+        let top_pos = this.activeItem.top;
         for (let i = 0; i < report_layout_items.length; i++) {
           const element = report_layout_items[i];
           if(element.selectted===true){
@@ -189,13 +180,8 @@ export default {
 
       if(mode === "align_bottom") {
         let report_layout_items = this.paper.layout.items;
-        let bottom_pos = -99999999999;
-        for (let i = 0; i < report_layout_items.length; i++) {
-          const element = report_layout_items[i];
-          if(element.selectted===true){
-            bottom_pos = (element.top+element.height) > bottom_pos? (element.top+element.height):bottom_pos;
-          }
-        }
+        let bottom_pos = this.activeItem.top + this.activeItem.height;
+
         for (let i = 0; i < report_layout_items.length; i++) {
           const element = report_layout_items[i];
           if(element.selectted===true){
@@ -206,15 +192,40 @@ export default {
 
       if(mode === "align_width") {
 
+          let report_layout_items = this.paper.layout.items;
 
+          let item_width = this.activeItem.width;
+          for (let i = 0; i < report_layout_items.length; i++) {
+            const element = report_layout_items[i];
+            if(element.selectted===true){
+              report_layout_items[i].width = item_width;
+            }
+          }
+      }
+      if(mode === "align_height") {
 
+          let report_layout_items = this.paper.layout.items;
+          let item_height = this.activeItem.height;
+          for (let i = 0; i < report_layout_items.length; i++) {
+            const element = report_layout_items[i];
+            if(element.selectted===true){
+              report_layout_items[i].height = item_height;
+            }
+          }
       }
 
 
-
+    },
+    onMouseDown(item){
+      this.activeItem = item;
+      console.log(" paper onMouseDown", item.id, item);
     },
     onAllowDrag(ev, item){
       console.log("allowDrag", ev, item);
+    },
+    onActivated(item){
+
+      console.log("1111111111111111 22");
     },
 
     SetSize(width, height){
@@ -247,6 +258,7 @@ export default {
       for (let i = 0; i < this.paper.layout.items.length; i++) {
         this.paper.layout.items[i].selectted = false;
       }
+      this.activeItem = null;
     },
   }
 }
