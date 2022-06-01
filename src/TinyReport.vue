@@ -357,16 +357,16 @@ export default {
       let new_id = stringRandom();
 
       if(type_name === "image") {
-          this.paper.layout.items.push({id:new_id, class:"image",left:x,top:y,width:100,height:200,isActive:true, zindex:0, selectted:false}); 
+          this.paper.layout.items.push({id:new_id, class:"image",left:x,top:y,width:100,height:100,isActive:true, zindex:0, selectted:false}); 
       }
       else if(type_name === "rect") {
-          this.paper.layout.items.push({id:new_id, class:"rect",left:x,top:y,width:100,height:200,isActive:true, zindex:0, selectted:false}); 
+          this.paper.layout.items.push({id:new_id, class:"rect",left:x,top:y,width:100,height:100,isActive:true, zindex:0, selectted:false}); 
       }
       else if(type_name === "label") {
-          this.paper.layout.items.push({id:new_id, class:"label",left:x,top:y,width:100,height:200,isActive:true, zindex:0, selectted:false}); 
+          this.paper.layout.items.push({id:new_id, class:"label",left:x,top:y,width:100,height:100,isActive:true, zindex:0, selectted:false}); 
       }
       else if(type_name === "ellipse") {
-          this.paper.layout.items.push({id:new_id, class:"ellipse",left:x,top:y,width:100,height:200,isActive:true, zindex:0, selectted:false}); 
+          this.paper.layout.items.push({id:new_id, class:"ellipse",left:x,top:y,width:100,height:100,isActive:true, zindex:0, selectted:false}); 
       }else{
         console.error("尝试增加一个不支持的类型");
       }
