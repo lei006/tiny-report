@@ -108,3 +108,30 @@ export default {
 
 
 </style>
+
+
+<style>
+
+.el-button--tiny,.el-button--tiny.is-round {
+    padding: 3px 7px;
+    font-size: 12px;
+    margin-right: 3px;
+}
+
+.el-button--tiny.is-circle {
+    padding: 3px
+}
+
+
+.el-radio-button--tiny .el-radio-button__inner {
+    padding: 3px 7px;
+    font-size: 12px;
+    border-radius: 0
+}
+
+.el-radio-button--tiny .el-radio-button__inner.is-round {
+    padding: 3px 7px
+}
+
+
+</style>

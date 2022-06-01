@@ -1,7 +1,7 @@
 <template>
   <div class="tiny-paper-box">
     <div class="tiny-paper rd-f5" :style="{'width':paper.layout.size.width + 'px','height':paper.layout.size.height + 'px',fontSize:paper.layout.font.size + 'px'}">
-      <div class="tiny-paper-content" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
+      <div class="tiny-paper-content" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @dragover="onDragOver" @drop="onDrag">
 
       
           <template v-for="(item,key) in paper.layout.items">
@@ -28,6 +28,7 @@ import TinyTop from './ReportComponents/TinyTop.vue'
 import Var from './TinyVariable'
 
         
+const stringRandom = require('string-random');
 
 
 
@@ -74,6 +75,9 @@ export default {
         startX:0,
         startY:0,
       },
+      default_items:[
+
+      ],
     }
   },
   computed: {
@@ -85,10 +89,18 @@ export default {
   },
 
   mounted(){
+
+    this.AddItemByType("image", 100, 10);
+    this.AddItemByType("rect", 110, 20);
+    this.AddItemByType("label", 120, 30);
+    this.AddItemByType("ellipse", 130, 40);
+
+    /*
     this.paper.layout.items.push({id: 1, class:"image",left:100,top:10,width:100,height:200,isActive:true, zindex:0, selectted:false});
     this.paper.layout.items.push({id: 2, class:"rect",left:110,top:20,width:100,height:200,isActive:true, zindex:0, selectted:false});
     this.paper.layout.items.push({id: 3, class:"label",left:120,top:30,width:180,height:290,isActive:true, zindex:0, selectted:false});
     this.paper.layout.items.push({id: 4, class:"ellipse",left:130,top:40,width:160,height:200,isActive:true, zindex:0, selectted:false});
+    */
 
     window.addEventListener('keydown', ev => {
       if (ev.key === "Control") {
@@ -295,6 +307,18 @@ export default {
         }
       }
     },
+    onDragOver(ev){
+        ev.preventDefault();
+
+      //console.log("onDragOver", ev.target)
+    },
+    onDrag(ev){
+
+      var src = ev.dataTransfer.getData("tiny-report-item-type");//获取src
+      ev.preventDefault();
+      this.AddItemByType(src, ev.offsetX, ev.offsetY);
+      console.log("ev,",ev);
+    },
     
     SetSize(width, height){
       this.paper.layout.size.width = width;
@@ -327,7 +351,28 @@ export default {
         this.paper.layout.items[i].selectted = false;
       }
       this.activeItem = null;
+    },
+    AddItemByType(type_name, x, y) {
+
+      let new_id = stringRandom();
+
+      if(type_name === "image") {
+          this.paper.layout.items.push({id:new_id, class:"image",left:x,top:y,width:100,height:200,isActive:true, zindex:0, selectted:false}); 
+      }
+      else if(type_name === "rect") {
+          this.paper.layout.items.push({id:new_id, class:"rect",left:x,top:y,width:100,height:200,isActive:true, zindex:0, selectted:false}); 
+      }
+      else if(type_name === "label") {
+          this.paper.layout.items.push({id:new_id, class:"label",left:x,top:y,width:100,height:200,isActive:true, zindex:0, selectted:false}); 
+      }
+      else if(type_name === "ellipse") {
+          this.paper.layout.items.push({id:new_id, class:"ellipse",left:x,top:y,width:100,height:200,isActive:true, zindex:0, selectted:false}); 
+      }else{
+        console.error("尝试增加一个不支持的类型");
+      }
+
     }
+
     
   }
 }

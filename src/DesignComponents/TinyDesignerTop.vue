@@ -1,18 +1,18 @@
 <template>
   <div class="tiny-designer-top">
     <TinyToolbarBox>
-      <el-button size="mini" @click="onToolHit('btn_undo')">撤消</el-button>
-      <el-button size="mini" @click="onToolHit('btn_undo')">重做</el-button>
+      <el-button size="tiny" @click="onToolHit('btn_undo')">撤消</el-button>
+      <el-button size="tiny" @click="onToolHit('btn_undo')">重做</el-button>
       <div class="btn-diviler"></div>
-      <el-radio-group v-model="radio1"  size="mini" @change="onReportModel">
+      <el-radio-group v-model="radio1"  size="tiny" @change="onReportModel">
         <el-radio-button label="btn_design">设计</el-radio-button>
         <el-radio-button label="btn_write">填写</el-radio-button>
         <el-radio-button label="btn_preview">预览</el-radio-button>
       </el-radio-group>
       <div class="btn-diviler"></div>    
-      <el-button size="mini" @click="onToolHit('btn_print')">打印</el-button>
+      <el-button size="tiny" @click="onToolHit('btn_print')">打印</el-button>
       <div class="btn-diviler"></div>
-      <el-radio-group v-model="radio2"  size="mini" @change="onReportSize">
+      <el-radio-group v-model="radio2"  size="tiny" @change="onReportSize">
         <el-radio-button label="btn_paper_a4">A4</el-radio-button>
         <el-radio-button label="btn_paper_b5">B5</el-radio-button>
       </el-radio-group>
@@ -27,17 +27,17 @@
             <div class="tiny-toolbar-btn" @click="onToolHit('align_bottom')"><i class="icon iconfont icon-tiny-reportxiaduiqi1"></i></div>
             <div class="tiny-toolbar-btn" @click="onToolHit('align_width')"><i class="icon iconfont icon-tiny-reportdengkuan1"></i></div>
             <div class="tiny-toolbar-btn" @click="onToolHit('align_height')"><i class="icon iconfont icon-tiny-reportdenggao1"></i></div>
-        <el-button size="mini" slot="reference">对齐</el-button>
+        <el-button size="tiny" slot="reference">对齐</el-button>
       </el-popover>
 
 
     </TinyToolbarBox>
     <div class="designer-toolsbar">
       <TinyToolbarBox>
-        <el-button size="mini" @click="onToolHit('qr_code')">导入JSON</el-button>
-        <el-button size="mini" @click="onToolHit('qr_code')">预览</el-button>
-        <el-button size="mini" @click="onToolHit('qr_code')">导出JSON</el-button>
-        <el-button size="mini" @click="onToolHit('qr_code')">生成代码</el-button>
+        <el-button size="tiny" @click="onToolHit('qr_code')">导入JSON</el-button>
+        <el-button size="tiny" @click="onToolHit('qr_code')">预览</el-button>
+        <el-button size="tiny" @click="onToolHit('qr_code')">导出JSON</el-button>
+        <el-button size="tiny" @click="onToolHit('qr_code')">生成代码</el-button>
       </TinyToolbarBox>
     </div>
   </div>
@@ -103,10 +103,10 @@ export default {
 .tiny-designer-top {
 
   width: 100%;
-  height: 45px;
+  height: 35px;
   border:1px solid #cccccc;
 
-  padding: 10px;
+  padding: 5px;
 
   display: flex;
   justify-content:space-between;
@@ -121,7 +121,7 @@ export default {
     float: left;
     width: 1px;
     background: #eee;
-    margin: 10px;
+    margin: 5px;
 }
 
 .designer-layout-box {
