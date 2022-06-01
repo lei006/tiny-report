@@ -1,7 +1,7 @@
 <template>
   <div class="tiny-designer">
     <el-container>
-      <el-aside>
+      <el-aside width="210px">
         <TinyComponentsList />
       </el-aside>
         <el-main>

@@ -2,6 +2,7 @@
   <div class="tiny-designer-top">
     <TinyToolbarBox>
       <el-button size="mini" @click="onToolHit('btn_undo')">撤消</el-button>
+      <el-button size="mini" @click="onToolHit('btn_undo')">重做</el-button>
       <div class="btn-diviler"></div>
       <el-radio-group v-model="radio1"  size="mini" @change="onReportModel">
         <el-radio-button label="btn_design">设计</el-radio-button>

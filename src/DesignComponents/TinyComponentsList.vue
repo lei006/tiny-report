@@ -9,14 +9,18 @@
       <li class="form-edit-widget-label"><a><i class="icon iconfont icon-radio-active"></i><span>单选框组</span></a></li>
       <li class="form-edit-widget-label"><a><i class="icon iconfont icon-check-box"></i><span>多选框组</span></a></li>
       <li class="form-edit-widget-label"><a><i class="icon iconfont icon-select"></i><span>下拉选择框</span></a></li>
-      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-time"></i><span>时间选择器</span></a></li>
-      <li class="form-edit-widget-label"><a><i class="icon iconfont el-icon-edit"></i><span>日期选择器</span></a></li>
-      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-pingfen1"></i><span>评分</span></a></li>
-      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-color"></i><span>颜色选择器</span></a></li>
-      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-switch"></i><span>开关</span></a></li>
-      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-slider"></i><span>滑块</span></a></li>
-      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-wenzishezhi-"></i><span>文字</span></a></li>
-      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-html"></i><span>HTML</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标签</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单行输入</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多行输入</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>富文本</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>选择时间</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>选择日期</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>日期时间</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单项选择</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多项选择</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>连动选择</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>矩形</span></a></li>
+      <li class="form-edit-widget-label"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>图片</span></a></li>
       <li class="form-edit-widget-label"><a><i class="icon iconfont icon-button"></i><span>按钮</span></a></li>
       <li class="form-edit-widget-label"><a><i class="icon iconfont icon-lianjie"></i><span>文字链接</span></a></li>
       </draggable>
@@ -74,7 +78,7 @@ export default {
     font-size: 12px;
     display: block;
     width: 48%;
-    line-height: 26px;
+    line-height: 24px;
     position: relative;
     float: left;
     left: 0;
@@ -99,7 +103,13 @@ export default {
 }
 .components-list .form-edit-widget-label a {
     color: #333;
+    display: flex;
+    align-items: center;
 }
+.components-list .form-edit-widget-label span {
+    height: 100%;
+}
+
 
 .components-list .form-edit-widget-label:hover a {
     color: #409eff;
