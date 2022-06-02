@@ -54,7 +54,7 @@ export default {
       msg: 'Welcome to Your Vue.js App',
       fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
       fit:"contain",
-      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'      
+      url: "",
     }
   },
   methods:{

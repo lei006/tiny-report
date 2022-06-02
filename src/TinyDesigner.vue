@@ -40,11 +40,13 @@ export default {
   methods:{
     onBtnHit(btn, data){
       if (btn == "btn_paper_a4") {
-          this.$refs.reportPaper.SetSize(1440,900);
+          this.$refs.reportPaper.SetSize(900,1270);
       }else if (btn == "btn_paper_b5"){
-          this.$refs.reportPaper.SetSize(800,600);
+          this.$refs.reportPaper.SetSize(600,900);
+      }else if (btn == "btn_paper_tiny"){
+          this.$refs.reportPaper.SetSize(200,200);
       }else if (btn == "btn_print"){
-        console.log(btn)
+          this.$refs.reportPaper.Print();
       }else if (btn == "btn_design"){
           this.$refs.reportPaper.SetModel("design");
       }else if (btn == "btn_write"){
@@ -63,6 +65,8 @@ export default {
           this.$refs.reportPaper.align(btn);
       }else if (btn == "align_height"){
           this.$refs.reportPaper.align(btn);
+      }else if (btn == "btn_print"){
+          this.$refs.Print();
       }else{
         console.log("未处理事件", btn);
       }

@@ -15,6 +15,7 @@
       <el-radio-group v-model="radio2"  size="tiny" @change="onReportSize">
         <el-radio-button label="btn_paper_a4">A4</el-radio-button>
         <el-radio-button label="btn_paper_b5">B5</el-radio-button>
+        <el-radio-button label="btn_paper_tiny">Tiny</el-radio-button>
       </el-radio-group>
       <div class="btn-diviler"></div>    
       <!--对齐部分-->

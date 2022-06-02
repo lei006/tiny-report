@@ -1,7 +1,7 @@
 <template>
   <div class="tiny-paper-box">
     <div class="tiny-paper rd-f5" :style="{'width':paper.layout.size.width + 'px','height':paper.layout.size.height + 'px',fontSize:paper.layout.font.size + 'px'}">
-      <div class="tiny-paper-content" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @dragover="onDragOver" @drop="onDrag">
+      <div class="tiny-paper-content" ref="report" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @dragover="onDragOver" @drop="onDrag">
 
       
           <template v-for="(item,key) in paper.layout.items">
@@ -18,6 +18,10 @@
 </template>
 
 <script>
+
+import printJS from 'print-js'
+import html2canvas from "html2canvas"
+
 
 import TinyImage from './ReportComponents/TinyImage.vue'
 import TinyEllipse from './ReportComponents/TinyEllipse.vue'
@@ -371,7 +375,15 @@ export default {
         console.error("尝试增加一个不支持的类型");
       }
 
-    }
+    },
+    Print(){
+
+        html2canvas(this.$refs.report, {scale: 3,allowTaint: true,taintTest: true,}).then(canvas => {
+          console.log("html2canvas  canvas = ",canvas);
+          let dataURL = canvas.toDataURL("image/png");
+          printJS(dataURL, 'image')
+        });
+    },
 
     
   }
