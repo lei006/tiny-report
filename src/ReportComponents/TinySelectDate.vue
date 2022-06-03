@@ -8,7 +8,7 @@
         :showBackArea="showBackArea"
         :zindex="zindex"
       >
-      <div class="tiny-report-label"><slot>标签</slot></div>
+      <el-date-picker size="mini" v-model="reportItem.data" type="date" placeholder="选择日期"></el-date-picker>
     </report-base-item>
 </template>
 
@@ -53,6 +53,7 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      input:"aaaaaaa",
     }
   },
   methods:{

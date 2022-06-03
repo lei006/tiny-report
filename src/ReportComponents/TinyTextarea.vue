@@ -8,7 +8,7 @@
         :showBackArea="showBackArea"
         :zindex="zindex"
       >
-      <div class="tiny-report-label"><slot>标签</slot></div>
+      <el-input size="tiny" type="textarea" autosize v-model="reportItem.data" placeholder="请输入内容"></el-input>
     </report-base-item>
 </template>
 
@@ -53,6 +53,7 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      input:"aaaaaaa",
     }
   },
   methods:{

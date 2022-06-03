@@ -8,7 +8,8 @@
         :showBackArea="showBackArea"
         :zindex="zindex"
       >
-      <div class="tiny-report-label"><slot>标签</slot></div>
+      <el-time-select size="mini" v-model="reportItem.data" placeholder="选择时间"></el-time-select>
+
     </report-base-item>
 </template>
 
@@ -53,6 +54,7 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      input:"aaaaaaa",
     }
   },
   methods:{

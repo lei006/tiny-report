@@ -2,18 +2,12 @@
   <div class="components-list tiny-report-no-select">
     <div class="widget-cate">基础字段</div>
     <ul>
-      <li class="form-edit-widget-label" draggable="false" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-input"></i><span>单行文本</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'multiline-text')"><a draggable="false"><i class="icon iconfont icon-diy-com-textarea"></i><span>多行文本</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-number"></i><span>计数器</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-radio-active"></i><span>单选框组</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-check-box"></i><span>多选框组</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-select"></i><span>下拉选择框</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'label')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标签</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单行输入</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多行输入</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'input')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单行输入</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'textarea')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多行输入</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'rich-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>富文本</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>选择时间</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>选择日期</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-time')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>选择时间</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-date')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>选择日期</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>日期时间</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单项选择</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多项选择</span></a></li>

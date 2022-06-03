@@ -9,6 +9,10 @@
             <TinyRect :key="key" :mode="mode" v-if="item.class == 'rect'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
             <TinyLabel :key="key" :mode="mode" v-if="item.class == 'label'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
             <TinyEllipse :key="key" :mode="mode" v-if="item.class == 'ellipse'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyInput :key="key" :mode="mode" v-if="item.class == 'input'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyTextarea :key="key" :mode="mode" v-if="item.class == 'textarea'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinySelectDate :key="key" :mode="mode" v-if="item.class == 'select-date'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinySelectTime :key="key" :mode="mode" v-if="item.class == 'select-time'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
           </template>
           <div v-if="selectRect.show == true" :style="{'left': selectRect.left + 'px', 'top': selectRect.top+ 'px', 'width': selectRect.width+ 'px', 'height': selectRect.height+ 'px'}" class="tiny-paper-selected-rect"></div>
       </div>
@@ -28,6 +32,10 @@ import TinyEllipse from './ReportComponents/TinyEllipse.vue'
 import TinyRect from './ReportComponents/TinyRect.vue'
 import TinyLabel from './ReportComponents/TinyLabel.vue'
 import TinyTop from './ReportComponents/TinyTop.vue'
+import TinyInput from './ReportComponents/TinyInput.vue'
+import TinyTextarea from './ReportComponents/TinyTextarea.vue'
+import TinySelectDate from './ReportComponents/TinySelectDate.vue'
+import TinySelectTime from './ReportComponents/TinySelectTime.vue'
 
 import Var from './TinyVariable'
 
@@ -38,7 +46,7 @@ const stringRandom = require('string-random');
 
 export default {
   name: 'TinyReport',
-  components:{TinyImage,TinyEllipse, TinyRect, TinyLabel, TinyTop},
+  components:{TinyImage,TinyEllipse, TinyRect, TinyLabel, TinyTop, TinyInput, TinyTextarea, TinySelectDate, TinySelectTime},
   data () {
     return {
       paper:{
@@ -367,12 +375,20 @@ export default {
           this.paper.layout.items.push({id:new_id, class:"rect",left:x,top:y,width:100,height:100,isActive:true, zindex:0, selectted:false}); 
       }
       else if(type_name === "label") {
-          this.paper.layout.items.push({id:new_id, class:"label",left:x,top:y,width:100,height:100,isActive:true, zindex:0, selectted:false}); 
+          this.paper.layout.items.push({id:new_id, class:"label",left:x,top:y,width:60,height:20,isActive:true, zindex:0, selectted:false}); 
       }
       else if(type_name === "ellipse") {
           this.paper.layout.items.push({id:new_id, class:"ellipse",left:x,top:y,width:100,height:100,isActive:true, zindex:0, selectted:false}); 
+      }else if(type_name === "input") {
+          this.paper.layout.items.push({id:new_id, class:"input",left:x,top:y,width:100,height:30,isActive:true, zindex:0, selectted:false, data:"" }); 
+      }else if(type_name === "textarea") {
+          this.paper.layout.items.push({id:new_id, class:"textarea",left:x,top:y,width:160,height:50,isActive:true, zindex:0, selectted:false, data:"" }); 
+      }else if(type_name === "select-date") {
+          this.paper.layout.items.push({id:new_id, class:"select-date",left:x,top:y,width:160,height:50,isActive:true, zindex:0, selectted:false, data:"" }); 
+      }else if(type_name === "select-time") {
+          this.paper.layout.items.push({id:new_id, class:"select-time",left:x,top:y,width:160,height:30,isActive:true, zindex:0, selectted:false, data:"" }); 
       }else{
-        console.error("尝试增加一个不支持的类型");
+        console.error("尝试增加一个不支持的类型", type_name);
       }
 
     },
@@ -462,5 +478,42 @@ export default {
 user-select: none; 
 
 }
+
+
+
+.el-input--tiny {
+    font-size: 12px
+}
+
+.el-input--tiny .el-input__inner {
+    height: 28px;
+    line-height: 28px;
+    padding: 0px 7px;
+}
+
+.el-input--tiny .el-input__icon {
+    line-height: 28px
+}
+
+
+.el-date-editor.el-input,.el-date-editor.el-input__inner {
+    width: 150px
+}
+
+
+.el-input--mini {
+    font-size: 12px
+}
+
+.el-input--mini .el-input__inner {
+    height: 28px;
+    line-height: 28px;
+    width: 150px;
+}
+
+.el-input--mini .el-input__icon {
+    line-height: 28px
+}
+
 
 </style>

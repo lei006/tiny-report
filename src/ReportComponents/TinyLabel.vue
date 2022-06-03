@@ -8,7 +8,7 @@
         :showBackArea="showBackArea"
         :zindex="zindex"
       >
-      <div class="tiny-report-label"><slot>标签</slot>mode:{{mode}}</div>
+      <div class="tiny-report-label"><slot>标签</slot></div>
     </report-base-item>
 </template>
 
