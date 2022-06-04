@@ -34,7 +34,7 @@ export default {
   components:{TinyComponentsList,TinyProperties,TinyReport, TinyDesignerTop},
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      reportData:{},
     }
   },
   methods:{

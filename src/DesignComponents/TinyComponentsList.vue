@@ -54,11 +54,8 @@ export default {
     padding: 8px 0;
     width: 100%;
     height: 100%;
-
     border:1px solid #cccccc;
-
     overflow:auto;
-
 }
 
 .components-list .widget-cate {

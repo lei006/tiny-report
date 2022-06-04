@@ -47,7 +47,7 @@ export default {
       input:"aaaaaaa",
       disabled:false,
     }
-  },
+  }, 
 
 
 
