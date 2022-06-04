@@ -40,7 +40,7 @@ export default {
   methods:{
     onBtnHit(btn, data){
       if (btn == "btn_paper_a4") {
-          this.$refs.reportPaper.SetSize(900,1250);
+          this.$refs.reportPaper.SetSize(700,800);
       }else if (btn == "btn_paper_b5"){
           this.$refs.reportPaper.SetSize(600,900);
       }else if (btn == "btn_paper_tiny"){
