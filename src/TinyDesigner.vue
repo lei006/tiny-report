@@ -1,7 +1,7 @@
 <template>
   <div class="tiny-designer">
     <el-container>
-      <el-aside width="210px">
+      <el-aside width="200px">
         <TinyComponentsList />
       </el-aside>
         <el-main>
@@ -40,7 +40,7 @@ export default {
   methods:{
     onBtnHit(btn, data){
       if (btn == "btn_paper_a4") {
-          this.$refs.reportPaper.SetSize(900,1270);
+          this.$refs.reportPaper.SetSize(900,1250);
       }else if (btn == "btn_paper_b5"){
           this.$refs.reportPaper.SetSize(600,900);
       }else if (btn == "btn_paper_tiny"){

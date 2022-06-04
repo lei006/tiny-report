@@ -3,20 +3,19 @@
     <div class="widget-cate">基础字段</div>
     <ul>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'label')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标签</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'title')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标题</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'input')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单行输入</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'textarea')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多行输入</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'rich-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>富文本</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-one')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单项选择</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-many')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多项选择</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-cascader')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>连动选择</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-time')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>选择时间</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-date')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>选择日期</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>日期时间</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单项选择</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多项选择</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>连动选择</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-date-time')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>日期时间</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'rect')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>矩形</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'ellipse')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>椭圆</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'image')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>图片</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-button"></i><span>按钮</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-line-text')"><a><i class="icon iconfont icon-lianjie"></i><span>文字链接</span></a></li>
     </ul>
   </div>
 </template>
@@ -51,7 +50,6 @@ export default {
 
 
 .components-list{
-    padding: 8px 0;
     width: 100%;
     height: 100%;
     border:1px solid #cccccc;
@@ -59,22 +57,22 @@ export default {
 }
 
 .components-list .widget-cate {
-    padding: 8px 12px;
+    padding: 5px 8px;
     font-size: 13px;
 }
 
 .components-list ul {
     position: relative;
     overflow: hidden;
-    padding: 0 10px 10px;
+    padding: 0 0px 0px 0;
     margin: 0;
 }
 
 
 .components-list .form-edit-widget-label {
-    font-size: 12px;
+    font-size: 13px;
     display: block;
-    width: 48%;
+    width: 90px;
     line-height: 24px;
     position: relative;
     float: left;
@@ -82,7 +80,7 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin: 1%;
+    margin: 1px;
     color: #333;
     border: 1px solid #f4f6fc;
 }
