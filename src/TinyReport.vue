@@ -85,6 +85,7 @@ export default {
         startX:0,
         startY:0,
       },
+      old_select_items:[],
     }
   },
 
@@ -420,15 +421,68 @@ export default {
           printJS(dataURL, 'image')
         });
     },
-    //检查选择项改变
+    //检查选择项改变-并通知外部...
     checkSelecttedChange(newPaper, oldPaper) {
-      /*
-      let select_items = [];
-      for (let i = 0; i < newPaper.length; i++) {
-        const element = array[i];
-        
+
+      // 1. 找出当前所有选中项..
+      let new_select_items = [];
+      for (let i = 0; i < newPaper.items.length; i++) {
+        const paper_item = newPaper.items[i];
+        if(paper_item.selectted) {
+          new_select_items.push(paper_item);
+        }
       }
-      */
+
+      let old_select_items = this.old_select_items;
+
+      // 2. 与上次选中相比较，判断选择是否改变. (在new的中找不存在的)
+      for (let i = 0; i < new_select_items.length; i++) {
+        const new_item = new_select_items[i];
+
+        let is_exist = false;
+        for (let j = 0; j < old_select_items.length; j++) {
+          const old_item = old_select_items[j];
+          if(new_item.id === old_item.id) {
+            is_exist = true;
+            break;
+          }
+        }
+        
+        //如果不存在...
+        if(is_exist === false) {
+          this.$emit("selectchange", new_select_items);
+          break;
+        }
+      }
+
+      // 3. 与上次选中相比较，判断选择是否改变.(在old的中找不存在的)
+      for (let i = 0; i < old_select_items.length; i++) {
+        const old_item = old_select_items[i];
+
+        let is_exist = false;
+        for (let j = 0; j < new_select_items.length; j++) {
+          const new_item = new_select_items[j];
+          if(new_item.id === old_item.id) {
+            is_exist = true;
+            break;
+          }
+        }
+        
+        //如果不存在...
+        if(is_exist === false) {
+          this.$emit("selectchange", new_select_items);
+          break;
+        }
+      }
+
+
+      // 4. 保存本次比较，以便下次比较使用...
+      this.old_select_items = [];
+      for (let i = 0; i < new_select_items.length; i++) {
+        const paper_item = new_select_items[i];
+        this.old_select_items.push({id:paper_item.id});
+      }
+
 
     },
     
@@ -446,7 +500,7 @@ export default {
   width: 100%;
   height: 100%;
 
-  padding: 20px;
+  padding: 10px;
 
   background-color: #edeef3;
 
@@ -462,14 +516,8 @@ export default {
 
 
 .tiny-paper {
-  width: 500px;
-  height: 1400px;
   padding: 15px;
-  margin:auto;
-
   position: relative;
-
-
 }
 
 .tiny-paper-content {

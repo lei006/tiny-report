@@ -10,7 +10,7 @@
               <TinyDesignerTop @onBtnHit="onBtnHit"/>
             </el-header>
             <el-main>
-              <TinyReport ref="reportPaper"></TinyReport>
+              <TinyReport ref="reportPaper" @selectchange="onSelectChange"></TinyReport>
             </el-main>
           </el-container>
         </el-main>
@@ -71,7 +71,10 @@ export default {
         console.log("未处理事件", btn);
       }
 
-    }
+    },
+    onSelectChange(items) {
+      console.log("onSelectChange", items);
+    },
   }
 }
 </script>
@@ -80,13 +83,8 @@ export default {
 <style scoped>
 
 
-
-
-
-
-
-.el-header {
-    padding: 0 0px;
+.el-container {
+  height: 100%;
 }
 
 
@@ -99,15 +97,11 @@ export default {
   height: 100%;
   
 
-  border:1px solid #fc0c0c;
+  border:1px solid #888;
 
-    margin-left: 20px;
-    box-shadow: inset 0 0 3px 2px #dadada;
+  margin-left: 2px;
+  box-shadow: inset 0 0 1px 1px #dadada;
 
-}
-
-.el-container {
-  height: 100%;
 }
 
 
