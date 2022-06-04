@@ -5,7 +5,9 @@
         @mousedown="onMouseDown"
         :options="options"
       >
-      <el-input size="tiny" type="textarea" :disabled="options.isItemEnable"  autosize v-model="reportItem.data" placeholder="请输入内容"></el-input>
+      <el-select size="tiny" v-model="reportItem.data" :disabled="!options.isItemEnable"  placeholder="请选择">
+        <el-option v-for="item in reportItem.items" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
     </report-base-item>
 </template>
 
@@ -14,7 +16,7 @@
 import ReportBaseItem from './index.vue'
 
 export default {
-  name: 'TinyItemInputBox',
+  name: 'TinyItemSelectOne',
   components:{ReportBaseItem},
   model: {
       prop: "reportItem",
@@ -36,6 +38,11 @@ export default {
           }
         }
       },
+      zindex:{
+        type:Number,
+        default:0,
+      },
+
   },
   data () {
     return {

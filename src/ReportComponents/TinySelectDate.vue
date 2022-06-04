@@ -5,7 +5,7 @@
         @mousedown="onMouseDown"
         :options="options"
       >
-      <el-date-picker size="mini" v-model="reportItem.data" type="date" placeholder="选择日期"></el-date-picker>
+      <el-date-picker size="mini" :disabled="options.isItemEnable"  v-model="reportItem.data" type="date" placeholder="选择日期"></el-date-picker>
     </report-base-item>
 </template>
 

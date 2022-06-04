@@ -4,18 +4,20 @@
     <ul>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'label')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标签</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'title')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标题</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'input')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单行输入</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'textarea')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多行输入</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'input')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单行</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'textarea')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多行</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'rich-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>富文本</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-one')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单项选择</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-many')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多项选择</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-cascader')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>连动选择</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-time')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>选择时间</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-date')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>选择日期</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'single-date-time')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>日期时间</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-one')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单选</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-many')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多选</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-cascader')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>连选</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-time')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>时间</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-date')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>日期</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-datetime')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>日期时间</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'rect')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>矩形</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'ellipse')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>椭圆</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'image')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>图片</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'qr_code')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>条形码</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'qr_code')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>二维码</span></a></li>
     </ul>
   </div>
 </template>

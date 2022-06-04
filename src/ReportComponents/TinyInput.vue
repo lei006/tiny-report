@@ -5,7 +5,7 @@
         @mousedown="onMouseDown"
         :options="options"
       >
-      <el-input size="tiny" :disabled="disabled" v-model="reportItem.data" placeholder="请输入内容"></el-input>
+      <el-input size="tiny" :disabled="options.isItemEnable"  v-model="reportItem.data" placeholder="请输入内容"></el-input>
     </report-base-item>
 </template>
 

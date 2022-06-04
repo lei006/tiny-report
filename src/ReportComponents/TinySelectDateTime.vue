@@ -5,7 +5,8 @@
         @mousedown="onMouseDown"
         :options="options"
       >
-      <el-input size="tiny" type="textarea" :disabled="options.isItemEnable"  autosize v-model="reportItem.data" placeholder="请输入内容"></el-input>
+      <el-date-picker size="tiny" :disabled="!options.isItemEnable"  v-model="reportItem.data" type="datetime" placeholder="选择日期时间"></el-date-picker>
+
     </report-base-item>
 </template>
 
@@ -14,7 +15,7 @@
 import ReportBaseItem from './index.vue'
 
 export default {
-  name: 'TinyItemInputBox',
+  name: 'TinyItemSelectDateTime',
   components:{ReportBaseItem},
   model: {
       prop: "reportItem",
@@ -36,6 +37,11 @@ export default {
           }
         }
       },
+      zindex:{
+        type:Number,
+        default:0,
+      },
+
   },
   data () {
     return {

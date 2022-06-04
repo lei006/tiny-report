@@ -12,6 +12,10 @@
             <TinyTextarea :options="options"  :key="key" v-if="item.class == 'textarea'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
             <TinySelectDate :options="options"  :key="key" v-if="item.class == 'select-date'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
             <TinySelectTime :options="options"  :key="key" v-if="item.class == 'select-time'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
+            <TinySelectDateTime :options="options"  :key="key" v-if="item.class == 'select-datetime'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
+            <TinySelectOne :options="options"  :key="key" v-if="item.class == 'select-one'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
+            <TinySelectMany :options="options"  :key="key" v-if="item.class == 'select-many'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
+            <TinySelectCascader :options="options"  :key="key" v-if="item.class == 'select-cascader'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
           </template>
           <div v-if="selectRect.show == true" :style="{'left': selectRect.left + 'px', 'top': selectRect.top+ 'px', 'width': selectRect.width+ 'px', 'height': selectRect.height+ 'px'}" class="tiny-paper-selected-rect"></div>
       </div>
@@ -35,6 +39,10 @@ import TinyInput from './ReportComponents/TinyInput.vue'
 import TinyTextarea from './ReportComponents/TinyTextarea.vue'
 import TinySelectDate from './ReportComponents/TinySelectDate.vue'
 import TinySelectTime from './ReportComponents/TinySelectTime.vue'
+import TinySelectDateTime from './ReportComponents/TinySelectDateTime.vue'
+import TinySelectOne from './ReportComponents/TinySelectOne.vue'
+import TinySelectMany from './ReportComponents/TinySelectMany.vue'
+import TinySelectCascader from './ReportComponents/TinySelectCascader.vue'
 
 import Var from './TinyVariable'
 
@@ -45,7 +53,7 @@ const stringRandom = require('string-random');
 
 export default {
   name: 'TinyReport',
-  components:{TinyImage,TinyEllipse, TinyRect, TinyLabel, TinyTop, TinyInput, TinyTextarea, TinySelectDate, TinySelectTime},
+  components:{TinyImage,TinyEllipse, TinyRect, TinyLabel, TinyTop, TinyInput, TinyTextarea, TinySelectDate, TinySelectTime, TinySelectDateTime,TinySelectOne, TinySelectMany, TinySelectCascader},
   data () {
     return {
       paper:{
@@ -389,8 +397,8 @@ export default {
 
       if(type_name === "image") {
           let new_item = create_item("image", new_id, x, y);
-          new_item.width = 160;
-          new_item.height = 160;
+          new_item.width = 100;
+          new_item.height = 100;
           this.paper.items.push(new_item);
       }
       else if(type_name === "rect") {
@@ -406,9 +414,17 @@ export default {
       }else if(type_name === "textarea") {
           this.paper.items.push({id:new_id, class:"textarea",left:x,top:y,width:160,height:50,isActive:true, zindex:0, selectted:false, data:"" }); 
       }else if(type_name === "select-date") {
-          this.paper.items.push({id:new_id, class:"select-date",left:x,top:y,width:160,height:50,isActive:true, zindex:0, selectted:false, data:"" }); 
+          this.paper.items.push({id:new_id, class:"select-date",left:x,top:y,width:202,height:30,isActive:true, zindex:0, selectted:false, data:"" }); 
       }else if(type_name === "select-time") {
-          this.paper.items.push({id:new_id, class:"select-time",left:x,top:y,width:160,height:30,isActive:true, zindex:0, selectted:false, data:"" }); 
+          this.paper.items.push({id:new_id, class:"select-time",left:x,top:y,width:202,height:30,isActive:true, zindex:0, selectted:false, data:"" }); 
+      }else if(type_name === "select-datetime") {
+          this.paper.items.push({id:new_id, class:"select-datetime",left:x,top:y,width:202,height:30,isActive:true, zindex:0, selectted:false, data:"" }); 
+      }else if(type_name === "select-one") {
+          this.paper.items.push({id:new_id, class:"select-one",left:x,top:y,width:160,height:30,isActive:true, zindex:0, selectted:false, data:"" }); 
+      }else if(type_name === "select-many") {
+          this.paper.items.push({id:new_id, class:"select-many",left:x,top:y,width:160,height:30,isActive:true, zindex:0, selectted:false, data:"" }); 
+      }else if(type_name === "select-cascader") {
+          this.paper.items.push({id:new_id, class:"select-cascader",left:x,top:y,width:160,height:30,isActive:true, zindex:0, selectted:false, data:"" }); 
       }else{
         console.error("尝试增加一个不支持的类型", type_name);
       }
@@ -562,40 +578,23 @@ user-select: none;
 }
 
 
+.el-date-editor.el-input,.el-date-editor.el-input__inner {
+    width: 200px
+}
 
 .el-input--tiny {
-    font-size: 12px
+
 }
 
 .el-input--tiny .el-input__inner {
     height: 28px;
     line-height: 28px;
-    padding: 0px 7px;
 }
 
 .el-input--tiny .el-input__icon {
     line-height: 28px
 }
 
-
-.el-date-editor.el-input,.el-date-editor.el-input__inner {
-    width: 150px
-}
-
-
-.el-input--mini {
-    font-size: 12px
-}
-
-.el-input--mini .el-input__inner {
-    height: 28px;
-    line-height: 28px;
-    width: 150px;
-}
-
-.el-input--mini .el-input__icon {
-    line-height: 28px
-}
 
 
 </style>
