@@ -5,7 +5,10 @@
         @mousedown="onMouseDown"
         :options="options"
       >
-      <el-image style="width: 100%; height: 100%" :disabled="options.isItemEnable"  :src="url" :fit="fit"></el-image>
+      <el-image style="width: 100%; height: 100%" :disabled="options.isItemEnable"  :src="url" :fit="fit">
+
+
+      </el-image>
     </report-base-item>
 </template>
 
