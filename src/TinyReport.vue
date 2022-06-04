@@ -5,18 +5,18 @@
 
       
           <template v-for="(item,key) in paper.layout.items">
-            <TinyImage :key="key" :mode="mode" v-if="item.class == 'image'" v-model="paper.layout.items[key]" @mousedown="onItemMouseDown" @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
-            <TinyRect :key="key" :mode="mode" v-if="item.class == 'rect'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
-            <TinyLabel :key="key" :mode="mode" v-if="item.class == 'label'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
-            <TinyEllipse :key="key" :mode="mode" v-if="item.class == 'ellipse'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
-            <TinyInput :key="key" :mode="mode" v-if="item.class == 'input'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
-            <TinyTextarea :key="key" :mode="mode" v-if="item.class == 'textarea'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
-            <TinySelectDate :key="key" :mode="mode" v-if="item.class == 'select-date'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
-            <TinySelectTime :key="key" :mode="mode" v-if="item.class == 'select-time'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown"  @dragging="dragging" @dragstop="dragstop" :allowResize="item.selectted && isAllowResize" :allowDrag="item.selectted && isAllowDrag" :showBackArea="isShowBackArea" :zindex="item.zindex"/>
+            <TinyImage :options="options"  :key="key" v-if="item.class == 'image'" v-model="paper.layout.items[key]" @mousedown="onItemMouseDown(item)" @dragging="dragging" @dragstop="dragstop" />
+            <TinyRect :options="options"  :key="key" v-if="item.class == 'rect'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
+            <TinyLabel :options="options"  :key="key" v-if="item.class == 'label'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
+            <TinyEllipse :options="options"  :key="key" v-if="item.class == 'ellipse'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
+            <TinyInput :options="options"  :key="key" v-if="item.class == 'input'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
+            <TinyTextarea :options="options"  :key="key" v-if="item.class == 'textarea'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
+            <TinySelectDate :options="options"  :key="key" v-if="item.class == 'select-date'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
+            <TinySelectTime :options="options"  :key="key" v-if="item.class == 'select-time'" v-model="paper.layout.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
           </template>
           <div v-if="selectRect.show == true" :style="{'left': selectRect.left + 'px', 'top': selectRect.top+ 'px', 'width': selectRect.width+ 'px', 'height': selectRect.height+ 'px'}" class="tiny-paper-selected-rect"></div>
       </div>
-      <TinyTop>模式:{{mode}} size:{{paper.layout.size}}, {{drag}},{{this.activeItem}}</TinyTop>
+      <TinyTop>options:{{options}} size:{{paper.layout.size}}, {{drag}},{{this.activeItem}}</TinyTop>
     </div>
   </div>
 </template>
@@ -64,11 +64,14 @@ export default {
           items:[],       //报告数据列表...
         }
       },
-      mode: Var.TINY_REPORT__WRITE,  //模式
-      isAllowResize:true, 
-      isAllowDrag:true,
-      isShowBackArea:true,
-      
+      options:{
+        mode:Var.TINY_REPORT__WRITE,
+        isAllowResize:true, 
+        isAllowDrag:true,
+        isItemEnable:true,
+        isShowBackArea:true,
+        topItemId:"",
+      },
       activeItem:null,
 
       // 同步拖动....
@@ -250,6 +253,7 @@ export default {
 
     },
     onItemMouseDown(item){
+      this.options.topItemId = item.id;
       this.activeItem = item;
     },
     onMouseDown(ev){
@@ -338,21 +342,21 @@ export default {
     },
     SetModel(mode){
       if (mode == Var.TINY_REPORT__DESIGN) {
-        this.isAllowResize = true;
-        this.isAllowDrag = true;
-        this.isShowBackArea = true;
+        this.options.isAllowResize = true;
+        this.options.isAllowDrag = true;
+        this.options.isShowBackArea = true;
       }
 
       if (mode == Var.TINY_REPORT__PREVIEW) {
-        this.isAllowResize = false;
-        this.isAllowDrag = true;
-        this.isShowBackArea = false;
+        this.options.isAllowResize = false;
+        this.options.isAllowDrag = true;
+        this.options.isShowBackArea = false;
       }
 
       if (mode == Var.TINY_REPORT__WRITE) {
-        this.isAllowResize = false;
-        this.isAllowDrag = false;
-        this.isShowBackArea = false;
+        this.options.isAllowResize = false;
+        this.options.isAllowDrag = false;
+        this.options.isShowBackArea = false;
       }
 
       this.mode = mode;

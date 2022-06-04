@@ -3,10 +3,7 @@
         @dragging="dragging" 
         @dragstop="dragstop"
         @mousedown="onMouseDown"
-        :allowResize="allowResize"
-        :allowDrag="allowDrag"
-        :showBackArea="showBackArea"
-        :zindex="zindex"
+        :options="options"
       >
       <el-date-picker size="mini" v-model="reportItem.data" type="date" placeholder="选择日期"></el-date-picker>
     </report-base-item>
@@ -27,22 +24,17 @@ export default {
       reportItem: {
           type: Object
       },
-      mode:{
-        type:String
-      },
-      //允许选中
-      allowResize:{
-        type:Boolean,
-        default:false,
-      },
-      allowDrag:{
-        type:Boolean,
-        default:true,
-      },
-      //显示背景区域
-      showBackArea:{
-        type:Boolean,
-        default:true,
+      options:{
+        type: Object,
+        default: ()=>{
+          return {
+            mode:"",
+            isAllowResize:false,  //允许调整大小
+            isAllowDrag:true,     //允许拖动
+            isItemEnable:true,    //是否有效
+            isShowBackArea:true,  //显示背景
+          }
+        }
       },
       zindex:{
         type:Number,
