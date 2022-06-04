@@ -6,7 +6,7 @@
       </el-aside>
         <el-main>
           <el-container>
-            <el-header style="height: 32px;">
+            <el-header style="height: 32px; padding: 0 3px;">
               <TinyDesignerTop @onBtnHit="onBtnHit"/>
             </el-header>
             <el-main>
@@ -65,8 +65,8 @@ export default {
           this.$refs.reportPaper.align(btn);
       }else if (btn == "align_height"){
           this.$refs.reportPaper.align(btn);
-      }else if (btn == "btn_print"){
-          this.$refs.Print();
+      }else if (btn == "btn_test"){
+          this.$refs.reportPaper.Test();
       }else{
         console.log("未处理事件", btn);
       }

@@ -15,7 +15,7 @@
           </template>
           <div v-if="selectRect.show == true" :style="{'left': selectRect.left + 'px', 'top': selectRect.top+ 'px', 'width': selectRect.width+ 'px', 'height': selectRect.height+ 'px'}" class="tiny-paper-selected-rect"></div>
       </div>
-      <TinyTop>options:{{options}} size:{{paper.size}}, {{drag}},{{this.activeItem}}</TinyTop>
+      <TinyTop v-if="options.isTest">options:{{options}} size:{{paper.size}}, {{drag}},{{this.activeItem}}</TinyTop>
     </div>
   </div>
 </template>
@@ -65,6 +65,7 @@ export default {
         isItemEnable:true,
         isShowBackArea:true,
         topItemId:"",
+        isTest:false,
       },
       activeItem:null,
 
@@ -485,6 +486,9 @@ export default {
 
 
     },
+    Test(){
+      this.options.isTest = !this.options.isTest;
+    }
     
   }
 }

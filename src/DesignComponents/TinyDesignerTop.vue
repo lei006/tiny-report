@@ -30,6 +30,8 @@
             <div class="tiny-toolbar-btn" @click="onToolHit('align_height')"><i class="icon iconfont icon-tiny-reportdenggao1"></i></div>
         <el-button size="tiny" slot="reference">对齐</el-button>
       </el-popover>
+      <div class="btn-diviler"></div>
+      <el-button size="tiny" @click="onToolHit('btn_test')">测试</el-button>
 
 
     </TinyToolbarBox>

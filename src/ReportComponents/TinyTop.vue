@@ -48,6 +48,7 @@ export default {
   border-width:0px;
   top:2px;
   left:2px;
+  color: #00f8;
 }
 
 
