@@ -5,7 +5,7 @@
         @mousedown="onMouseDown"
         :options="options"
       >
-      <div class="ellipse"></div>mode:{{options.mode}}
+      <div class="ellipse"></div>
     </report-base-item>
 </template>
 

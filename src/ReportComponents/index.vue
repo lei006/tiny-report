@@ -19,7 +19,7 @@
       @mouseup="onMouseUp"
     >
       <div class="tiny-report-item-class tiny-report-no-select" v-bind:class="{ 'tiny-report-item-area': options.isShowBackArea }" @click.stop="onClick" @mousedown="onMouseDown" @mousemove.stop="onMouseMove" @mouseup.stop="onMouseUp">
-        <slot>基本组件1</slot>zindex={{zindex}}
+        <slot>基本组件1</slot>
         <!--
         <div class="tiny-report-item-mask">{{reportItem}}==drag:{{allowDrag}}, resize:{{isAllowResize}}</div>
         -->

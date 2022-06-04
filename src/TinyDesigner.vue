@@ -6,7 +6,7 @@
       </el-aside>
         <el-main>
           <el-container>
-            <el-header style="height: 45px;">
+            <el-header style="height: 32px;">
               <TinyDesignerTop @onBtnHit="onBtnHit"/>
             </el-header>
             <el-main>

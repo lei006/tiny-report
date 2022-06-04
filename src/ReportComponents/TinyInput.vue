@@ -5,13 +5,14 @@
         @mousedown="onMouseDown"
         :options="options"
       >
-      <el-input size="tiny" v-model="reportItem.data" placeholder="请输入内容"></el-input>
+      <el-input size="tiny" :disabled="disabled" v-model="reportItem.data" placeholder="请输入内容"></el-input>
     </report-base-item>
 </template>
 
 <script>
 
 import ReportBaseItem from './index.vue'
+import Var from '../TinyVariable'
 
 export default {
   name: 'TinyItemInputBox',
@@ -36,14 +37,20 @@ export default {
           }
         }
       },
-
   },
+
+
+
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
       input:"aaaaaaa",
+      disabled:false,
     }
   },
+
+
+
   methods:{
     dragging(id, left, top){
       this.$emit("dragging", id, left, top);

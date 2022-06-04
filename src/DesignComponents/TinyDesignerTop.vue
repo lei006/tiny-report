@@ -104,16 +104,14 @@ export default {
 .tiny-designer-top {
 
   width: 100%;
-  height: 35px;
-  border:1px solid #cccccc;
+  height: 32px;
+  border:0px solid #cccccc;
 
   padding: 5px;
 
   display: flex;
   justify-content:space-between;
   align-items: center;
-
-
 }
 
 

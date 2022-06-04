@@ -5,7 +5,7 @@
         @mousedown="onMouseDown"
         :options="options"
       >
-      <div class="tiny-report-rect"></div>mode:{{options.mode}}
+      <div class="tiny-report-rect"></div>
     </report-base-item>
 </template>
 

@@ -39,7 +39,7 @@ import TinySelectTime from './ReportComponents/TinySelectTime.vue'
 
 import Var from './TinyVariable'
 
-        
+
 const stringRandom = require('string-random');
 
 
@@ -372,8 +372,18 @@ export default {
 
       let new_id = stringRandom();
 
+      function create_item(name, id, left, top){
+        let item = {id, class:name, left, top, width:10,height:100, zindex:0, selectted:false};
+        return item;
+      }
+
+
+
       if(type_name === "image") {
-          this.paper.layout.items.push({id:new_id, class:"image",left:x,top:y,width:100,height:100,isActive:true, zindex:0, selectted:false}); 
+          let new_item = create_item("image", new_id, x, y);
+          new_item.width = 160;
+          new_item.height = 160;
+          this.paper.layout.items.push(new_item);
       }
       else if(type_name === "rect") {
           this.paper.layout.items.push({id:new_id, class:"rect",left:x,top:y,width:100,height:100,isActive:true, zindex:0, selectted:false}); 
