@@ -3,7 +3,7 @@ label:用于给富文本赋予默认值,清空值label=" ",必须加空格,负�
 v-model:单向绑定，由于富文本监听问题，不能用v-model赋予默认值
   -->
 <template>
-        <froala :tag="'textarea'" :config="froalaConfig" v-model="editData"></froala>
+    <froala :tag="'textarea'" :config="froalaConfig" v-model="editData1"></froala>
 </template>
 <script>
 export default {
@@ -22,6 +22,7 @@ export default {
     },
     data() {
         return {
+            editData1:"12312312312",
             froalaConfig: {
                 toolbarInline: true,
                 charCounterCount: false,
@@ -29,8 +30,18 @@ export default {
             
         }
     },
+  watch: {
+    editData1(val) {
+      this.$emit("eventEditData", val);
+    },
+    editData(val) {
+      this.editData1 = val;
+    }
+  },
+
 
     mounted() {
+
 
     },
     methods: {

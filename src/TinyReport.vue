@@ -4,6 +4,8 @@
       <div class="tiny-paper-content" ref="report" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @dragover="onDragOver" @drop="onDrag">
       
           <template v-for="(item,key) in paper.items">
+            <TinyQrcode :options="options"  :key="key" v-if="item.class == 'qr_code'" v-model="paper.items[key]" @mousedown="onItemMouseDown(item)" @dragging="dragging" @dragstop="dragstop" />
+            <TinyBarcode :options="options"  :key="key" v-if="item.class == 'bar_code'" v-model="paper.items[key]" @mousedown="onItemMouseDown(item)" @dragging="dragging" @dragstop="dragstop" />
             <TinyImage :options="options"  :key="key" v-if="item.class == 'image'" v-model="paper.items[key]" @mousedown="onItemMouseDown(item)" @dragging="dragging" @dragstop="dragstop" />
             <TinyRect :options="options"  :key="key" v-if="item.class == 'rect'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
             <TinyLabel :options="options"  :key="key" v-if="item.class == 'label'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
@@ -45,6 +47,8 @@ import TinySelectOne from './ReportComponents/TinySelectOne.vue'
 import TinySelectMany from './ReportComponents/TinySelectMany.vue'
 import TinySelectCascader from './ReportComponents/TinySelectCascader.vue'
 import TinyRich from './ReportComponents/TinyRich.vue'
+import TinyQrcode from './ReportComponents/TinyQrcode.vue'
+import TinyBarcode from './ReportComponents/TinyBarcode.vue'
 
 import Var from './TinyVariable'
 
@@ -55,7 +59,7 @@ const stringRandom = require('string-random');
 
 export default {
   name: 'TinyReport',
-  components:{TinyRich,TinyImage,TinyEllipse, TinyRect, TinyLabel, TinyTop, TinyInput, TinyTextarea, TinySelectDate, TinySelectTime, TinySelectDateTime,TinySelectOne, TinySelectMany, TinySelectCascader},
+  components:{TinyRich,TinyImage, TinyQrcode, TinyBarcode,TinyEllipse, TinyRect, TinyLabel, TinyTop, TinyInput, TinyTextarea, TinySelectDate, TinySelectTime, TinySelectDateTime,TinySelectOne, TinySelectMany, TinySelectCascader},
   data () {
     return {
       paper:{
@@ -406,6 +410,12 @@ export default {
       }
       else if(type_name === "rect") {
           this.paper.items.push({id:new_id, class:"rect",left:x,top:y,width:100,height:100,isActive:true, zindex:0, selectted:false}); 
+      }
+      else if(type_name === "qr_code") {
+          this.paper.items.push({id:new_id, class:"qr_code",left:x,top:y,width:100,height:100,isActive:true, zindex:0, selectted:false, data:"这是一个二维码"}); 
+      }
+      else if(type_name === "bar_code") {
+          this.paper.items.push({id:new_id, class:"bar_code",left:x,top:y,width:100,height:100,isActive:true, zindex:0, selectted:false, data:"123w214"}); 
       }
       else if(type_name === "label") {
           this.paper.items.push({id:new_id, class:"label",left:x,top:y,width:60,height:20,isActive:true, zindex:0, selectted:false}); 

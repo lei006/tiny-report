@@ -16,7 +16,7 @@
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'rect')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>矩形</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'ellipse')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>椭圆</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'image')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>图片</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'qr_code')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>条形码</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'bar_code')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>条形码</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'qr_code')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>二维码</span></a></li>
     </ul>
   </div>
