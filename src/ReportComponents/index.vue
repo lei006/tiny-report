@@ -143,6 +143,8 @@ export default {
   width:100%;
   height:100%;
   position: relative;
+
+  display: flex;
 }
 
 .tiny-report-item-area {
@@ -165,5 +167,8 @@ export default {
 }
 
 
+textarea {
+  height: 100%;
+}
 
 </style>

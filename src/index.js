@@ -11,6 +11,16 @@ import TinyDesigner from './TinyDesigner.vue'
 import './Resource/iconfont.css'
 import './Resource/iconfont.js'
 
+// 富文本
+import 'froala-editor/css/froala_editor.pkgd.min.css'
+import 'froala-editor/css/froala_style.min.css'
+import 'froala-editor/js/froala_editor.pkgd.min.js'
+import 'froala-editor/js/languages/zh_cn.js'
+import 'froala-editor/js/plugins.pkgd.min.js'
+import VueFroala from 'vue-froala-wysiwyg'
+
+
+
 
 const components = {
     install:function(Vue){
@@ -19,6 +29,8 @@ const components = {
 
         Vue.component(TinyReport.name, TinyReport)
         Vue.component(TinyDesigner.name, TinyDesigner)
+
+        Vue.use(VueFroala)
 
     }
 }

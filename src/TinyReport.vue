@@ -10,6 +10,7 @@
             <TinyEllipse :options="options"  :key="key" v-if="item.class == 'ellipse'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
             <TinyInput :options="options"  :key="key" v-if="item.class == 'input'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
             <TinyTextarea :options="options"  :key="key" v-if="item.class == 'textarea'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
+            <TinyRich :options="options"  :key="key" v-if="item.class == 'rich-text'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
             <TinySelectDate :options="options"  :key="key" v-if="item.class == 'select-date'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
             <TinySelectTime :options="options"  :key="key" v-if="item.class == 'select-time'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
             <TinySelectDateTime :options="options"  :key="key" v-if="item.class == 'select-datetime'" v-model="paper.items[key]"  @mousedown="onItemMouseDown(item)"  @dragging="dragging" @dragstop="dragstop"/>
@@ -43,6 +44,7 @@ import TinySelectDateTime from './ReportComponents/TinySelectDateTime.vue'
 import TinySelectOne from './ReportComponents/TinySelectOne.vue'
 import TinySelectMany from './ReportComponents/TinySelectMany.vue'
 import TinySelectCascader from './ReportComponents/TinySelectCascader.vue'
+import TinyRich from './ReportComponents/TinyRich.vue'
 
 import Var from './TinyVariable'
 
@@ -53,7 +55,7 @@ const stringRandom = require('string-random');
 
 export default {
   name: 'TinyReport',
-  components:{TinyImage,TinyEllipse, TinyRect, TinyLabel, TinyTop, TinyInput, TinyTextarea, TinySelectDate, TinySelectTime, TinySelectDateTime,TinySelectOne, TinySelectMany, TinySelectCascader},
+  components:{TinyRich,TinyImage,TinyEllipse, TinyRect, TinyLabel, TinyTop, TinyInput, TinyTextarea, TinySelectDate, TinySelectTime, TinySelectDateTime,TinySelectOne, TinySelectMany, TinySelectCascader},
   data () {
     return {
       paper:{
@@ -125,6 +127,7 @@ export default {
     this.AddItemByType("rect", 110, 20);
     this.AddItemByType("label", 120, 30);
     this.AddItemByType("ellipse", 130, 40);
+    this.AddItemByType("rich-text", 130, 40);
 
     /*
     this.paper.items.push({id: 1, class:"image",left:100,top:10,width:100,height:200,isActive:true, zindex:0, selectted:false});
@@ -413,6 +416,8 @@ export default {
           this.paper.items.push({id:new_id, class:"input",left:x,top:y,width:100,height:30,isActive:true, zindex:0, selectted:false, data:"" }); 
       }else if(type_name === "textarea") {
           this.paper.items.push({id:new_id, class:"textarea",left:x,top:y,width:160,height:50,isActive:true, zindex:0, selectted:false, data:"" }); 
+      }else if(type_name === "rich-text") {
+          this.paper.items.push({id:new_id, class:"rich-text",left:x,top:y,width:260,height:150,isActive:true, zindex:0, selectted:false, data:"" }); 
       }else if(type_name === "select-date") {
           this.paper.items.push({id:new_id, class:"select-date",left:x,top:y,width:202,height:30,isActive:true, zindex:0, selectted:false, data:"" }); 
       }else if(type_name === "select-time") {
