@@ -417,7 +417,7 @@ export default {
       }else if(type_name === "textarea") {
           this.paper.items.push({id:new_id, class:"textarea",left:x,top:y,width:160,height:50,isActive:true, zindex:0, selectted:false, data:"" }); 
       }else if(type_name === "rich-text") {
-          this.paper.items.push({id:new_id, class:"rich-text",left:x,top:y,width:260,height:150,isActive:true, zindex:0, selectted:false, data:"" }); 
+          this.paper.items.push({id:new_id, class:"rich-text",left:x,top:y,width:260,height:150,isActive:true, zindex:0, selectted:false, data:"我是富文本" }); 
       }else if(type_name === "select-date") {
           this.paper.items.push({id:new_id, class:"select-date",left:x,top:y,width:202,height:30,isActive:true, zindex:0, selectted:false, data:"" }); 
       }else if(type_name === "select-time") {

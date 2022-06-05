@@ -22,6 +22,7 @@ import VueFroala from 'vue-froala-wysiwyg'
 
 
 
+
 const components = {
     install:function(Vue){
 

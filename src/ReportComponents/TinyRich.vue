@@ -5,20 +5,21 @@
         @mousedown="onMouseDown"
         :options="options"
       >
-      <RichEditFroala size="tiny" :disabled="options.isItemEnable"  v-model="msg" placeholder="请输入内容"></RichEditFroala>
+      <RichEditFroala size="tiny" :disabled="options.isItemEnable"  v-model="reportItem.data" placeholder="请输入内容"></RichEditFroala>
     </report-base-item>
 </template>
 
 <script>
 
 import RichEditFroala from '../ComponentsHelper/RichEditFroala/index.vue'
+import TinyMCE from '../ComponentsHelper/TinyMCE/index.vue'
 
 import ReportBaseItem from './index.vue'
 import Var from '../TinyVariable'
 
 export default {
   name: 'TinyItemInputBox',
-  components:{ReportBaseItem, RichEditFroala},
+  components:{ReportBaseItem, RichEditFroala, TinyMCE},
   model: {
       prop: "reportItem",
       event: "eventReportItem"
