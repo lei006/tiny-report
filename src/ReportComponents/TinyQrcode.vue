@@ -5,12 +5,13 @@
         @mousedown="onMouseDown"
         :options="options"
       >
-      <div class="tiny-qrcode tiny-report-no-select" draggable="false" ref="qrCodeUrl"></div>
+      <img class="tiny-qrcode tiny-report-no-select" draggable="false" :src="imgData" ref="qrCodeUrl" />
     </report-base-item>
 </template>
 
 <script>
-import QRCode from 'qrcodejs2'
+//import QRCode from 'qrcodejs2'
+import QRCode from 'qrcode'
 
 import ReportBaseItem from './index.vue'
 
@@ -49,7 +50,8 @@ export default {
 
         this.qr_timer = setTimeout(() => {
           if( (this.qr_data !== newVal.data) || (this.old_width !== newVal.width) || (this.old_height !== newVal.height) ) {
-            this.creatQrCode(newVal.data, newVal.width - 2, newVal.height - 2);          
+            //this.creatQrCode(newVal.data, newVal.width - 2, newVal.height - 2);
+            this.createQrUrl(newVal.data, newVal.width - 2, newVal.height - 2);
             this.qr_data = newVal.data;
             this.old_width = newVal.width;
             this.old_height = newVal.height;
@@ -64,6 +66,7 @@ export default {
   },
   data () {
     return {
+      imgData:"",
       msg: 'Welcome to Your Vue.js App',
       fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
       fit:"contain",
@@ -97,6 +100,14 @@ export default {
         console.log("creatQrCode", qrcode)
         return qrcode;
     },
+    createQrUrl(data, width, height) {
+      let _self = this;
+      QRCode.toDataURL(data, {width, height, margin:1, errorCorrectionLevel: 'H' }, function (err, url) {
+        _self.imgData = url;
+      })
+    }
+
+
   }  
 }
 </script>

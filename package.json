@@ -21,6 +21,7 @@
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
     "print-js": "^1.6.0",
+    "qrcode": "^1.5.0",
     "qrcodejs2": "^0.0.2",
     "splitpanes": "^2.4.1",
     "string-random": "^0.1.3",
