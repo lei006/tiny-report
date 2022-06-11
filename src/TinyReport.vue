@@ -76,7 +76,7 @@ export default {
         mode:Var.TINY_REPORT__WRITE,
         isAllowResize:true, 
         isAllowDrag:true,
-        isItemEnable:true,
+        isItemEnable:false,
         isShowBackArea:true,
         topItemId:"",
         isTest:false,
@@ -126,13 +126,15 @@ export default {
   },
 
   mounted(){
+    this.AddItemByType("input", 120, 30);
 
+    /*
     this.AddItemByType("image", 100, 10);
     this.AddItemByType("rect", 110, 20);
     this.AddItemByType("label", 120, 30);
     this.AddItemByType("ellipse", 130, 40);
     this.AddItemByType("rich-text", 130, 40);
-
+    */
     /*
     this.paper.items.push({id: 1, class:"image",left:100,top:10,width:100,height:200,isActive:true, zindex:0, selectted:false});
     this.paper.items.push({id: 2, class:"rect",left:110,top:20,width:100,height:200,isActive:true, zindex:0, selectted:false});
@@ -455,6 +457,10 @@ export default {
     },
     //检查选择项改变-并通知外部...
     checkSelecttedChange(newPaper, oldPaper) {
+      
+      if (this.mode !== Var.TINY_REPORT__DESIGN) {
+        return;
+      }
 
       // 1. 找出当前所有选中项..
       let new_select_items = [];
