@@ -8767,6 +8767,11 @@ vue-loader@^13.3.0:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
+vue-resize-observer@^2.0.16:
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/vue-resize-observer/-/vue-resize-observer-2.0.16.tgz#5013e5c1830710042a072b6aefde4d95e27442d0"
+  integrity sha512-E6LBZp0KSYAgA7KbqKv6GA4NRj6Q677Ldck5e+nTB2GCjhyPZQzdYJEzIeYoERDuwI6c6OcGF5Vd4a0+rjZECA==
+
 vue-resize@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/vue-resize/-/vue-resize-1.0.1.tgz#c120bed4e09938771d622614f57dbcf58a5147ee"

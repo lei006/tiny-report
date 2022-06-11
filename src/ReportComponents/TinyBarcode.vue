@@ -5,7 +5,7 @@
         @mousedown="onMouseDown"
         :options="options"
       >
-      <img :id="id" class="tiny-qrcode tiny-report-no-select" draggable="false" ref="qrCodeUrl" />
+      <img :id="id" class="tiny-qrcode tiny-report-no-select" draggable="false" ref="qrCodeUrl" v-resize="onResize"/>
     </report-base-item>
 </template>
 
@@ -56,6 +56,11 @@ export default {
             this.old_width = newVal.width;
             this.old_height = newVal.height;
             this.qr_timer = null;
+            let img_dcm = document.getElementById(this.id);
+            console.log("img",img_dcm.offsetWidth,img_dcm.offsetHeight, newVal);
+            //this.reportItem.width = img_dcm.offsetWidth;
+            //this.reportItem.height = img_dcm.offsetHeight + 2;
+
           }
         }, 300);
         //this.url = code;
@@ -95,7 +100,7 @@ export default {
           lineColor: "#0aa",  //线条颜色
           width, //线宽
           height:height,  //条码高度
-          displayValue: false //是否显示文字信息
+          displayValue: true //是否显示文字信息
         })
 
         /*
@@ -111,6 +116,9 @@ export default {
         console.log("creatQrCode", qrcode)
         return qrcode;
         */
+    },
+    onResize(data){
+      console.log("onResize--->", data)
     },
   }  
 }

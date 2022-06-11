@@ -20,6 +20,7 @@ import 'froala-editor/js/plugins.pkgd.min.js'
 import VueFroala from 'vue-froala-wysiwyg'
 
 
+const VueResizeObserver = require("vue-resize-observer");
 
 
 
@@ -32,6 +33,8 @@ const components = {
         Vue.component(TinyDesigner.name, TinyDesigner)
 
         Vue.use(VueFroala)
+        Vue.use(VueResizeObserver); // use is a static method
+
 
     }
 }
