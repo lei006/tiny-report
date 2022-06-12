@@ -5,7 +5,7 @@
         @mousedown="onMouseDown"
         :options="options"
       >
-      <RichEditFroala size="tiny" :disabled="options.isItemEnable"  v-model="reportItem.data" placeholder="请输入内容"></RichEditFroala>
+      <RichEditFroala size="tiny" :disabled="!options.isItemEnable"  v-model="reportItem.data" placeholder="请输入内容"></RichEditFroala>
     </report-base-item>
 </template>
 

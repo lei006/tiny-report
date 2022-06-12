@@ -358,7 +358,6 @@ export default {
       var src = ev.dataTransfer.getData("tiny-report-item-type");//获取src
       ev.preventDefault();
       this.AddItemByType(src, ev.offsetX, ev.offsetY);
-      console.log("ev,",ev);
     },
     
     SetSize(width, height){
@@ -368,18 +367,21 @@ export default {
     SetModel(mode){
       if (mode == Var.TINY_REPORT__DESIGN) {
         this.options.isAllowResize = true;
+        this.options.isItemEnable = false;
         this.options.isAllowDrag = true;
         this.options.isShowBackArea = true;
       }
 
       if (mode == Var.TINY_REPORT__PREVIEW) {
+        this.options.isItemEnable = false;
         this.options.isAllowResize = false;
-        this.options.isAllowDrag = true;
+        this.options.isAllowDrag = false;
         this.options.isShowBackArea = false;
       }
 
       if (mode == Var.TINY_REPORT__WRITE) {
         this.options.isAllowResize = false;
+        this.options.isItemEnable = true;
         this.options.isAllowDrag = false;
         this.options.isShowBackArea = false;
       }

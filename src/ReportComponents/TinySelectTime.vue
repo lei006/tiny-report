@@ -5,7 +5,7 @@
         @mousedown="onMouseDown"
         :options="options"
       >
-      <el-time-select size="mini" :disabled="options.isItemEnable" v-model="reportItem.data" placeholder="选择时间"></el-time-select>
+      <el-time-select size="mini" :disabled="!options.isItemEnable" v-model="reportItem.data" placeholder="选择时间"></el-time-select>
     </report-base-item>
 </template>
 
