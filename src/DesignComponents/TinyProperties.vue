@@ -1,5 +1,6 @@
 <template>
   <div class="attr-list">
+      <template>
       <div class="attr-title tiny-report-no-select">报告模板</div>
       <ul>
         <li v-for="(item, key) of paper" :key="key" class="attr-item">
@@ -20,10 +21,12 @@
             <div class="label">字体:</div>
             <div class="item"><el-input-number size="mini" v-model="paper[key]"></el-input-number></div>
           </template>
-          
+
         </li>
       </ul>
+      </template>
 
+      <template>
       <div class="attr-title tiny-report-no-select">选中项属性</div>
       <ul>
         <li v-for="(item, key) of items" :key="key" class="attr-item">
@@ -88,10 +91,15 @@
               </el-select>
             </div>
           </template>
-          
+          <template v-if="key === 'image'">
+            <div class="label">图像:</div>
+            <div class="item">
+                <input class="tiny-report--select-file-input" type="file" name="" id="" @change="onImageselect(items[key], $event)" >
+            </div>
+          </template>
         </li>
       </ul>
-
+      </template>
   </div>
 </template>
 
@@ -121,6 +129,10 @@ export default {
             data:"",
             items:[]
           },
+          image:{
+            data:"",
+            id:"123123",
+          },
           color:"",
           backgroundcolor:"rgba(238, 0, 0, 1)",
           fontfamily:"宋体",
@@ -138,6 +150,14 @@ export default {
       onSelectChange(select, ev){
         select.items.push(ev);
       },
+      onImageselect(image, ev) {
+        var reader = new FileReader();
+        reader.onload = function(evt){
+          image.data = evt.target.result;
+        }
+        reader.readAsDataURL(ev.target.files[0]);
+      },
+
     }
 
 }
@@ -196,6 +216,41 @@ export default {
 .attr-item .item {
   flex:1,
 }
+
+
+.tiny-report--select-file-input{
+  width: 100px;
+  
+}
+
+
+
+input {
+    overflow: hidden;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: textfield;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
+
+
+
+
+
+
 
 
 </style>
