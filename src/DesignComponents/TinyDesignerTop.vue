@@ -30,15 +30,15 @@
             <div class="tiny-toolbar-btn" @click="onToolHit('align_height')"><i class="icon iconfont icon-tiny-reportdenggao1"></i></div>
         <el-button size="tiny" slot="reference">对齐</el-button>
       </el-popover>
+      <div class="btn-diviler"></div>
+      <el-button size="tiny" @click="onToolHit('btn_test')">测试</el-button>
 
 
     </TinyToolbarBox>
     <div class="designer-toolsbar">
       <TinyToolbarBox>
-        <el-button size="tiny" @click="onToolHit('qr_code')">导入JSON</el-button>
-        <el-button size="tiny" @click="onToolHit('qr_code')">预览</el-button>
-        <el-button size="tiny" @click="onToolHit('qr_code')">导出JSON</el-button>
-        <el-button size="tiny" @click="onToolHit('qr_code')">生成代码</el-button>
+        <el-button size="tiny" @click="onToolHit('qr_code')">导入</el-button>
+        <el-button size="tiny" @click="onToolHit('qr_code')">导出</el-button>
       </TinyToolbarBox>
     </div>
   </div>
@@ -104,16 +104,14 @@ export default {
 .tiny-designer-top {
 
   width: 100%;
-  height: 35px;
-  border:1px solid #cccccc;
+  height: 32px;
+  border:0px solid #cccccc;
 
   padding: 5px;
 
   display: flex;
   justify-content:space-between;
   align-items: center;
-
-
 }
 
 

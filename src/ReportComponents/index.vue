@@ -9,7 +9,7 @@
     :minh='1' 
     :enableNativeDrag='true'
     :z="zindex"
-      :draggable='allowDrag'  :resizable='allowResize' :preventDeactivation='true' :parentLimitation='true'
+      :draggable='options.isAllowDrag && reportItem.selectted'  :resizable='options.isAllowResize && reportItem.selectted' :preventDeactivation='true' :parentLimitation='true'
       @dragging="dragging"
       @dragstop="dragstop"
       @resizing="onResize"
@@ -18,10 +18,10 @@
       :on-drag-start="onDragStartCallback"
       @mouseup="onMouseUp"
     >
-      <div class="tiny-report-item-class tiny-report-no-select" v-bind:class="{ 'tiny-report-item-area': showBackArea }" @click.stop="onClick" @mousedown="onMouseDown" @mousemove.stop="onMouseMove" @mouseup.stop="onMouseUp">
-        <slot>基本组件1</slot>
+      <div class="tiny-report-item-class tiny-report-no-select" v-bind:class="{ 'tiny-report-item-area': options.isShowBackArea }" @click="onClick" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
+        <slot>基本组件</slot>
         <!--
-        <div class="tiny-report-item-mask">{{reportItem}}==drag:{{allowDrag}}, resize:{{allowResize}}</div>
+        <div class="tiny-report-item-mask">{{reportItem}}==drag:{{allowDrag}}, resize:{{isAllowResize}}</div>
         -->
       </div>
     </vue-draggable-resizable>
@@ -48,29 +48,29 @@ export default {
             return {left:10,top:20,isActive:true}
           },
       },
-      //允许选中
-      allowResize:{
-        type:Boolean,
-        default:false,
-      },
-      allowDrag:{
-        type:Boolean,
-        default:true,
-      },
-      //显示背景区域
-      showBackArea:{
-        type:Boolean,
-        default:true,
-      },
-      zindex:{
-        type:Number,
-        default:0,
+      options:{
+        type: Object,
+        default: ()=>{
+          return {
+          isAllowResize:false, 
+          isAllowDrag:true,
+          isItemEnable:true,
+          isShowBackArea:true,
+        }}
       },
   },
   watch:{
     reportItem:{
       handler(newVal, oldVal){
-        newVal.zindex = newVal.isActive?100:0;
+        if(newVal.selectted) {
+          if(newVal.id === this.options.topItemId) {
+            this.zindex = 2;
+          }else{
+            this.zindex = 1;
+          }
+        }else{
+          this.zindex = 0;
+        }
       },
       deep:true,
       immediate:true,
@@ -80,6 +80,7 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      zindex:0,
     }
   },
   mounted(){
@@ -142,6 +143,8 @@ export default {
   width:100%;
   height:100%;
   position: relative;
+
+  display: flex;
 }
 
 .tiny-report-item-area {
@@ -164,5 +167,8 @@ export default {
 }
 
 
+textarea {
+  height: 100%;
+}
 
 </style>

@@ -1,35 +1,165 @@
 <template>
-  <div class="components-list tiny-report-no-select">
-    <div class="widget-cate">属性栏</div>
-    <ul>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-input"></i><span>单行文本</span></a></li>
-    <li class="form-edit-widget-label" draggable="false" style=""><a draggable="false"><i class="icon iconfont icon-diy-com-textarea"></i><span>多行文本</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-number"></i><span>计数器</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-radio-active"></i><span>单选框组</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-check-box"></i><span>多选框组</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-select"></i><span>下拉选择框</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-time"></i><span>时间选择器</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-date"></i><span>日期选择器</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-pingfen1"></i><span>评分</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-color"></i><span>颜色选择器</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-switch"></i><span>开关</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-slider"></i><span>滑块</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-wenzishezhi-"></i><span>文字</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-html"></i><span>HTML</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-button"></i><span>按钮</span></a></li>
-    <li class="form-edit-widget-label"><a><i class="icon iconfont icon-lianjie"></i><span>文字链接</span></a></li>
-    </ul>
+  <div class="attr-list">
+      <template>
+      <div class="attr-title tiny-report-no-select">报告模板</div>
+      <ul>
+        <li v-for="(item, key) of paper" :key="key" class="attr-item">
+
+          <template v-if="key === 'title'">
+            <div class="label">名称:</div>
+            <div class="item"><el-input size="mini" v-model="items[key]"></el-input></div>
+          </template>
+          <template v-if="key === 'width'">
+            <div class="label">宽度:</div>
+            <div class="item"><el-input-number size="mini" v-model="paper[key]"></el-input-number></div>
+          </template>
+          <template v-if="key === 'height'">
+            <div class="label">高度:</div>
+            <div class="item"><el-input-number size="mini" v-model="paper[key]"></el-input-number></div>
+          </template>
+          <template v-if="key === 'fontsize'">
+            <div class="label">字体:</div>
+            <div class="item"><el-input-number size="mini" v-model="paper[key]"></el-input-number></div>
+          </template>
+
+        </li>
+      </ul>
+      </template>
+
+      <template>
+      <div class="attr-title tiny-report-no-select">选中项属性</div>
+      <ul>
+        <li v-for="(item, key) of items" :key="key" class="attr-item">
+          <template v-if="key === 'id'">
+            <div class="label">ID:</div>
+            <div class="item"><el-input size="mini" v-model="items[key]"></el-input></div>
+          </template>
+          <template v-if="key === 'class'">
+            <div class="label">类型:</div>
+            <div class="item"><el-input size="mini" v-model="items[key]"></el-input></div>
+          </template>
+          <template v-if="key === 'nickname'">
+            <div class="label">别称:</div>
+            <div class="item"><el-input size="mini" v-model="items[key]"></el-input></div>
+          </template>
+          <template v-if="key === 'width'">
+            <div class="label">宽度:</div>
+            <div class="item"><el-input-number size="mini" v-model="items[key]"></el-input-number></div>
+          </template>
+          <template v-if="key === 'height'">
+            <div class="label">高度:</div>
+            <div class="item"><el-input-number size="mini" v-model="items[key]"></el-input-number></div>
+          </template>
+          <template v-if="key === 'fontsize'">
+            <div class="label">字体:</div>
+            <div class="item"><el-input-number size="mini" v-model="items[key]"></el-input-number></div>
+          </template>
+          <template v-if="key === 'data'">
+            <div class="label">数据:</div>
+            <div class="item"><el-input size="mini" v-model="items[key]"></el-input></div>
+          </template>
+          
+          <!--单选-->
+          <template v-if="key === 'select'">
+            <div class="label">选项条目:</div>
+            <div class="item">
+              <el-select size="mini" v-model="items[key].data" filterable allow-create default-first-option placeholder="请选择" @change="onSelectChange(items[key], $event)">
+                <el-option v-for="item in items[key].items" :key="key + '--' + item" :label="item" :value="item"></el-option>
+              </el-select>
+            </div>
+          </template>
+
+
+          <template v-if="key === 'color'">
+            <div class="label">字体颜色:</div>
+            <div class="item">  <el-color-picker size="mini" v-model="items[key]"></el-color-picker></div>
+          </template>
+
+          <template v-if="key === 'backgroundcolor'">
+            <div class="label">背景颜色:</div>
+            <div class="item">  <el-color-picker size="mini" v-model="items[key]"></el-color-picker></div>
+          </template>
+          
+          <template v-if="key === 'align'">
+            <div class="label">对齐:</div>
+            <div class="item"> 
+              <el-select size="mini" v-model="items[key]" style="width:130px;">
+                  <el-option value="left" label="靠左" key="left">靠左</el-option>
+                  <el-option value="right" label="靠右" key="right">靠右</el-option>
+                  <el-option value="center" label="居中" key="center">居中</el-option>
+                  <el-option value="justify" label="分散" key="justify">分散</el-option>
+              </el-select>
+            </div>
+          </template>
+          <template v-if="key === 'image'">
+            <div class="label">图像:</div>
+            <div class="item">
+                <input class="tiny-report--select-file-input" type="file" name="" id="" @change="onImageselect(items[key], $event)" >
+            </div>
+          </template>
+        </li>
+      </ul>
+      </template>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TinyProperties',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+    name: 'TinyProperties',
+    data() {
+      return {
+        activeNames: ['1'],
+        paper:{
+          width: 1500,
+          height: 324,
+          fontsize:14,
+          title:"这是TinyReport",
+        },
+        items:{
+          id:"",
+          class:"",
+          nickname:"助记名",
+          left:0,
+          top:0,
+          width:100,
+          height:200,
+          data:200,
+          items:[],
+          select:{
+            data:"",
+            items:[]
+          },
+          image:{
+            data:"",
+            id:"123123",
+          },
+          color:"",
+          backgroundcolor:"rgba(238, 0, 0, 1)",
+          fontfamily:"宋体",
+          fontsize:16,
+          fontweight:200,
+          align:"",
+        }
+      };
+    },
+
+    methods: {
+      handleChange(val) {
+        console.log(val);
+      },
+      onSelectChange(select, ev){
+        select.items.push(ev);
+      },
+      onImageselect(image, ev) {
+        var reader = new FileReader();
+        reader.onload = function(evt){
+          image.data = evt.target.result;
+        }
+        reader.readAsDataURL(ev.target.files[0]);
+      },
+
     }
-  }
+
 }
 </script>
 
@@ -37,53 +167,84 @@ export default {
 <style scoped>
 
 
-.components-list{
-    padding: 8px 0;
+.attr-list{
+    padding: 0px;
     width: 100%;
-    height: 100%;
+    border:0px solid #cccccc;
+    overflow:auto;
+
+    display: flex;
+    flex-direction: column;
+
 }
 
-.components-list .widget-cate {
-    padding: 8px 12px;
-    font-size: 13px;
+
+
+.attr-title {
+    box-sizing: border-box;
+    padding: 8px;
+    font-weight: 400;
+    font-size: 14px;
+    background: #eee;
+    line-height: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.components-list ul {
+.attr-list ul {
     position: relative;
     overflow: hidden;
-    padding: 0 10px 10px;
+    padding: 0 0px 0px 0;
     margin: 0;
 }
 
 
-.components-list .form-edit-widget-label {
-    font-size: 12px;
-    display: block;
-    width: 48%;
-    line-height: 26px;
-    position: relative;
-    float: left;
-    left: 0;
+.attr-item{
+  display: flex;
+  margin: 2px;
+}
+
+.attr-item .label {
+  width: 95px;
+  height: 28px;
+  line-height: 28px;
+  padding-left: 15px;
+}
+
+.attr-item .item {
+  flex:1,
+}
+
+
+.tiny-report--select-file-input{
+  width: 100px;
+  
+}
+
+
+
+input {
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin: 1%;
-    color: #333;
-    border: 1px solid #f4f6fc;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: textfield;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
 }
-
-
-.components-list .form-edit-widget-label>a {
-    display: block;
-    cursor: move;
-    background: #f4f6fc;
-    border: 1px solid #f4f6fc;
-}
-.components-list .form-edit-widget-label a {
-    color: #333;
-}
-
-
 
 
 

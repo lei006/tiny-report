@@ -3,12 +3,9 @@
         @dragging="dragging" 
         @dragstop="dragstop"
         @mousedown="onMouseDown"
-        :allowResize="allowResize"
-        :allowDrag="allowDrag"
-        :showBackArea="showBackArea"
-        :zindex="zindex"
+        :options="options"
       >
-      <div class="tiny-report-label"><slot>标签</slot>mode:{{mode}}</div>
+      <div class="tiny-report-label"><slot>标签</slot></div>
     </report-base-item>
 </template>
 
@@ -30,23 +27,17 @@ export default {
       mode:{
         type:String
       },
-      //允许选中
-      allowResize:{
-        type:Boolean,
-        default:false,
-      },
-      allowDrag:{
-        type:Boolean,
-        default:true,
-      },
-      //显示背景区域
-      showBackArea:{
-        type:Boolean,
-        default:true,
-      },
-      zindex:{
-        type:Number,
-        default:0,
+      options:{
+        type: Object,
+        default: ()=>{
+          return {
+            mode:"",
+            isAllowResize:false,  //允许调整大小
+            isAllowDrag:true,     //允许拖动
+            isItemEnable:true,    //是否有效
+            isShowBackArea:true,  //显示背景
+          }
+        }
       },
 
   },

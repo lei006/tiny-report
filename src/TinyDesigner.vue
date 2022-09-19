@@ -1,16 +1,16 @@
 <template>
   <div class="tiny-designer">
     <el-container>
-      <el-aside width="210px">
+      <el-aside width="200px">
         <TinyComponentsList />
       </el-aside>
         <el-main>
           <el-container>
-            <el-header style="height: 45px;">
+            <el-header style="height: 32px; padding: 0 3px;">
               <TinyDesignerTop @onBtnHit="onBtnHit"/>
             </el-header>
             <el-main>
-              <TinyReport ref="reportPaper"></TinyReport>
+              <TinyReport ref="reportPaper" @selectchange="onSelectChange"></TinyReport>
             </el-main>
           </el-container>
         </el-main>
@@ -34,13 +34,13 @@ export default {
   components:{TinyComponentsList,TinyProperties,TinyReport, TinyDesignerTop},
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      reportData:{},
     }
   },
   methods:{
     onBtnHit(btn, data){
       if (btn == "btn_paper_a4") {
-          this.$refs.reportPaper.SetSize(900,1270);
+          this.$refs.reportPaper.SetSize(700,800);
       }else if (btn == "btn_paper_b5"){
           this.$refs.reportPaper.SetSize(600,900);
       }else if (btn == "btn_paper_tiny"){
@@ -65,13 +65,16 @@ export default {
           this.$refs.reportPaper.align(btn);
       }else if (btn == "align_height"){
           this.$refs.reportPaper.align(btn);
-      }else if (btn == "btn_print"){
-          this.$refs.Print();
+      }else if (btn == "btn_test"){
+          this.$refs.reportPaper.Test();
       }else{
         console.log("未处理事件", btn);
       }
 
-    }
+    },
+    onSelectChange(items) {
+      console.log("onSelectChange", items);
+    },
   }
 }
 </script>
@@ -80,13 +83,8 @@ export default {
 <style scoped>
 
 
-
-
-
-
-
-.el-header {
-    padding: 0 0px;
+.el-container {
+  height: 100%;
 }
 
 
@@ -99,15 +97,11 @@ export default {
   height: 100%;
   
 
-  border:1px solid #fc0c0c;
+  border:1px solid #888;
 
-    margin-left: 20px;
-    box-shadow: inset 0 0 3px 2px #dadada;
+  margin-left: 2px;
+  box-shadow: inset 0 0 1px 1px #dadada;
 
-}
-
-.el-container {
-  height: 100%;
 }
 
 
