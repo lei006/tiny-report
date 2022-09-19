@@ -4,7 +4,7 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 
 import '@/styles/index.scss' // global css
 
@@ -15,6 +15,18 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+
+// 增加 pinia 的支持
+import {createPinia, PiniaVuePlugin, setMapStoreSuffix } from 'pinia' //导入pinia
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate' //持久化插件
+
+const pinia = createPinia(); //调用创建pinia
+pinia.use(piniaPluginPersistedstate);
+setMapStoreSuffix('_pinia');
+
+
+ Vue.use(PiniaVuePlugin)
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -24,36 +36,21 @@ import '@/permission' // permission control
  * please remove it before going online ! ! !
  */
 if (process.env.NODE_ENV === 'production') {
-  //const { mockXHR } = require('../mock')
-  //mockXHR()
+  const { mockXHR } = require('../mock')
+  mockXHR()
 }
 
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
+Vue.use(ElementUI, { zhLocale })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
-
-
-
-
-
-//本地的包--用来开发
-import TinyReport from '../src/index'
-
-//从NPM下载的包--用来测试
-//import TinyReport from 'tiny-report'    
-
-Vue.use(TinyReport)
-
-
-
-
 
 Vue.config.productionTip = false
 
 new Vue({
   el: '#app',
   router,
+  pinia,
   store,
   render: h => h(App)
 })
