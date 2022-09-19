@@ -7,14 +7,9 @@
 
 <script>
 
-import draggable from "vuedraggable";
-
-
 export default {
   name: 'ReportToolbarAlign',
-  components: {
-    draggable,
-  }, 
+  components: {}, 
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

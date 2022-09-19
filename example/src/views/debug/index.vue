@@ -1,32 +1,42 @@
 <template>
-    <div class="test-div">
-        <button @click="increment">增加</button>
-        <span>原始:{{ counter }}</span>
-        <span>附加:{{ getcounter }}</span>
+    <div class="dashboard-container">
+          <TinyDesigner />
     </div>
-</template>
-<script>
-import {mapState,mapActions} from 'pinia'
-import storeId from '@/store/pinia_test'  //storeId就是导出的那个值
+  </template>
+  
+  <script>
+  import { mapGetters } from 'vuex'
+  import TinyDesigner from '../../../../src/TinyDesign.vue'
 
-export default {
-    methods: {
-        ...mapActions(storeId,['increment'])//不把函数补充完整的时候页面会报错
+  export default {
+    name: 'Dashboard',
+    components:{
+        TinyDesigner
     },
-    computed:{
-        ...mapState(storeId,['counter','getcounter'])
+    computed: {
+      ...mapGetters([
+        'name'
+      ])
     }
-};
-</script>
-
-<style scoped>
-
-.test-div{
-    width: 800px;
-    height: 500px;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-}
-
-</style>
+  }
+  </script>
+  
+  <style lang="scss" scoped>
+  .dashboard {
+    &-container {
+      margin: 0px;
+    }
+    &-text {
+      font-size: 30px;
+      line-height: 46px;
+    }
+  }
+  
+  .dashboard-container {
+    height: 100%;
+    width: 100%;
+  
+  }
+  
+  </style>
+  

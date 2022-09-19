@@ -6,11 +6,9 @@
 
 <script>
 
-import ReportBaseItem from './index.vue'
-
 export default {
   name: 'TinyReportLabel',
-  components:{ReportBaseItem},
+  components:{},
   model: {
       prop: "reportItem",
       event: "eventReportItem"

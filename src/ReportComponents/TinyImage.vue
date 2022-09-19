@@ -1,37 +1,35 @@
 <template>
-    <report-base-item  v-model="reportItem"  
-        @dragging="dragging" 
-        @dragstop="dragstop"
-        @mousedown="onMouseDown"
-        :options="options"
-      >
-      <el-image style="width: 100%; height: 100%" :disabled="options.isItemEnable"  :src="url" :fit="fit">
-
-
+  <div style="width: 100%; height: 100%"  @dragover="onDragOver" @drop="onDrag">
+      <el-image style="width: 100%; height: 100%" :disabled="options.isItemEnable"  :src="imageData" :fit="fit">
+        <div slot="error" class="image-slot">图片</div>
       </el-image>
-    </report-base-item>
+  </div>      
 </template>
 
 <script>
 
-import ReportBaseItem from './index.vue'
-
 export default {
   name: 'TpImage',
-  components:{ReportBaseItem},
+  components:{},
   model: {
-      prop: "reportItem",
-      event: "eventReportItem"
+      prop: "itemData",
+      event: "eventItemData"
   },
   props: {
-      reportItem: {
-          type: Object
+      itemData: {
+          type: String
       },
+      fit: {
+          type: String,
+          default:()=>{
+            return "contain";
+          }
+      },
+
       options:{
         type: Object,
         default: ()=>{
           return {
-            mode:"",
             isAllowResize:false,  //允许调整大小
             isAllowDrag:true,     //允许拖动
             isItemEnable:true,    //是否有效
@@ -42,27 +40,52 @@ export default {
   },   
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
       fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
-      fit:"contain",
-      url: "",
+      imageData:"",
     }
   },
+  watch: {
+    itemData:{
+          handler(newVal) {
+            this.imageData = newVal;
+          },
+          deep:true,
+          immediate:true,
+    },
+    imageData:{
+          handler(newVal) {
+            this.$emit('eventItemData',newVal);
+          },
+          deep:true,
+          immediate:false,
+    },
+    
+  },
+
+
+
   methods:{
-    dragging(id, left, top){
-      this.$emit("dragging", id, left, top);
+    onDragOver(ev){
+      ev.preventDefault();
     },
-    dragstop(id, left, top){
-      this.$emit("dragstop", id, left, top);
-    },
-    onMouseDown(){
-      this.$emit("mousedown", this.reportItem);
-    }        
+    onDrag(ev){
+      ev.preventDefault();
+      var src = ev.dataTransfer.getData("report_image");//获取src
+
+      console.log("onDrag", src);
+      let new_item = JSON.parse(src)
+      this.imageData = new_item.thumbnail;
+    }
   }  
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.image-slot{
+  font-size: 24px;
+  color: #888;
+}
 
 </style>

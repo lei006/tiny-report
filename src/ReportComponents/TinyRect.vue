@@ -1,26 +1,26 @@
 <template>
-    <report-base-item v-model="reportItem" 
-        @dragging="dragging" 
-        @dragstop="dragstop"
-        @mousedown="onMouseDown"
-        :options="options"
-      >
-      <div class="tiny-report-rect"></div>
-    </report-base-item>
+      <div class="tiny-report-rect" :style="{'border-radius': radius + 'px', 'background-color':color}"></div>
 </template>
 
 <script>
 
-import ReportBaseItem from './index.vue'
-
 export default {
   name: 'TinyReportRect',
-  components:{ReportBaseItem},
+  components:{},
   model: {
       prop: "reportItem",
       event: "eventReportItem"
   },
   props: {
+      radius:{
+          type: Number,
+          default:()=>{
+            return 0;
+          }
+      },
+      color:{
+          type: String,
+      },
       reportItem: {
           type: Object
       },
@@ -28,7 +28,6 @@ export default {
         type: Object,
         default: ()=>{
           return {
-            mode:"",
             isAllowResize:false,  //允许调整大小
             isAllowDrag:true,     //允许拖动
             isItemEnable:true,    //是否有效
@@ -43,15 +42,7 @@ export default {
     }
   },
   methods:{
-    dragging(id, left, top){
-      this.$emit("dragging", id, left, top);
-    },
-    dragstop(id, left, top){
-      this.$emit("dragstop", id, left, top);
-    },
-    onMouseDown(){
-      this.$emit("mousedown", this.reportItem);
-    }        
+     
   }
 }
 </script>

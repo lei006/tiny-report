@@ -1,15 +1,13 @@
 <template>
   <div class="tiny-designer-top">
     <TinyToolbarBox>
-      <el-button size="tiny" @click="onToolHit('btn_undo')">撤消</el-button>
-      <el-button size="tiny" @click="onToolHit('btn_undo')">重做</el-button>
-      <div class="btn-diviler"></div>
-      <el-radio-group v-model="radio1"  size="tiny" @change="onReportModel">
-        <el-radio-button label="btn_design">设计</el-radio-button>
-        <el-radio-button label="btn_write">填写</el-radio-button>
-        <el-radio-button label="btn_preview">预览</el-radio-button>
+      <el-radio-group v-model="radio_model"  size="tiny" @change="onReportModel">
+        <el-radio-button label="design">设计</el-radio-button>
+        <el-radio-button label="write">填写</el-radio-button>
+        <el-radio-button label="tab">TAB</el-radio-button>
+        <el-radio-button label="preview">预览</el-radio-button>
       </el-radio-group>
-      <div class="btn-diviler"></div>    
+      <div class="btn-diviler"></div>
       <el-button size="tiny" @click="onToolHit('btn_print')">打印</el-button>
       <div class="btn-diviler"></div>
       <el-radio-group v-model="radio2"  size="tiny" @change="onReportSize">
@@ -17,6 +15,8 @@
         <el-radio-button label="btn_paper_b5">B5</el-radio-button>
         <el-radio-button label="btn_paper_tiny">Tiny</el-radio-button>
       </el-radio-group>
+      <div class="btn-diviler"></div>
+      <el-button size="tiny" @click="onToolHit('btn_friend_name')">友好名</el-button>
       <div class="btn-diviler"></div>    
       <!--对齐部分-->
       <el-popover placement="top" trigger="hover">
@@ -46,17 +46,22 @@
 
 <script>
 
-import TinyToolbarAlign from './TinyToolbarAlign.vue'
 import TinyToolbarBox from './TinyToolbarBox.vue'
 
 
 export default {
   name: 'TinyDesignerTop',
-  components:{TinyToolbarAlign, TinyToolbarBox},
+  components:{ TinyToolbarBox},
+
+  props: {
+      model:{
+        type: String,
+      }
+  },  
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      radio1:"3",
+      radio_model:"3",
       radio2:"A4",
         gridData: [{
           date: '2016-05-02',
@@ -78,6 +83,16 @@ export default {
 
     }
   },
+  watch: {
+    model:{
+            handler(newVal) {
+              console.log("model======>",newVal)
+              this.radio_model = newVal;
+            },
+            deep:true,
+            immediate:true,
+        },
+  },
   methods:{
 
     onBtnHit(data, data1){
@@ -87,7 +102,7 @@ export default {
       this.onBtnHit(data);
     },
     onReportModel(data){
-      this.onBtnHit(data);
+      this.$emit('modelchange', data)
     },
     onReportSize(data){
       this.onBtnHit(data);
@@ -104,7 +119,7 @@ export default {
 .tiny-designer-top {
 
   width: 100%;
-  height: 32px;
+  height: 42px;
   border:0px solid #cccccc;
 
   padding: 5px;

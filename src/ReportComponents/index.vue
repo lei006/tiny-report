@@ -1,35 +1,31 @@
 <template>
 
     <vue-draggable-resizable ref="item" :parent="true" 
-    :x='reportItem.left' 
-    :y='reportItem.top' 
-    :w='reportItem.width'  
-    :h='reportItem.height' 
+    :x='left' 
+    :y='top' 
+    :w='width'  
+    :h='height' 
     :minw='1' 
     :minh='1' 
     :enableNativeDrag='true'
     :z="zindex"
-      :draggable='options.isAllowDrag && reportItem.selectted'  :resizable='options.isAllowResize && reportItem.selectted' :preventDeactivation='true' :parentLimitation='true'
+      :draggable='options.isAllowDrag && selectted'  :resizable='options.isAllowResize && selectted' :preventDeactivation='true' :parentLimitation='true'
       @dragging="dragging"
       @dragstop="dragstop"
       @resizing="onResize"
       @resizestop="onResize"
       class-name="draggable-item-class"
       :on-drag-start="onDragStartCallback"
-      @mouseup="onMouseUp"
     >
-      <div class="tiny-report-item-class tiny-report-no-select" v-bind:class="{ 'tiny-report-item-area': options.isShowBackArea }" @click="onClick" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp">
+      <div class="tiny-report-item-class tiny-report-no-select" v-bind:class="{'tiny-report-drag-area':(options.isAllowDrag || options.isAllowResize) }" @click="onClick" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp"
+        :style="{'background':backgroundcolor, 'fontSize':fontsize + 'px', 'color':fontcolor,'fontFamily':fontfamily, 'font-weight': fontweight}"
+      >
         <slot>基本组件</slot>
-        <!--
-        <div class="tiny-report-item-mask">{{reportItem}}==drag:{{allowDrag}}, resize:{{isAllowResize}}</div>
-        -->
       </div>
     </vue-draggable-resizable>
 </template>
 
 <script>
-
-import Var from '../TinyVariable'
 
 import VueDraggableResizable from 'vue-draggable-resizable'
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
@@ -54,16 +50,50 @@ export default {
           return {
           isAllowResize:false, 
           isAllowDrag:true,
-          isItemEnable:true,
-          isShowBackArea:true,
         }}
+      },
+      model:{
+        type:String
+      },
+      left:{
+        type:Number
+      },
+      top:{
+        type:Number
+      },
+      width:{
+        type:Number
+      },
+      height:{
+        type:Number
+      },
+      selectted:{
+        type:Boolean
+      },
+      backgroundcolor:{
+        type:String
+      },
+      fontcolor:{
+        type:String
+      },
+      fontsize:{
+        type:Number
+      },
+      fontfamily:{
+        type:String
+      },
+      fontweight:{
+        type:String
+      },
+      attop:{
+        type:Boolean
       },
   },
   watch:{
     reportItem:{
-      handler(newVal, oldVal){
+      handler(newVal){
         if(newVal.selectted) {
-          if(newVal.id === this.options.topItemId) {
+          if(this.attop === true) {
             this.zindex = 2;
           }else{
             this.zindex = 1;
@@ -88,26 +118,21 @@ export default {
   },
   methods:{
     dragging(left, top){
-      this.$emit("dragging", this.reportItem.id, left, top);
+      this.$emit("dragging", {left, top});
     },
     dragstop(left, top){
-      this.$emit("dragstop", this.reportItem.id, left, top);
+      this.$emit("dragstop", {left, top});
     },
     onResize(left, top, width, height){
-      
-      this.reportItem.left = left;
-      this.reportItem.top = top;
-      this.reportItem.width = width;
-      this.reportItem.height = height;
-      
+      this.$emit('resize', {left, top, width, height})
     },
-    onClick(event){
-      this.reportItem.selectted = true;
+    onClick(){
+      this.$emit('eventReportItem', {selectted:true})
     },
 
-    onMouseDown(){
-      this.reportItem.selectted = true;
-      this.$emit("mousedown");
+    onMouseDown(ev){
+      this.$emit('eventReportItem', {selectted:true})
+      this.$emit("mousedown", ev);
     },
 
     onDragStartCallback(){
@@ -116,8 +141,9 @@ export default {
     onMouseMove(){
 
     },
-    onMouseUp(){
+    onMouseUp(ev){
       //加这个是为了阻止向上传递事件..
+      this.$emit("mouseup", ev);
     }
 
 
@@ -147,11 +173,15 @@ export default {
   display: flex;
 }
 
-.tiny-report-item-area {
+.report-item-backarea {
+  background-color: #ccc;
+}
+
+
+.tiny-report-drag-area {
   border-style:dashed;
   border-width:1px;
 }
-
 
 
 .tiny-report-item-mask {

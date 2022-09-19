@@ -1,22 +1,18 @@
 <template>
   <div class="components-list tiny-report-no-select">
-    <div class="widget-cate">基础字段</div>
+    <div class="title-bar">基础字段</div>
     <ul>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'label')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标签</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'title')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标题</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'input')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单行</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'textarea')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多行</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'label_text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标签文本</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'label_text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标签数据</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'input-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单行文本</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'textarea')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多行文本</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'rich-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>富文本</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-one')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单选</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-many')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多选</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-item')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>选项</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-cascader')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>连选</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-time')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>时间</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-date')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>日期</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-datetime')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>日期时间</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'rect')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>矩形</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'ellipse')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>椭圆</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'image')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>图片</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'bar_code')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>条形码</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'qr_code')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>二维码</span></a></li>
     </ul>
   </div>
@@ -24,13 +20,12 @@
 
 <script>
 
-import draggable from "vuedraggable";
+const stringRandom = require('string-random');
 
 
 export default {
   name: 'TinyComponentsList',
   components: {
-    draggable,
   },  
   data () {
     return {
@@ -39,8 +34,26 @@ export default {
   },
   methods:{
 
-    onDragStart(event, report_item_name){
-     event.dataTransfer.setData("tiny-report-item-type",report_item_name);//存储图片的src
+    onDragStart(event, field_type){
+
+      let new_id = "custom_" + stringRandom();
+
+      let report_item = {
+          id:new_id,
+          class:field_type,
+          friend_name:"",
+      };
+
+      if(field_type == "label_text") {
+        report_item.data = "标签："
+      }
+      else if(field_type == "select-item") {
+        report_item.data = "远项一,远项二"
+      }
+
+      
+
+     event.dataTransfer.setData("report_item",JSON.stringify(report_item) );//存储图片的src
     },
 
   }
@@ -53,28 +66,33 @@ export default {
 
 .components-list{
     width: 100%;
-    height: 100%;
-    border:1px solid #cccccc;
-    overflow:auto;
+    margin-bottom: 15px;
+
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;    
 }
 
 .components-list .widget-cate {
     padding: 5px 8px;
     font-size: 13px;
+    display: flex;
 }
 
 .components-list ul {
     position: relative;
     overflow: hidden;
     padding: 0 0px 0px 0;
-    margin: 0;
+    margin: 0;    
 }
 
 
 .components-list .form-edit-widget-label {
     font-size: 13px;
     display: block;
-    width: 90px;
+    width: 94px;
     line-height: 24px;
     position: relative;
     float: left;
@@ -82,7 +100,7 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin: 1px;
+    margin: 2px;
     color: #333;
     border: 1px solid #f4f6fc;
 }
@@ -121,6 +139,24 @@ export default {
     display: inline-block;
     vertical-align: middle;
 }
+
+
+
+
+.title-bar {
+    box-sizing: border-box;
+    padding: 8px;
+    font-weight: 400;
+    font-size: 14px;
+    background: #eee;
+    line-height: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:100%;
+}
+
 
 
 

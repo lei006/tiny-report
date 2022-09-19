@@ -1,21 +1,12 @@
 <template>
-    <report-base-item v-model="reportItem"  
-        @dragging="dragging" 
-        @dragstop="dragstop"
-        @mousedown="onMouseDown"
-        :options="options"
-      >
       <div class="tiny-report-label"><slot>Title</slot></div>
-    </report-base-item>
 </template>
 
 <script>
 
-import ReportBaseItem from './index.vue'
-
 export default {
   name: 'TinyReportTitle',
-  components:{ReportBaseItem},
+  components:{},
   model: {
       prop: "reportItem",
       event: "eventReportItem"
@@ -31,7 +22,6 @@ export default {
         type: Object,
         default: ()=>{
           return {
-            mode:"",
             isAllowResize:false,  //允许调整大小
             isAllowDrag:true,     //允许拖动
             isItemEnable:true,    //是否有效

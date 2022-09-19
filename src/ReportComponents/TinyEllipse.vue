@@ -1,21 +1,13 @@
 <template>
-    <report-base-item  v-model="reportItem"  
-        @dragging="dragging" 
-        @dragstop="dragstop"
-        @mousedown="onMouseDown"
-        :options="options"
-      >
-      <div class="ellipse"></div>
-    </report-base-item>
+      <div class="ellipse" :style="{'background-color':color}"></div>
 </template>
 
 <script>
 
-import ReportBaseItem from './index.vue'
 
 export default {
   name: 'TpImage',
-  components:{ReportBaseItem},
+  components:{},
   model: {
       prop: "reportItem",
       event: "eventReportItem"
@@ -24,11 +16,13 @@ export default {
       reportItem: {
           type: Object
       },
+      color:{
+          type: String,
+      },      
       options:{
         type: Object,
         default: ()=>{
           return {
-            mode:"",
             isAllowResize:false,  //允许调整大小
             isAllowDrag:true,     //允许拖动
             isItemEnable:true,    //是否有效
@@ -43,15 +37,7 @@ export default {
     }
   },
   methods:{
-    dragging(id, left, top){
-      this.$emit("dragging", id, left, top);
-    },
-    dragstop(id, left, top){
-      this.$emit("dragstop", id, left, top);
-    }, 
-    onMouseDown(){
-      this.$emit("mousedown", this.reportItem);
-    }       
+ 
   }  
 }
 </script>

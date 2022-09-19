@@ -1,34 +1,35 @@
 <template>
-    <report-base-item v-model="reportItem"  
-        @dragging="dragging" 
-        @dragstop="dragstop"
-        @mousedown="onMouseDown"
-        :options="options"
-      >
-      <el-date-picker size="mini" :disabled="!options.isItemEnable"  v-model="reportItem.data" type="date" placeholder="选择日期"></el-date-picker>
-    </report-base-item>
+    
+    <el-cascader v-if="model==='write' || model=='design' || model=='tab'" size="mini" 
+          v-model="inputData" 
+          :disabled="!options.isItemEnable"  
+          :props="defaultProps"
+          clearable
+          :show-all-levels="showAll"
+          :options="selectOptions" 
+          @change="handleChange">
+    </el-cascader>
+    <div v-else>{{inputData | selectDataFilter}}</div>
+
 </template>
 
 <script>
 
-import ReportBaseItem from './index.vue'
-
 export default {
   name: 'TinyItemSelectCascader',
-  components:{ReportBaseItem},
+  components:{},
   model: {
-      prop: "reportItem",
-      event: "eventReportItem"
+      prop: "itemData",
+      event: "eventItemData"
   },
   props: {
-      reportItem: {
-          type: Object
+      itemData: {
+          type: String
       },
       options:{
         type: Object,
         default: ()=>{
           return {
-            mode:"",
             isAllowResize:false,  //允许调整大小
             isAllowDrag:true,     //允许拖动
             isItemEnable:true,    //是否有效
@@ -36,27 +37,87 @@ export default {
           }
         }
       },
+      model:{
+        type:String
+      },
       zindex:{
         type:Number,
         default:0,
       },
-
+      preset_data:{
+        type:String,
+        default:"",
+      },
+      showAll:{
+        type:Boolean,
+        default:true,
+      },
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      input:"aaaaaaa",
+      inputData:"",
+      defaultProps: {
+          children: 'children',
+          label: 'label',
+          value: 'label',
+          expandTrigger: 'hover'
+      },
+      selectOptions: [],
     }
   },
-  methods:{
-    dragging(id, left, top){
-      this.$emit("dragging", id, left, top);
+
+  watch:{
+    preset_data:{
+      handler(newVal, oldVal){
+
+        try {
+          this.selectOptions = JSON.parse(newVal);
+        } catch (error) {
+          this.selectOptions = [];
+        }
+        console.log("-->",newVal, this.selectOptions);
+      },
+      deep:true,
+      immediate:true,
     },
-    dragstop(id, left, top){
-      this.$emit("dragstop", id, left, top);
-    }, 
-    onMouseDown(){
-      this.$emit("mousedown", this.reportItem);
+
+    inputData:{
+      handler(newVal, oldVal){
+        let val_str = JSON.stringify(newVal);
+        this.$emit('eventItemData', val_str);
+      },
+      deep:true,
+      immediate:false,
+    },
+    itemData:{
+      handler(newVal, oldVal){
+
+        try {
+          let val_array = JSON.parse(newVal);
+          this.inputData = val_array;
+        } catch (error) {
+          this.inputData = [];
+        }
+      },
+      deep:true,
+      immediate:true,
+    },
+    
+
+
+  },
+  filters: {
+    selectDataFilter(data) {
+      if (data.constructor == Array) {
+        return data.join(",")
+      }
+      return data;
+    },
+
+  },
+  methods:{
+    handleChange(value) {
+        console.log(value);
     }
 
   }
@@ -75,6 +136,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.el-cascader {
+  width:100%;
 }
 
 
