@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 const NODE_ENV = process.env.NODE_ENV
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: NODE_ENV=='development' ? './src/main.js' : './index.js',
@@ -14,6 +15,15 @@ module.exports = {
   },
   module: {
     rules: [
+
+      {
+        //test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        test: /\.(png|jpg|gif|eot|woff|ttf|svg|webp|PNG)(\?\S*)?$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]'
+        }
+      },
       {
         test: /\.css$/,
         use: [
@@ -61,16 +71,18 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        //loader: 'babel-loader',        
+        
+        use: [{
+          loader: 'babel-loader',
+          options: {
+             presets: ['es2015']
+          }
+        }],
         exclude: /node_modules/
+        
       },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
-      }
+
     ]
   },
   resolve: {
@@ -99,12 +111,15 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
+    /*
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       compress: {
         warnings: false
       }
     }),
+    */
+    //new UglifyJsPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })

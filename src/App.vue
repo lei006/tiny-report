@@ -1,11 +1,12 @@
 <template>
   <div>
-    <TinyReport :propData='initData'/>
+    <tinyDesign/>
   </div>
 </template>
 
 <script>
 import TinyReport from './tinyReport/index.vue'
+import tinyDesign from './tinyDesign/index.vue'
 export default {
     data(){
       return {
@@ -13,7 +14,7 @@ export default {
       }
     },
     components:{
-      TinyReport
+      TinyReport,tinyDesign
     }
 }
 </script>

@@ -1,7 +1,7 @@
 {
   "name": "tiny-report",
   "description": "A Vue.js project",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "lei006 <lei006@qq.com>",
   "license": "MIT",
   "private": false,
@@ -11,7 +11,16 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "vue": "^2.5.11"
+    "@babel/core": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
+    "dateformat": "^5.0.3",
+    "element-ui": "^2.15.10",
+    "html2canvas": "^1.4.1",
+    "print-js": "^1.6.0",
+    "qrcode": "^1.5.1",
+    "string-random": "^0.1.3",
+    "vue": "^2.5.11",
+    "vue-draggable-resizable": "^2.3.0"
   },
   "browserslist": [
     "> 1%",
@@ -22,10 +31,11 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
-    "file-loader": "^1.1.4",
+    "file-loader": "^6.2.0",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
     "vue-loader": "^13.0.5",
