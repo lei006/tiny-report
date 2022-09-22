@@ -1,11 +1,11 @@
-import Main from './src/components/Main'
+import tinyReport from './src/tinyReport/index'
 import _Vue from 'vue'
 
-Main.install = Vue => {
+tinyReport.install = Vue => {
     if (!Vue) {
         window.Vue = Vue = _Vue
     }
-    Vue.component(Main.name, Main)
+    Vue.component(tinyReport.name, Main)
 }
 
-export default Main;
+export default tinyReport;
