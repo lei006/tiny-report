@@ -17,6 +17,9 @@ import 'element-ui/lib/theme-chalk/checkbox.css';
 import 'element-ui/lib/theme-chalk/option.css';
 import 'element-ui/lib/theme-chalk/color-picker.css';
 import 'element-ui/lib/theme-chalk/Image.css';
+import 'element-ui/lib/theme-chalk/scrollbar.css';
+import 'element-ui/lib/theme-chalk/progress.css';
+import 'element-ui/lib/theme-chalk/cascader-panel.css';
 
 
 
