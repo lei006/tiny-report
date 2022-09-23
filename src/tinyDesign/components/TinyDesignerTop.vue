@@ -60,7 +60,6 @@ export default {
   },  
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
       radio_model:"3",
       radio2:"A4",
         gridData: [{

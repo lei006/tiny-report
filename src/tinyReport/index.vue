@@ -1,7 +1,7 @@
 <template>
     <div class="tiny-paper-box">
       <div class="tiny-paper rd-f5" ref="report" :style="{'width':report.paper.width + 'px','height':report.paper.height + 'px', fontSize:report.paper.fontsize + 'px'}">
-        <div class="tiny-paper-content input-text" :class="{'tiny-paper-border':(model!=='preview')}"  @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @dragover="onDragOver" @drop="onDrag">
+        <div class="tiny-paper-content input_text" :class="{'tiny-paper-border':(model!=='preview')}"  @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @dragover="onDragOver" @drop="onDrag">
               <report-base-item
                   v-for="(item, key) in report.items"
                   :key='key'
@@ -28,12 +28,12 @@
                 > 
                         <TinyLabelText :options="options" :model="model" v-if="item.class == 'label_text'" :align="report.items[key].align" :label="report.items[key].data"/>
                         <TinyLabelData :options="options" :model="model" v-if="item.class == 'label_data'" :align="report.items[key].align" :label="report.items[key].data"/>
-                        <TinyInputText :options="options" :model="model" :tabindex="item.tab + ''"  v-if="item.class == 'input-text'" v-model="report.items[key].data" @eventItemData="eventInputTextChange($event, report.items[key])"/>
+                        <TinyInputText :options="options" :model="model" :tabindex="item.tab + ''"  v-if="item.class == 'input_text'" v-model="report.items[key].data" @eventItemData="eventInputTextChange($event, report.items[key])"/>
                         <TinyImage :options="options" :model="model" v-if="item.class == 'image'" v-model="report.items[key].data"/>
                         <TinyQrcode :options="options" :model="model" v-if="item.class == 'qr_code'" v-model="report.items[key].data" :color="report.items[key].color"/>
                         <TinyRect :options="options" :model="model" v-if="item.class == 'rect'"  :radius="report.items[key].radius" :color="report.items[key].color"/>
                         <TinyEllipse :options="options" :model="model" v-if="item.class == 'ellipse'" :color="report.items[key].color"/>
-                        <TinyTextarea :options="options" :model="model" :tabindex="item.tab + ''" v-if="item.class == 'textarea'" v-model="report.items[key].data"/>
+                        <TinyTextarea :options="options" :model="model" :tabindex="item.tab + ''" v-if="item.class == 'text_area'" v-model="report.items[key].data"/>
                         <TinyRich :options="options" :model="model" :tabindex="item.tab + ''" v-if="item.class == 'rich-text'" v-model="report.items[key].data"/>
                         <TinySelectDate :options="options" :model="model" :tabindex="item.tab + ''" v-if="item.class == 'select-date'" :def_now="item.def_now" :format="item.dateformat" v-model="report.items[key].data"/>
                         <TinySelectItem :options="options" :model="model" :tabindex="item.tab + ''" :multiple="item.multiple" v-if="item.class == 'select-item'" v-model="report.items[key].data" :preset_data="item.preset_data" />
@@ -77,12 +77,6 @@
     name: 'YmTinyReport',
     components:{ReportBaseItem, TinyRich, TinyImage, TinyQrcode,TinyEllipse, TinySelectItem, TinyRect, TinyLabelText, TinyLabelData, TinyInputText, TinyTextarea, TinySelectDate, TinySelectCascader},
     props: {
-        readOnly: {
-            type: Boolean,
-            default: function() {
-                return false;
-            },
-        },
         //设计
         design: {
             type: Boolean,
@@ -174,13 +168,13 @@
     },
   
     mounted(){
-      /*
-      this.AddItemByType("input", 150, 30);
-      this.AddItemByType("label", 120, 30);
-      this.AddItemByType("image", 180, 80);
-      this.AddItemByType("ellipse", 130, 40);
-      this.AddItemByType("rect", 110, 20);
-      */
+      
+      this.AddItemByType("input_text", 150, 30);
+      //this.AddItemByType("label", 120, 30);
+      //this.AddItemByType("image", 180, 80);
+      //this.AddItemByType("ellipse", 130, 40);
+      //this.AddItemByType("rect", 110, 20);
+      
       //this.AddItemByType("rich-text", 130, 40);
   
   
@@ -406,11 +400,11 @@
           return;
         }
   
-  
         let new_item = JSON.parse(src)
         console.log("onDrag", new_item);
         ev.preventDefault();
-        this.AddItemByType(new_item, ev.offsetX, ev.offsetY);
+
+        this.AddReportItem(new_item, ev.offsetX, ev.offsetY);
       },
       eventInputTextChange(data, item){
   
@@ -473,7 +467,12 @@
         }
         this.activeItem = undefined;
       },
+
       AddItemByType(report_item, x, y) {
+        
+      },
+
+      AddReportItem(report_item, x, y) {
   
         let new_id = report_item.id;
         let type_name = report_item.class;
@@ -514,10 +513,10 @@
         else if(type_name === "ellipse") {
             this.addItem({id:new_id, class: type_name,friend_name, left:x,top:y,width:100,height:100, color:'rgb(238, 0, 0)',isActive:true, zindex:0, selectted:false}); 
         }
-        else if(type_name === "input-text") {
+        else if(type_name === "input_text") {
             this.addItem({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:100,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: preset_data, ex_data,sync_id}); 
         }
-        else if(type_name === "textarea") {
+        else if(type_name === "text_area") {
             this.addItem({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:160,height:50, fontfamily,fontweight,fontcolor, fontsize,isActive:true, zindex:0, selectted:false, data: preset_data, ex_data }); 
         }
         else if(type_name === "rich-text") {
