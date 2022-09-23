@@ -42,6 +42,7 @@ export default {
           id:new_id,
           class:field_type,
           friend_name:"",
+          data:"",
       };
 
       if(field_type == "label_text") {

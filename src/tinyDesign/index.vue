@@ -1,7 +1,7 @@
 <template>
     <div class="tiny-designer">
   
-        <div v-if="true" width="220px" style="border: 1px solid #cccccc; background-color: #fff;">
+        <div class="tool-side">
             <TinyComponentsList />
             <TinyPresetFields :preset_fields="filter_preset_fields"></TinyPresetFields>
         </div>
@@ -34,7 +34,7 @@
   
   
   export default {
-    name: 'tinyDesign',
+    name: 'YcTinyDesign',
     components:{TinyPresetFields,TinyComponentsList,TinyProperties,TinyReport, TinyDesignerTop},
   
     props: {
@@ -168,11 +168,12 @@
 
   }
   
-  .top-tool-header{
-    padding: 0 3px; 
-    border: 1px solid #cccccc;
+  .tool-side {
+    width: 220px;
+    border: 1px solid #cccccc; 
+    background-color: #fff;
   }
-  
+
 
   .layout-main-col{
     display: flex;

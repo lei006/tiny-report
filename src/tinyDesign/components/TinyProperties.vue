@@ -226,11 +226,9 @@
           </template>
         </li>
       </ul>
-      {{paper}}===={{properties}}
       </template>
 
-
-    <el-dialog title="提示11" :visible.sync="dialogVisible" width="550px" :before-close="handleClose">
+    <el-dialog title="提示" :visible.sync="dialogVisible" width="550px" :before-close="handleClose">
       <div style="height:320px; overflow: auto;">
         <TinyTreeEdit v-model="editTreeData"></TinyTreeEdit>
       </div>

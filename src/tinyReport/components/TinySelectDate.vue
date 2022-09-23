@@ -27,7 +27,7 @@ export default {
       },
       format:{
         type:String,
-        default:"yyyy年MM月dd日"
+        default:"yyyy-MM-dd"
       },
       def_now:{
         type:Boolean,
