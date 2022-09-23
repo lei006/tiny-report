@@ -20,9 +20,6 @@ module.exports = {
         //test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
         test: /\.(png|jpg|gif|eot|woff|ttf|svg|webp|PNG)(\?\S*)?$/,
         loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
       },
       {
         test: /\.css$/,

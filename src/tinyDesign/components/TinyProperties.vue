@@ -401,14 +401,15 @@ export default {
 }
 
 .attr-item .label {
-  width: 95px;
+  width: 90px;
   height: 28px;
   line-height: 28px;
   padding-left: 15px;
 }
 
 .attr-item .item {
-  flex:1,
+  flex:1;
+  max-width:200px;
 }
 
 

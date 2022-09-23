@@ -103,6 +103,7 @@
           paper:{
             width:640,
             height:720,
+            ratio:1.125,
           },
           items:[]
         },
@@ -469,7 +470,7 @@
       },
 
       AddItemByType(report_item, x, y) {
-        
+
       },
 
       AddReportItem(report_item, x, y) {

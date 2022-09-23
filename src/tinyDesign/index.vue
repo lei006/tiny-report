@@ -11,7 +11,7 @@
                     <TinyDesignerTop :model="curModel"  @onBtnHit="onBtnHit" @modelchange="onEventModelchange"/>
                 </div>
                 <div class="main">
-                    <TinyReport v-model="reportData" :model="curModel" :friendname="friendname" ref="reportPaper" @activeItemChange="onEventActiveItemChange" @layoutChange="eventLayoutChange"></TinyReport>
+                    <TinyReport v-model="reportData" :model="curModel" :friendname="friendname" ref="reportPaper" @activeItemChange="onEventActiveItemChange" @layoutChange="onEventLayoutChange"></TinyReport>
                 </div>
             </div>
         </div>
@@ -124,7 +124,7 @@
             return this.$refs.reportPaper.setLayout(layout_str);
           }
       },
-      eventLayoutChange(report){
+      onEventLayoutChange(report){
         this.report_item_id_list = [];
         report.items.forEach(element => {
           this.report_item_id_list.push(element.id);
