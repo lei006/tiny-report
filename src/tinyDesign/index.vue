@@ -1,25 +1,24 @@
 <template>
     <div class="tiny-designer">
   
-            <div v-if="true" width="220px" style="border: 1px solid #cccccc; background-color: #fff;">
-                <TinyComponentsList />
-                <TinyPresetFields :preset_fields="filter_preset_fields"></TinyPresetFields>
-            </div>
-            <div  style="padding:0px; flex:1; ">
-                <div class="layout-main-col">
-                  <div class="top">
-                      <TinyDesignerTop :model="curModel"  @onBtnHit="onBtnHit" @modelchange="onEventModelchange"/>
-                  </div>
-                  <div class="main">
-                      <TinyReport v-show="true" :model="curModel" :friendname="friendname" ref="reportPaper" @activeItemChange="onEventActiveItemChange" @layoutChange="eventLayoutChange"></TinyReport>
-                  </div>
+        <div v-if="true" width="220px" style="border: 1px solid #cccccc; background-color: #fff;">
+            <TinyComponentsList />
+            <TinyPresetFields :preset_fields="filter_preset_fields"></TinyPresetFields>
+        </div>
+        <div  style="padding:0px; flex:1; ">
+            <div class="layout-main-col">
+                <div class="top">
+                    <TinyDesignerTop :model="curModel"  @onBtnHit="onBtnHit" @modelchange="onEventModelchange"/>
+                </div>
+                <div class="main">
+                    <TinyReport v-model="reportData" :model="curModel" :friendname="friendname" ref="reportPaper" @activeItemChange="onEventActiveItemChange" @layoutChange="eventLayoutChange"></TinyReport>
                 </div>
             </div>
-            <div v-if="true" style="border: 1px solid #cccccc; width:280px;">
-                <TinyProperties ref="property" @propertyChange="onEventPropertyChange" />          
-            </div>
+        </div>
+        <div v-if="true" style="border: 1px solid #cccccc; width:280px;">
+            <TinyProperties ref="property" @propertyChange="onEventPropertyChange" />          
+        </div>
 
-  
     </div>
   </template>
   

@@ -121,8 +121,6 @@ export default {
   height: 42px;
   border:0px solid #cccccc;
 
-  padding: 5px;
-
   display: flex;
   justify-content:space-between;
   align-items: center;
