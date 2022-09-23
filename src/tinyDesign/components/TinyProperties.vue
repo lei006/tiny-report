@@ -100,8 +100,12 @@
             </div>
         </li>
 
-
-
+        <li v-if="properties['is_no_print'] !== undefined" class="attr-item">
+            <div class="label">不打印:</div>
+            <div class="item">
+              <el-checkbox size="mini" v-model="properties['is_no_print']"></el-checkbox>
+            </div>
+        </li>
 
         <li v-if="properties['showall'] !== undefined" class="attr-item">
             <div class="label">显示所有:</div>

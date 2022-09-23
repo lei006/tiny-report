@@ -11,7 +11,9 @@
                   :width='item.width'  
                   :height='item.height' 
                   :selectted="item.selectted"
-  
+
+                  v-show="((model === 'preview') && (item.is_no_print === true)) === false"
+
                   @dragging="dragging(report, item, $event)" 
                   @dragstop="dragstop(report, item, $event)"
                   @mousedown="onItemMouseDown(report, item, $event)"
@@ -502,6 +504,7 @@
         let fontsize = 14;
         let align="right";
         let sync_id = "";
+        let is_no_print = false;    //不打印
         /*
         let report_item = {
             id:new_id,
@@ -521,16 +524,16 @@
             this.addItem({id:new_id, class:type_name,friend_name, left:x,top:y,width:100,height:100, isActive:true, zindex:0, selectted:false, data: preset_data, ex_data,sync_id}); 
         }
         else if(type_name === "label_text") {
-            this.addItem({id:new_id, class: type_name,friend_name, left:x,top:y,width:60,height:20, align,isActive:true, fontfamily,fontweight,fontcolor, fontsize, zindex:0, selectted:false, data:preset_data, ex_data}); 
+            this.addItem({id:new_id, class: type_name,friend_name, is_no_print, left:x,top:y,width:60,height:20, align,isActive:true, fontfamily,fontweight,fontcolor, fontsize, zindex:0, selectted:false, data:preset_data, ex_data}); 
         }
         else if(type_name === "label_data") {
-            this.addItem({id:new_id, class: type_name,friend_name, left:x,top:y,width:60,height:20, align,isActive:true, fontfamily,fontweight,fontcolor, fontsize, zindex:0, selectted:false, data:preset_data, ex_data, sync_id}); 
+            this.addItem({id:new_id, class: type_name,friend_name, is_no_print, left:x,top:y,width:60,height:20, align,isActive:true, fontfamily,fontweight,fontcolor, fontsize, zindex:0, selectted:false, data:preset_data, ex_data, sync_id}); 
         }
         else if(type_name === "ellipse") {
             this.addItem({id:new_id, class: type_name,friend_name, left:x,top:y,width:100,height:100, color:'rgb(238, 0, 0)',isActive:true, zindex:0, selectted:false}); 
         }
         else if(type_name === "input_text") {
-            this.addItem({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:100,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", ex_data,sync_id}); 
+            this.addItem({id:new_id, class:type_name,friend_name, is_no_print, tab:def_tab, left:x,top:y,width:100,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", ex_data,sync_id}); 
         }
         else if(type_name === "text_area") {
             this.addItem({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:160,height:50, fontfamily,fontweight,fontcolor, fontsize,isActive:true, zindex:0, selectted:false, data: preset_data, ex_data }); 
@@ -539,13 +542,13 @@
             this.addItem({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:260,height:150, isActive:true, zindex:0, selectted:false, data:preset_data + " ", ex_data}); 
         }
         else if(type_name === "select-date") {
-            this.addItem({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:202,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", dateformat:"yyyyMMdd", def_now:true, ex_data}); 
+            this.addItem({id:new_id, class:type_name,friend_name, is_no_print, tab:def_tab, left:x,top:y,width:202,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", dateformat:"yyyyMMdd", def_now:true, ex_data}); 
         }
         else if(type_name === "select-item") {
-            this.addItem({id:new_id, class:type_name, friend_name, tab:def_tab, left:x,top:y,width:160,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, multiple:false, data: "", preset_data, ex_data });
+            this.addItem({id:new_id, class:type_name, friend_name, is_no_print, tab:def_tab, left:x,top:y,width:160,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, multiple:false, data: "", preset_data, ex_data });
         }
         else if(type_name === "select-cascader") {
-            this.addItem({id:new_id, class:type_name, friend_name, tab:def_tab, left:x,top:y,width:160,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", showall:true, preset_data, ex_data }); 
+            this.addItem({id:new_id, class:type_name, friend_name, is_no_print, tab:def_tab, left:x,top:y,width:160,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", showall:true, preset_data, ex_data }); 
         }
         else{
           console.error("尝试增加一个不支持的类型", type_name);
