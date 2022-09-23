@@ -3,7 +3,7 @@
       <div class="tiny-label-context"
           :class="{'label-align-justify': align =='justify', 'label-align-left': align =='left', 'label-align-right': align =='right', 'label-align-center': align =='center'}"      
       >
-        <slot>{{label}}</slot>
+        {{label}}
       </div>
       </div>
 </template>
