@@ -182,7 +182,7 @@
 
 
 	.tool-side {
-		width: 220px;
+		width: 200px;
 		border: 1px solid #cccccc; 
 		background-color: #fff;
 	}

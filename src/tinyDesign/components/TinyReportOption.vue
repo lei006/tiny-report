@@ -239,7 +239,7 @@
   }
   .item .title{
     padding-left: 10px;
-    width: 60px;
+    width: 50px;
     font-size: 14px;
     line-height: 28px;
   } 
@@ -248,7 +248,6 @@
     padding-left: 5px;
     padding-right: 5px;
     flex:1;
-    background-color: #e0eeff;
     line-height: 28px;
 
   }
