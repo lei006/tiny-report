@@ -240,7 +240,7 @@
   .item .title{
     padding-left: 10px;
     width: 50px;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 28px;
   } 
 
