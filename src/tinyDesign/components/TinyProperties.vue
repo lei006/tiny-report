@@ -9,7 +9,7 @@
         </li>
         <li v-if="paper.ratio !== undefined"  class="attr-item">
             <div class="label">宽高比:</div>
-            <div class="item"><el-input-number size="mini" v-model="paper.ratio"></el-input-number></div>
+            <div class="item"><el-input-number size="mini" v-model="paper.ratio" :step="0.01" :max="5" :min="0.1"></el-input-number></div>
         </li>
       </ul>
       </template>

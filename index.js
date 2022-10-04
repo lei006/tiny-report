@@ -34,6 +34,7 @@ const components = {
 
         Vue.component(Cascader.name, Cascader);
         Vue.component(DatePicker.name, DatePicker);
+        Vue.component(Input.name, Input);
         Vue.component(InputNumber.name, InputNumber);
         Vue.component(Button.name, Button);
         Vue.component(Tree.name, Tree);
