@@ -2,16 +2,20 @@
     <div class="tiny-designer">
   
         <div class="tool-side">
+			<TinyReportOption :options="options" :model="curModel" :pagenum="curPageNum" @optionsChange="onChangeOptions"></TinyReportOption>
             <TinyComponentsList />
             <TinyPresetFields :preset_fields="filter_preset_fields"></TinyPresetFields>
         </div>
-        <div  style="padding:0px; flex:1; ">
+        <div class="main">
             <div class="layout-main-col">
                 <div class="top">
                     <TinyDesignerTop :model="curModel"  @onBtnHit="onBtnHit" @modelchange="onEventModelchange"/>
                 </div>
                 <div class="main">
-                    <TinyReport v-model="reportData" :model="curModel" :friendname="friendname" ref="reportPaper" @activeItemChange="onEventActiveItemChange" @layoutChange="onEventLayoutChange"></TinyReport>
+                    <TinyReport v-model="reportData"  ref="reportPaper"
+						:options="options"
+						@activeItemChange="onEventActiveItemChange"
+						@layoutChange="onEventLayoutChange"></TinyReport>
                 </div>
             </div>
         </div>
@@ -23,11 +27,10 @@
   </template>
   
   <script>
-  
-  import Var from '../tinyVariable'
-  
+    
   import TinyComponentsList from './components/TinyComponentsList.vue'
   import TinyPresetFields from './components/TinyPresetFields.vue'
+  import TinyReportOption from './components/TinyReportOption.vue'
   import TinyProperties from './components/TinyProperties.vue'
   import TinyReport from '../tinyReport/index.vue'
   import TinyDesignerTop from './components/TinyDesignerTop.vue'
@@ -35,7 +38,7 @@
   
   export default {
     name: 'YcTinyDesign',
-    components:{TinyPresetFields,TinyComponentsList,TinyProperties,TinyReport, TinyDesignerTop},
+    components:{TinyReportOption, TinyPresetFields,TinyComponentsList,TinyProperties,TinyReport, TinyDesignerTop},
   
     props: {
         //预置字段
@@ -53,6 +56,13 @@
         showReport:false,
         report_item_id_list:[],
         friendname:true,
+		curPageNum:1,
+		options:{
+			pageNum:1,
+			pageRatio:1.25,
+			friendName:false,
+			model:"design",
+		}
       }
     },
     computed: {
@@ -131,6 +141,10 @@
         });
         //console.log('eventLayoutChange', this.report_item_id_list);
       },
+	  onChangeOptions(options){
+        console.log('onChangeOptions', options);
+
+	  },
       onEventModelchange(model){
         this.curModel = model;
       },
@@ -142,10 +156,6 @@
   <style scoped>
   
   
-  .el-container {
-    height: 100%;
-  }
-  
   
   .tiny-designer {
   
@@ -153,9 +163,7 @@
     min-height: 100px;
   
     width: 100%;
-    height: 100%;
     
-  
     border:1px solid #888;
   
     box-shadow: inset 0 0 1px 1px #dadada;
@@ -166,13 +174,21 @@
     display: flex;
     flex-direction: row;
 
+
   }
   
-  .tool-side {
-    width: 220px;
-    border: 1px solid #cccccc; 
-    background-color: #fff;
-  }
+    .tiny-designer .main{
+		padding:0px; 
+		flex:1; 
+		overflow: auto;
+    }
+
+
+	.tool-side {
+		width: 220px;
+		border: 1px solid #cccccc; 
+		background-color: #fff;
+	}
 
 
   .layout-main-col{
@@ -189,8 +205,6 @@
     flex:1;
   }
 
-
-  
   
   </style>
   
@@ -209,8 +223,8 @@
   
   
   .el-radio-button--tiny .el-radio-button__inner {
-      padding: 3px 7px;
-      font-size: 12px;
+      padding: 2px 4px;
+      font-size: 10px;
       border-radius: 0
   }
   

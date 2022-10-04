@@ -9,7 +9,7 @@
     :minh='1' 
     :enableNativeDrag='true'
     :z="zindex"
-      :draggable='options.isAllowDrag && selectted'  :resizable='options.isAllowResize && selectted' :preventDeactivation='true' :parentLimitation='true'
+      :draggable='isAllowDrag && selectted'  :resizable='isAllowResize && selectted' :preventDeactivation='true' :parentLimitation='true'
       @dragging="dragging"
       @dragstop="dragstop"
       @resizing="onResize"
@@ -17,7 +17,7 @@
       class-name="draggable-item-class"
       :on-drag-start="onDragStartCallback"
     >
-      <div class="tiny-report-item-class tiny-report-no-select" v-bind:class="{'tiny-report-drag-area':(options.isAllowDrag || options.isAllowResize) }" @click="onClick" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp"
+      <div class="tiny-report-item-class tiny-report-no-select" v-bind:class="{'tiny-report-drag-area':(isAllowDrag || isAllowResize) }" @click="onClick" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp"
         :style="{'background':backgroundcolor, 'fontSize':fontsize + 'px', 'color':fontcolor,'fontFamily':fontfamily, 'font-weight': fontweight}"
       >
         <slot>基本组件</slot>
@@ -46,14 +46,6 @@ export default {
       },
       options:{
         type: Object,
-        default: ()=>{
-          return {
-          isAllowResize:false, 
-          isAllowDrag:true,
-        }}
-      },
-      model:{
-        type:String
       },
       left:{
         type:Number
@@ -89,65 +81,76 @@ export default {
         type:Boolean
       },
   },
-  watch:{
-    reportItem:{
-      handler(newVal){
-        if(newVal.selectted) {
-          if(this.attop === true) {
-            this.zindex = 2;
-          }else{
-            this.zindex = 1;
-          }
-        }else{
-          this.zindex = 0;
+	watch:{
+		reportItem:{
+			handler(newVal){
+				if(newVal.selectted) {
+					if(this.attop === true) {
+						this.zindex = 2;
+					}else{
+						this.zindex = 1;
+					}
+				}else{
+					this.zindex = 0;
+				}
+			},
+			deep:true,
+			immediate:true,
+		}
+	},
+    watch: {
+        options: {
+            handler: function(newVal) {
+                this.isAllowResize = newVal.model === "design";
+                this.isAllowDrag = newVal.model === "design";
+            },
+            deep:true,
+            immediate: true
         }
-      },
-      deep:true,
-      immediate:true,
-    }
-  },
+    },
+	data () {
+		return {
+			msg: 'Welcome to Your Vue.js App',
+			zindex:0,
+			isAllowResize:false, 
+          	isAllowDrag:true,			
+		}
+	},
+	mounted(){
 
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-      zindex:0,
-    }
-  },
-  mounted(){
+	},
+	methods:{
+		dragging(left, top){
+			this.$emit("dragging", {left, top});
+		},
+		dragstop(left, top){
+			this.$emit("dragstop", {left, top});
+		},
+		onResize(left, top, width, height){
+			this.$emit('resize', {left, top, width, height})
+		},
+		onClick(){
+			this.$emit('eventReportItem', {selectted:true})
+		},
 
-  },
-  methods:{
-    dragging(left, top){
-      this.$emit("dragging", {left, top});
-    },
-    dragstop(left, top){
-      this.$emit("dragstop", {left, top});
-    },
-    onResize(left, top, width, height){
-      this.$emit('resize', {left, top, width, height})
-    },
-    onClick(){
-      this.$emit('eventReportItem', {selectted:true})
-    },
+		onMouseDown(ev){
+			this.$emit('eventReportItem', {selectted:true})
+			this.$emit("mousedown", ev);
+		},
 
-    onMouseDown(ev){
-      this.$emit('eventReportItem', {selectted:true})
-      this.$emit("mousedown", ev);
-    },
+		onDragStartCallback(){
+			this.$refs.item.checkParentSize();
+		},
+		onMouseMove(){
 
-    onDragStartCallback(){
-      this.$refs.item.checkParentSize();
-    },
-    onMouseMove(){
-
-    },
-    onMouseUp(ev){
-      //加这个是为了阻止向上传递事件..
-      this.$emit("mouseup", ev);
-    }
+		},
+		onMouseUp(ev){
+			//加这个是为了阻止向上传递事件..
+			this.$emit("mouseup", ev);
+		}
 
 
-  }
+	}
 }
 </script>
 

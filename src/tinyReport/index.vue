@@ -1,7 +1,8 @@
 <template>
     <div class="tiny-paper-box">
       <div class="tiny-paper rd-f5" ref="report" :style="{'width':report.paper.width + 'px','height':report.paper.height + 'px', fontSize:report.paper.fontsize + 'px'}">
-        <div class="tiny-paper-content input_text" :class="{'tiny-paper-border':(model!=='preview')}"  @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @dragover="onDragOver" @drop="onDrag">
+        {{options}}
+        <div class="tiny-paper-content input_text" :class="{'tiny-paper-border':(options.model!=='preview')}"  @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @dragover="onDragOver" @drop="onDrag">
               <report-base-item
                   v-for="(item, key) in report.items"
                   :key='key'
@@ -12,7 +13,7 @@
                   :height='item.height' 
                   :selectted="item.selectted"
 
-                  v-show="((model === 'preview') && (item.is_no_print === true)) === false"
+                  v-show="((options.model === 'preview') && (item.is_no_print === true)) === false"
 
                   @dragging="dragging(report, item, $event)" 
                   @dragstop="dragstop(report, item, $event)"
@@ -20,7 +21,6 @@
                   @mouseup="onItemMouseUp(report, item, $event)"
                   @resize="onItemResize(report,item,$event)"
   
-                  :model="model"
                   :options="options"
                   :fontfamily="item.fontfamily + ''"
                   :fontsize="item.fontsize"
@@ -28,22 +28,22 @@
                   :backgroundcolor="item.backgroundcolor"
                   :fontweight="item.fontweight  + ''"
                 > 
-                        <TinyLabelText :options="options" :model="model" v-if="item.class == 'label_text'" :align="report.items[key].align" :label="report.items[key].data"/>
-                        <TinyLabelData :options="options" :model="model" v-else-if="item.class == 'label_data'" :align="report.items[key].align" :label="report.items[key].data"/>
-                        <TinyInputText :options="options" :model="model" :tabindex="item.tab + ''"  v-else-if="item.class == 'input_text'" v-model="report.items[key].data" @eventItemData="eventInputTextChange($event, report.items[key])"/>
-                        <TinyImage :options="options" :model="model" v-else-if="item.class == 'image'" v-model="report.items[key].data"/>
-                        <TinyQrcode :options="options" :model="model" v-else-if="item.class == 'qr_code'" v-model="report.items[key].data" :color="report.items[key].color"/>
-                        <TinyRect :options="options" :model="model" v-else-if="item.class == 'rect'"  :radius="report.items[key].radius" :color="report.items[key].color"/>
-                        <TinyEllipse :options="options" :model="model" v-else-if="item.class == 'ellipse'" :color="report.items[key].color"/>
-                        <TinyTextarea :options="options" :model="model" :tabindex="item.tab + ''" v-else-if="item.class == 'text_area'" v-model="report.items[key].data"/>
-                        <TinyRich :options="options" :model="model" :tabindex="item.tab + ''" v-else-if="item.class == 'rich-text'" v-model="report.items[key].data"/>
-                        <TinySelectDate :options="options" :model="model" :tabindex="item.tab + ''" v-else-if="item.class == 'select-date'" :def_now="item.def_now" v-model="report.items[key].data"/>
-                        <TinySelectItem :options="options" :model="model" :tabindex="item.tab + ''" :multiple="item.multiple" v-else-if="item.class == 'select-item'" v-model="report.items[key].data" :preset_data="item.preset_data" />
-                        <TinySelectCascader :options="options" :model="model" :tabindex="item.tab + ''" :showAll="item.showall" v-else-if="item.class == 'select-cascader'" v-model="report.items[key].data" :preset_data="item.preset_data" />
+                        <TinyLabelText :options="options" :model="options.model" v-if="item.class == 'label_text'" :align="report.items[key].align" :label="report.items[key].data"/>
+                        <TinyLabelData :options="options" :model="options.model" v-else-if="item.class == 'label_data'" :align="report.items[key].align" :label="report.items[key].data"/>
+                        <TinyInputText :options="options" :model="options.model" :tabindex="item.tab + ''"  v-else-if="item.class == 'input_text'" v-model="report.items[key].data" @eventItemData="eventInputTextChange($event, report.items[key])"/>
+                        <TinyImage :options="options" :model="options.model" v-else-if="item.class == 'image'" v-model="report.items[key].data"/>
+                        <TinyQrcode :options="options" :model="options.model" v-else-if="item.class == 'qr_code'" v-model="report.items[key].data" :color="report.items[key].color"/>
+                        <TinyRect :options="options" :model="options.model" v-else-if="item.class == 'rect'"  :radius="report.items[key].radius" :color="report.items[key].color"/>
+                        <TinyEllipse :options="options" :model="options.model" v-else-if="item.class == 'ellipse'" :color="report.items[key].color"/>
+                        <TinyTextarea :options="options" :model="options.model" :tabindex="item.tab + ''" v-else-if="item.class == 'text_area'" v-model="report.items[key].data"/>
+                        <TinyRich :options="options" :model="options.model" :tabindex="item.tab + ''" v-else-if="item.class == 'rich-text'" v-model="report.items[key].data"/>
+                        <TinySelectDate :options="options" :model="options.model" :tabindex="item.tab + ''" v-else-if="item.class == 'select-date'" :def_now="item.def_now" v-model="report.items[key].data"/>
+                        <TinySelectItem :options="options" :model="options.model" :tabindex="item.tab + ''" :multiple="item.multiple" v-else-if="item.class == 'select-item'" v-model="report.items[key].data" :preset_data="item.preset_data" />
+                        <TinySelectCascader :options="options" :model="options.model" :tabindex="item.tab + ''" :showAll="item.showall" v-else-if="item.class == 'select-cascader'" v-model="report.items[key].data" :preset_data="item.preset_data" />
                         <div v-else>不支持组件:{{item.class}}</div>
 
-                      <div v-if="model==='tab' && item.tab" class="report-tab" @click="onBtnTabClick(report, item)">{{item.tab}}</div>
-                      <div v-if="model==='design' && item.friend_name && friendname===true " class="report-tab">{{item.friend_name}}</div>
+                      <div v-if="options.model==='tab' && item.tab" class="report-tab" @click="onBtnTabClick(report, item)">{{item.tab}}</div>
+                      <div v-if="options.model==='design' && item.friend_name && options.friendname===true " class="report-tab">{{item.friend_name}}</div>
   
               </report-base-item>
         </div>
@@ -87,7 +87,7 @@
         event: "eventReportData"
     },    
     props: {
-        reportData:{
+      reportData:{
             type: Object,
             default:function(){
                 return {
@@ -95,24 +95,16 @@
                 }
             }
         },
-        //设计
-        design: {
-            type: Boolean,
-            default: function() {
-                return false;
-            },
-        },
-        model:{
-          type: String,
-          default: function(){
-            return "write"
-          }
-        },
-        friendname:{
-          type: Boolean,
-          default: function(){
-            return true
-          }
+        options:{
+            type: Object,
+            default:function(){
+                return {
+                  pageNum:1,
+                  pageRatio:1.25,
+                  friendName:true,
+                  model:"design",                
+                }
+            }
         },
     },
     data () {
@@ -126,15 +118,6 @@
           items:[]
         },
         tab_index:1,
-        options:{
-          isAllowResize:true, 
-          isAllowDrag:true,
-          isItemEnable:false,
-          isShowBackArea:true,
-          isShowBorder:true,
-          topItemId:"",
-          isTest:false,
-        },
         activeItem:null,
         hitItem:false,    //鼠标点击中了一个item
         // 同步拖动....
@@ -174,9 +157,9 @@
         deep:true,
         immediate:false,
       },
-      model:{
+      options:{
         handler(newVal){
-          this.SetModel(newVal);
+          this.SetModel(newVal.model);
         },
         deep:true,
         immediate:false,
@@ -356,11 +339,10 @@
       },
       onItemMouseDown(report, item, ev){
         this.hitItem = true;
-        if(this.model === Var.TINY_REPORT__DESIGN) {
+        if(this.options.model === Var.TINY_REPORT__DESIGN) {
   
           //if( (ev.ctrlKey == true) || (ev.shiftKey == true) )
           {
-            this.options.topItemId = item.id;
             item.selectted = true;
             this.activeItem = item;
   
@@ -374,7 +356,7 @@
         //console.log("11111", item.id, item.selectted);
       },
       onItemResize(report,item,ev){
-        if(this.model === Var.TINY_REPORT__DESIGN) {
+        if(this.options.model === Var.TINY_REPORT__DESIGN) {
           item.left = ev.left;
           item.top = ev.top;
           item.width = ev.width;
@@ -442,37 +424,7 @@
       },
       SetModel(model){
   
-        if (model == Var.TINY_REPORT__DESIGN) {
-          this.options.isAllowResize = true;
-          this.options.isItemEnable = false;
-          this.options.isAllowDrag = true;
-          this.options.isShowBackArea = true;
-          this.options.isShowBorder = false;
-  
-        }
-  
-        if (model == Var.TINY_REPORT__PREVIEW) {
-          this.options.isItemEnable = false;
-          this.options.isAllowResize = false;
-          this.options.isAllowDrag = false;
-          this.options.isShowBackArea = false;
-          this.options.isShowBorder = false;
-        }
-  
-        if (model == Var.TINY_REPORT__WRITE) {
-          this.options.isAllowResize = false;
-          this.options.isItemEnable = true;
-          this.options.isAllowDrag = false;
-          this.options.isShowBackArea = true;
-        }
-  
         if (model == Var.TINY_REPORT__TAB) {
-          this.options.isAllowResize = false;
-          this.options.isItemEnable = false;
-          this.options.isAllowDrag = false;
-          this.options.isShowBackArea = true;
-          this.options.isShowBorder = true;
-  
           this.tab_index = 1;
         }
       },
@@ -562,15 +514,15 @@
       Print(callback){
           let _self = this;
   
-          let old_model = _self.model;
-          _self.model = Var.TINY_REPORT__PREVIEW;
+          let old_model = _self.options.model;
+          _self.options.model = Var.TINY_REPORT__PREVIEW;
   
           setTimeout(() => {
               html2canvas(_self.$refs.report, {scale: 3,allowTaint: true,taintTest: true,}).then(canvas => {
                 let dataURL = canvas.toDataURL("image/png");
                 printJS(dataURL, 'image')
   
-                _self.model = old_model;
+                _self.options.model = old_model;
   
                 if(callback){
                   callback(dataURL);
@@ -606,7 +558,7 @@
       //检查选择项改变-并通知外部...
       checkSelecttedChange(newPaper) {
         
-        if (this.model !== Var.TINY_REPORT__DESIGN) {
+        if (this.options.model !== Var.TINY_REPORT__DESIGN) {
           return;
         }
   
