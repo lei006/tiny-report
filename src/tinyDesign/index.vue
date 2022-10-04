@@ -2,15 +2,12 @@
     <div class="tiny-designer">
   
         <div class="tool-side">
-			<TinyReportOption :options="options" :model="curModel" :pagenum="curPageNum" @optionsChange="onChangeOptions"></TinyReportOption>
+			<TinyReportOption :options="options" @optionsChange="onChangeOptions"></TinyReportOption>
             <TinyComponentsList />
             <TinyPresetFields :preset_fields="filter_preset_fields"></TinyPresetFields>
         </div>
         <div class="main">
             <div class="layout-main-col">
-                <div class="top">
-                    <TinyDesignerTop :model="curModel"  @onBtnHit="onBtnHit" @modelchange="onEventModelchange"/>
-                </div>
                 <div class="main">
                     <TinyReport v-model="reportData"  ref="reportPaper"
 						:options="options"

@@ -1,7 +1,6 @@
 <template>
     <div class="tiny-paper-box">
-      <div class="tiny-paper rd-f5" ref="report" :style="{'width':report.paper.width + 'px','height':report.paper.height + 'px', fontSize:report.paper.fontsize + 'px'}">
-        {{options}}
+      <div class="tiny-paper rd-f5" ref="report" :style="{'width':report.paper.width + 'px','height':report.paper.width*report.paper.ratio + 'px', fontSize:report.paper.fontsize + 'px'}">
         <div class="tiny-paper-content input_text" :class="{'tiny-paper-border':(options.model!=='preview')}"  @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @dragover="onDragOver" @drop="onDrag">
               <report-base-item
                   v-for="(item, key) in report.items"
@@ -112,8 +111,8 @@
         report:{
           paper:{
             width:640,
-            height:720,
             ratio:1.125,
+			pagenum:1,
           },
           items:[]
         },
@@ -160,6 +159,7 @@
       options:{
         handler(newVal){
           this.SetModel(newVal.model);
+		  this.report.paper.ratio = newVal.pageRatio;
         },
         deep:true,
         immediate:false,
@@ -418,9 +418,8 @@
         console.log("eventInputTextChange -->", data, item);
       },
   
-      SetSize(width, height){
+      SetSize(width){
         this.report.paper.width = width;
-        this.report.paper.height = height;
       },
       SetModel(model){
   

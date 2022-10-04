@@ -7,9 +7,9 @@
             <div class="label">宽度:</div>
             <div class="item"><el-input-number size="mini" v-model="paper.width"></el-input-number></div>
         </li>
-        <li v-if="paper.height !== undefined"  class="attr-item">
-            <div class="label">高度:</div>
-            <div class="item"><el-input-number size="mini" v-model="paper.height"></el-input-number></div>
+        <li v-if="paper.ratio !== undefined"  class="attr-item">
+            <div class="label">宽高比:</div>
+            <div class="item"><el-input-number size="mini" v-model="paper.ratio"></el-input-number></div>
         </li>
       </ul>
       </template>
