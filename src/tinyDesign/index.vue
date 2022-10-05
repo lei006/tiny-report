@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="true" style="border: 1px solid #cccccc; width:280px;">
+        <div v-if="true" class="properties-box" style="">
             <TinyProperties ref="property" @propertyChange="onEventPropertyChange" />          
         </div>
 
@@ -160,6 +160,7 @@
     min-height: 100px;
   
     width: 100%;
+    height: 100%;
     
     border:1px solid #888;
   
@@ -173,35 +174,41 @@
 
 
   }
-  
-    .tiny-designer .main{
+
+	.tiny-designer .main{
 		padding:0px; 
 		flex:1; 
 		overflow: auto;
-    }
-
-
-	.tool-side {
-		width: 200px;
-		border: 1px solid #cccccc; 
-		background-color: #fff;
 	}
 
 
-  .layout-main-col{
-    display: flex;
-    flex-direction: column;
-  }
-
-  .layout-main-col .top{
-    height:42px;
-  }
+	.tool-side {
+		width: 250px;
+		border: 1px solid #cccccc; 
+		background-color: #fff;
+		overflow: auto;
+	}
 
 
-  .layout-main-col .main{
-    flex:1;
-  }
+	.layout-main-col{
+		display: flex;
+		flex-direction: column;
+	}
 
+	.layout-main-col .top{
+		height:42px;
+	}
+
+
+	.layout-main-col .main{
+		flex:1;	
+	}
+
+    .properties-box {
+		border: 1px solid #cccccc; 
+		width:250px;
+		overflow: auto;
+    }
   
   </style>
   
