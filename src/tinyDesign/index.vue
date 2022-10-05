@@ -2,7 +2,7 @@
     <div class="tiny-designer">
   
         <div class="tool-side">
-			<TinyReportOption :options="options" @optionsChange="onChangeOptions"></TinyReportOption>
+			<TinyReportOption :friendName="friendName" :paperModel="paperModel" @onBtnHit="onBtnHit"></TinyReportOption>
             <TinyComponentsList />
             <TinyPresetFields :preset_fields="filter_preset_fields"></TinyPresetFields>
         </div>
@@ -10,9 +10,12 @@
             <div class="layout-main-col">
                 <div class="main">
                     <TinyReport v-model="reportData"  ref="reportPaper"
-						:options="options"
-						@activeItemChange="onEventActiveItemChange"
-						@layoutChange="onEventLayoutChange"></TinyReport>
+						:friendName="friendName" 
+						:paperModel="paperModel" 
+
+                        @activeItemChange="onEventActiveItemChange"
+                        @reportChange="onEventLayoutChange">
+                    </TinyReport>
                 </div>
             </div>
         </div>
@@ -48,18 +51,13 @@
     },  
     data () {
       return {
-        curModel:"design",
+        friendName:true,
+        paperModel:"design",
+
         reportData:{},
         showReport:false,
         report_item_id_list:[],
-        friendname:true,
 		curPageNum:1,
-		options:{
-			pageNum:1,
-			pageRatio:1.25,
-			friendName:false,
-			model:"design",
-		}
       }
     },
     computed: {
@@ -72,8 +70,9 @@
       this.$refs.reportPaper.SetModel("design");
     },
     methods:{
-      onBtnHit(btn){
-  
+      onBtnHit(btn, data){
+		console.log("onBtnHit(btn, data)", btn, data);
+
         if (btn == "btn_paper_a4") {
             this.$refs.reportPaper.SetSize(700,800);
         }else if (btn == "btn_paper_b5"){
@@ -83,7 +82,12 @@
         }else if (btn == "btn_friend_name"){
             this.friendname = !this.friendname;
         }else if (btn == "btn_print"){
-            this.$refs.reportPaper.Print();
+			let old_model = this.paperModel;
+			this.paperModel = "preview"
+			let _self = this;
+            this.$refs.reportPaper.Print(function(){
+				_self.paperModel = old_model;
+			});
         }else if (btn == "align_left"){
             this.$refs.reportPaper.align(btn);
         }else if (btn == "align_right"){
@@ -96,9 +100,13 @@
             this.$refs.reportPaper.align(btn);
         }else if (btn == "align_height"){
             this.$refs.reportPaper.align(btn);
+        }else if (btn == "paperModel"){
+			this.paperModel = data;
+        }else if (btn == "pageRatio"){
+			this.pageRatio = data;
         }else if (btn == "btn_test"){
-            this.$refs.reportPaper.Test();
-        }else{
+
+		}else{
           console.log("未处理事件", btn);
         }
         this.$emit("command",btn,"top_menu");
@@ -142,9 +150,6 @@
         console.log('onChangeOptions', options);
 
 	  },
-      onEventModelchange(model){
-        this.curModel = model;
-      },
     }
   }
   </script>

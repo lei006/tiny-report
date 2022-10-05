@@ -129,7 +129,7 @@
         </li>
 
         <!--数据-->
-        <li v-if="properties['class'] == 'label_text'" class="attr-item">
+        <li v-if="properties['class'] == 'label-text'" class="attr-item">
             <div class="label">数据:</div>
             <div class="item"><el-input size="mini" v-model="properties['data']"></el-input></div>
         </li>
@@ -141,7 +141,7 @@
             <div class="label">数据:</div>
             <div class="item"><el-input size="mini" v-model="properties['data']"></el-input></div>
         </li>
-        <li v-if="properties['class'] == 'qr_code'" class="attr-item">
+        <li v-if="properties['class'] == 'qr-code'" class="attr-item">
             <div class="label">数据:</div>
             <div class="item"><el-input size="mini" v-model="properties['data']"></el-input></div>
         </li>
@@ -403,7 +403,7 @@ export default {
 }
 
 .attr-item .label {
-  width: 90px;
+  width: 70px;
   height: 28px;
   line-height: 28px;
   padding-left: 15px;

@@ -9,7 +9,7 @@
     :minh='1' 
     :enableNativeDrag='true'
     :z="zindex"
-      :draggable='isAllowDrag && selectted'  :resizable='isAllowResize && selectted' :preventDeactivation='true' :parentLimitation='true'
+      :draggable='options.isAllowDrag && selectted'  :resizable='options.isAllowResize && selectted' :preventDeactivation='true' :parentLimitation='true'
       @dragging="dragging"
       @dragstop="dragstop"
       @resizing="onResize"
@@ -17,7 +17,7 @@
       class-name="draggable-item-class"
       :on-drag-start="onDragStartCallback"
     >
-      <div class="tiny-report-item-class tiny-report-no-select" v-bind:class="{'tiny-report-drag-area':(isAllowDrag || isAllowResize) }" @click="onClick" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp"
+      <div class="tiny-report-item-class tiny-report-no-select" v-bind:class="{'tiny-report-drag-area':(options.isAllowDrag || options.isAllowResize) }" @click="onClick" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp"
         :style="{'background':backgroundcolor, 'fontSize':fontsize + 'px', 'color':fontcolor,'fontFamily':fontfamily, 'font-weight': fontweight}"
       >
         <slot>基本组件</slot>
@@ -98,22 +98,9 @@ export default {
 			immediate:true,
 		}
 	},
-    watch: {
-        options: {
-            handler: function(newVal) {
-                this.isAllowResize = newVal.model === "design";
-                this.isAllowDrag = newVal.model === "design";
-            },
-            deep:true,
-            immediate: true
-        }
-    },
 	data () {
 		return {
-			msg: 'Welcome to Your Vue.js App',
 			zindex:0,
-			isAllowResize:false, 
-          	isAllowDrag:true,			
 		}
 	},
 	mounted(){

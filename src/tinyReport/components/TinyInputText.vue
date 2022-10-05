@@ -15,12 +15,13 @@ export default {
       itemData: {
           type: String
       },
+      model: {
+          type: String
+      },
       options:{
         type: Object,
         default: ()=>{
           return {
-            isAllowResize:false,  //允许调整大小
-            isAllowDrag:true,     //允许拖动
             isItemEnable:true,    //是否有效
             isShowBackArea:true,  //显示背景
             isShowBorder:true,  //显示边框
@@ -49,7 +50,32 @@ export default {
         },
         inputData: function (newval) {
           this.$emit('eventItemData',newval);
-        }
+        },
+        model:{
+            handler(newVal) {
+				console.log("input, model, ", newVal);
+              if(newVal === "design") {
+                this.isItemEnable = false; 	//是否有效
+                this.isShowBackArea = true; //显示背景
+                this.isShowBorder = true;  	//显示边框
+              } else if (newVal === "tab") {
+                this.isItemEnable = false; 	//是否有效
+                this.isShowBackArea = true; //显示背景
+                this.isShowBorder = true;  	//显示边框
+              } else if (newVal === "write") {
+                this.isItemEnable = true; 	//是否有效
+                this.isShowBackArea = true; //显示背景
+                this.isShowBorder = true;  	//显示边框
+              } else {
+                this.isItemEnable = false; 	//是否有效
+                this.isShowBackArea = false; //显示背景
+                this.isShowBorder = false;  	//显示边框
+              }
+            },
+            deep:true,
+            immediate:true,
+        },
+      
   },
 
   methods:{

@@ -4,7 +4,7 @@
       <div class="item">
             <div class="title">模式:</div>
             <div class="data">
-                <el-select v-model="reportOptions.model" size="mini" placeholder="请选择">
+                <el-select v-model="curPaperModel" size="mini" placeholder="请选择">
                     <el-option
                     v-for="item in options_model"
                     :key="item.value"
@@ -15,34 +15,15 @@
             </div>
         </div>
         <div class="item">
-            <div class="title">比例:</div>
-            <div class="data">
-                <el-select v-model="reportOptions.pageRatio" size="mini" placeholder="请选择">
-                    <el-option
-                    v-for="item in options_scale"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                    </el-option>
-                </el-select>  
-            </div>
-        </div>
-        <div class="item">
             <div class="title">打印:</div>
             <div class="data">
-                <el-button size="tiny" @click="onToolHit('btn_print')">打印</el-button>                
-            </div>
-        </div>
-        <div class="item">
-            <div class="title">页数:</div>
-            <div class="data">
-                <el-input-number size="mini" v-model="reportOptions.pageNum"></el-input-number>
+                <el-button size="tiny" @click="onBtnHit('btn_print')">打印</el-button>                
             </div>
         </div>
         <div class="item">
             <div class="title">友好名:</div>
             <div class="data">
-                <el-checkbox v-model="reportOptions.friendName">显示</el-checkbox>                
+                <el-checkbox v-model="curFriendName">显示</el-checkbox>                
             </div>
         </div>
         <div class="item">
@@ -50,14 +31,19 @@
             <div class="data">
                 <!--对齐部分-->
                 <el-popover placement="top" trigger="hover">
-                        <div class="tiny-toolbar-btn" @click="onToolHit('align_left')"><i class="icon iconfont icon-tiny-reportzuoduiqi"></i></div>
-                        <div class="tiny-toolbar-btn" @click="onToolHit('align_left')"><i class="icon iconfont icon-tiny-reportjurassic_horizalign-center"></i></div>
-                        <div class="tiny-toolbar-btn" @click="onToolHit('align_right')"><i class="icon iconfont icon-tiny-reportyouduiqi"></i></div>
-                        <div class="tiny-toolbar-btn" @click="onToolHit('align_top')"><i class="icon iconfont icon-tiny-reportshangduiqi1"></i></div>
-                        <div class="tiny-toolbar-btn" @click="onToolHit('align_left')"><i class="icon iconfont icon-tiny-reportchuizhijuzhongduiqi2"></i></div>
-                        <div class="tiny-toolbar-btn" @click="onToolHit('align_bottom')"><i class="icon iconfont icon-tiny-reportxiaduiqi1"></i></div>
-                        <div class="tiny-toolbar-btn" @click="onToolHit('align_width')"><i class="icon iconfont icon-tiny-reportdengkuan1"></i></div>
-                        <div class="tiny-toolbar-btn" @click="onToolHit('align_height')"><i class="icon iconfont icon-tiny-reportdenggao1"></i></div>
+                        <div class="tiny-toolbar-btn" @click="onBtnHit('align_left')"><i class="icon iconfont icon-tiny-reportzuoduiqi"></i>左对齐</div>
+                        <div class="tiny-toolbar-btn" @click="onBtnHit('align_right')"><i class="icon iconfont icon-tiny-reportyouduiqi"></i>右对齐</div>
+                        <div class="tiny-toolbar-btn" @click="onBtnHit('align_top')"><i class="icon iconfont icon-tiny-reportshangduiqi1"></i>顶对齐</div>
+                        <div class="tiny-toolbar-btn" @click="onBtnHit('align_bottom')"><i class="icon iconfont icon-tiny-reportxiaduiqi1"></i>底对齐</div>
+                        <br>
+                        <div class="tiny-toolbar-btn" @click="onBtnHit('align_col')"><i class="icon iconfont icon-tiny-reportjurassic_horizalign-center"></i>垂直对齐</div>
+                        <div class="tiny-toolbar-btn" @click="onBtnHit('align_row')"><i class="icon iconfont icon-tiny-reportchuizhijuzhongduiqi2"></i>水平对齐</div>
+                        <br>
+                        <div class="tiny-toolbar-btn" @click="onBtnHit('align_col')"><i class="icon iconfont icon-tiny-reportjurassic_horizalign-center"></i>垂直等距</div>
+                        <div class="tiny-toolbar-btn" @click="onBtnHit('align_row')"><i class="icon iconfont icon-tiny-reportchuizhijuzhongduiqi2"></i>水平等距</div>
+                        <br>
+                        <div class="tiny-toolbar-btn" @click="onBtnHit('align_width')"><i class="icon iconfont icon-tiny-reportdengkuan1"></i>等宽</div>
+                        <div class="tiny-toolbar-btn" @click="onBtnHit('align_height')"><i class="icon iconfont icon-tiny-reportdenggao1"></i>等高</div>
                     <el-button size="tiny" slot="reference">对齐</el-button>
                 </el-popover>
             </div>
@@ -73,8 +59,17 @@
     components: {
     },
     props: {
-        options:{
-            type: Object
+        friendName:{
+          type: Boolean,
+          default:function(){
+            return true;
+          }
+        },
+        paperModel:{
+          type: String,
+          default:function(){
+            return "design";
+          }
         },
     }, 
     data () {
@@ -93,36 +88,29 @@
           label: '预览'
         }],
         options_scale: [{
-          value: 1.25,
+          value: 1.42,
           label: 'A4'
         }, {
-          value: 1.5,
-          label: 'B5'
+          value: 1.43,
+          label: 'A4或B5'
         }, ],
-        reportOptions:this.options,
+        curFriendName:this.friendName,
+        curPaperModel:this.paperModel,
       }
     },
     watch: {
-        reportOptions: {
-            handler: function(newVal) {
-                
-                this.$emit("optionsChange", newVal);
-            },
-            deep:true,
-            immediate: true
-        }
+        curFriendName(val){
+            this.$emit('onBtnHit', "friendName", val)
+        },
+        curPaperModel(val){
+            this.$emit('onBtnHit', "paperModel", val)
+        },
     },    
     methods:{
-  
-      onDragStart(event, preset_item){
-        console.log("onDragStart", preset_item);
-        
-        event.dataTransfer.setData("report_item",JSON.stringify(preset_item));//存储图片的src
-      },
-      onBtnAdd(preset_item){
-        console.log('onBtnAdd==========>', preset_item)
-      },
-  
+        onBtnHit(data, data1){
+            this.$emit('onBtnHit', data, data1)
+        },
+
     }
   }
   </script>

@@ -37,8 +37,8 @@
     </TinyToolbarBox>
     <div class="designer-toolsbar">
       <TinyToolbarBox>
-        <el-button size="tiny" @click="onToolHit('qr_code')">导入</el-button>
-        <el-button size="tiny" @click="onToolHit('qr_code')">导出</el-button>
+        <el-button size="tiny" @click="onToolHit('qr-code')">导入</el-button>
+        <el-button size="tiny" @click="onToolHit('qr-code')">导出</el-button>
       </TinyToolbarBox>
     </div>
   </div>

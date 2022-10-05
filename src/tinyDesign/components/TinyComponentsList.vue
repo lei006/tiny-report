@@ -2,10 +2,10 @@
   <div class="components-list tiny-report-no-select">
     <div class="title-bar">基础字段</div>
     <ul>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'label_text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标签文本</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'label_data')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标签数据</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'input_text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单行文本</span></a></li>
-      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'text_area')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多行文本</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'label-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标签文本</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'label-data')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>标签数据</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'input-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>单行文本</span></a></li>
+      <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'text-area')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>多行文本</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'rich-text')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>富文本</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-item')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>选项</span></a></li>
       <li class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,'select-cascader')"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>连选</span></a></li>
