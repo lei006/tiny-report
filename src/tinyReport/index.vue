@@ -502,6 +502,7 @@
         */
   
         if(type_name === "image") {
+            friend_name = friend_name || "图像";
             this.addItem({id:new_id, class:type_name, friend_name, left:x,top:y,width:100,height:100, isActive:true, zindex:0, selectted:false, data: "", ex_data}); 
         }
         else if(type_name === "rect") {
@@ -511,21 +512,26 @@
             this.addItem({id:new_id, class:type_name,friend_name, left:x,top:y,width:100,height:100, isActive:true, zindex:0, selectted:false, data: preset_data, ex_data,sync_id}); 
         }
         else if(type_name === "label-text") {
+            friend_name = friend_name || "标签文本";
             this.addItem({id:new_id, class: type_name,friend_name, is_no_print, left:x,top:y,width:60,height:20, align,isActive:true, fontfamily,fontweight,fontcolor, fontsize, zindex:0, selectted:false, data:preset_data, ex_data}); 
         }
         else if(type_name === "label-data") {
+            friend_name = friend_name || "标签数据";
             this.addItem({id:new_id, class: type_name,friend_name, is_no_print, left:x,top:y,width:60,height:20, align,isActive:true, fontfamily,fontweight,fontcolor, fontsize, zindex:0, selectted:false, data:preset_data, ex_data, sync_id}); 
         }
         else if(type_name === "ellipse") {
             this.addItem({id:new_id, class: type_name,friend_name, left:x,top:y,width:100,height:100, color:'rgb(238, 0, 0)',isActive:true, zindex:0, selectted:false}); 
         }
         else if(type_name === "input-text") {
+            friend_name = friend_name || "单行输入";
             this.addItem({id:new_id, class:type_name,friend_name, is_no_print, tab:def_tab, left:x,top:y,width:100,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", ex_data,sync_id}); 
         }
         else if(type_name === "text-area") {
+            friend_name = friend_name || "多行输入";
             this.addItem({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:160,height:50, fontfamily,fontweight,fontcolor, fontsize,isActive:true, zindex:0, selectted:false, data: preset_data, ex_data }); 
         }
         else if(type_name === "rich-text") {
+            friend_name = friend_name || "富文本";
             this.addItem({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:260,height:150, isActive:true, zindex:0, selectted:false, data:preset_data + " ", ex_data}); 
         }
         else if(type_name === "select-date") {

@@ -1,13 +1,17 @@
 <template>
   <div>
     <div>
-      {{show_item}}
-      <a @click="show_item='demo01'">test1</a>
-      <a @click="show_item='demo02'">test2</a>
+      <el-page-header @back="goBack" content="详情页面">
+        <div slot="content">
+          <el-link type="primary" @click="show_item='report01'">报告01</el-link>
+          <el-link type="primary" @click="show_item='design01'">设计器01</el-link>
+        </div>
+      </el-page-header>      
     </div>
+    <hr>
     <div>
-      <Demo01 v-show="show_item==='demo01'"></Demo01>
-      <Demo02 v-show="show_item==='demo02'"></Demo02>
+      <Report01 v-show="show_item==='report01'"></Report01>
+      <Design01 v-show="show_item==='design01'"></Design01>
    </div>
     
   </div>
@@ -15,17 +19,24 @@
 
 <script>
 
-import Demo01 from './components/demo01.vue'
-import Demo02 from './components/demo02.vue'
+import Report01 from './examples/report01.vue'
+import Design01 from './examples/design01.vue'
 
 export default {
-    components:{Demo01, Demo02},
+    components:{Report01, Design01},
     data(){
       return {
         initData: 'hello 你好',
-        show_item:"demo01",
+        show_item:"report01",
       }
     },
+    methods: {
+      goBack() {
+        console.log('go back');
+      }
+    }
+
+
 }
 </script>
 
