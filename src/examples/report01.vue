@@ -2,30 +2,46 @@
     <div class="report-box">
       <div class="left">
         <div class="report-ev-item">
-          <div class="title">源码</div>
+          <div class="title">控件</div>
           <div class="data">
-            <el-input type="textarea" :rows="4" placeholder="请输入内容" v-model="textarea"> </el-input>
+            <el-row class="components-list">
+              <ul>
+                <li v-for="(item, index) in report_items" class="form-edit-widget-label" draggable="true" @dragstart="onDragStart($event,item)" @click="onClickItem(item)"><a><i class="icon iconfont icon-tiny-reportriqi3"></i><span>{{item.friend_name}}</span></a></li>
+              </ul>
+            </el-row>
+            <el-input type="textarea" size="mini" :rows="4" placeholder="请输入内容" v-model="drag_data"> </el-input>
+            <el-button size="tiny">增加</el-button>
+          </div>
+        </div>
+
+        <div class="report-ev-item">
+          <div class="title">报告</div>
+          <div class="data">
+            <el-input type="textarea" size="mini" :rows="6" placeholder="请输入内容" v-model="report"> </el-input>
           </div>
         </div>
         <div class="report-ev-item">
-          <div class="title">事件</div>
+          <div class="title">数据改变</div>
           <div class="data">
-            <el-input type="textarea" :rows="4" placeholder="请输入内容" v-model="textarea"> </el-input>
+            <el-input type="textarea" size="mini" :rows="6" placeholder="请输入内容" v-model="report_data"> </el-input>
           </div>
         </div>
         <div class="report-ev-item">
-          <div class="title">属性</div>
+          <div class="title">最小数据</div>
           <div class="data">
-            <el-input type="textarea" :rows="4" placeholder="请输入内容" v-model="textarea"> </el-input>
+            <el-input type="textarea" size="mini" :rows="6" placeholder="请输入内容" v-model="report_tinydata"> </el-input>
           </div>
         </div>
 
 
       </div>
       <div class="right">
-        <YcTinyReport 
-            @activeItemChange="onEventActiveItemChange"
-            @reportChange="onEventLayoutChange">
+        <YcTinyReport ref="tinyReport"
+          @drag="onReportDrag"
+          @reportChange="onReportChange"
+          @dataChange="onReportDataChange"
+          @tinyDataChange="onReportTinyDataChange"
+          >
         </YcTinyReport>
       </div>
 
@@ -37,19 +53,46 @@
   export default {
       data(){
         return {
-          initData: 'hello 你好',
-          textarea:"111111111",
-      
+          report_items:{},
+          drag_data:"",
+          report:"",
+          report_data:"",
+          report_tinydata:"",
         }
       },
+      mounted(){
+        this.report_items = this.$refs.tinyReport.def_items();
+        console.log("tiny-report", this.report_items);
+      },
       methods:{
-        onEventActiveItemChange(report, item){
-          console.log("onEventActiveItemChange", report, item);
+        onClickItem(item){
+          this.drag_data = JSON.stringify(item);
+        },
+        onReportDrag(event){
+          var src = event.dataTransfer.getData("tiny-report-drag");//获取src
+          this.drag_data = src;
 
+          let tmp = JSON.parse(src);
+          this.$set(tmp, "left", event.offsetX);
+          this.$set(tmp, "top", event.offsetY);
+          this.$refs.tinyReport.add(JSON.stringify(tmp));
         },
-        onEventLayoutChange(data){
-          console.log("onEventLayoutChange", data);
+        onDragStart(event, item){
+          event.dataTransfer.setData("tiny-report-drag",JSON.stringify(item) );//存储图片的src
         },
+        onReportChange(data){
+          this.report = JSON.stringify(data);
+        },
+
+        onReportDataChange(data){
+          this.report_data = JSON.stringify(data);
+        },
+
+        onReportTinyDataChange(data){
+          this.report_tinydata = JSON.stringify(data);
+        },
+
+        
       }
   }
   </script>
@@ -66,7 +109,7 @@
 
 
   .report-box .left{
-    width: 450px;
+    width: 650px;
     height:100%;
     padding: 20px;
   }
@@ -88,12 +131,73 @@
   }
 
   .report-ev-item .title{
-    width: 100px;
+    width: 90px;
   }
   .report-ev-item .data{
     flex: 1;
   }
 
+
+
+
+  .components-list ul {
+    position: relative;
+    overflow: hidden;
+    padding: 0 0px 0px 0;
+    margin: 0;    
+}
+
+
+.components-list .form-edit-widget-label {
+    font-size: 13px;
+    display: block;
+    width: 94px;
+    line-height: 24px;
+    position: relative;
+    float: left;
+    left: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 2px;
+    color: #333;
+    border: 1px solid #f4f6fc;
+}
+
+
+.components-list .form-edit-widget-label>a {
+    display: block;
+    cursor: move;
+    background: #f4f6fc;
+    border: 1px solid #f4f6fc;
+}
+.components-list .form-edit-widget-label a {
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+.components-list .form-edit-widget-label span {
+    height: 100%;
+}
+
+
+.components-list .form-edit-widget-label:hover a {
+    color: #409eff;
+}
+
+
+.components-list .form-edit-widget-label:hover {
+    color: #409eff;
+    border: 1px dashed #409eff;
+}
+
+.components-list .form-edit-widget-label>a .icon {
+    margin-right: 6px;
+    margin-left: 8px;
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
+}
 
 
 

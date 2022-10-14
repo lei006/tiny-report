@@ -6,6 +6,7 @@
           <el-link type="primary" @click="show_item='null'">置空</el-link>
           <el-link type="primary" @click="show_item='report01'">报告01</el-link>
           <el-link type="primary" @click="show_item='report02'">报告02</el-link>
+          <el-link type="primary" @click="show_item='report03'">报告03</el-link>
           <el-link type="primary" @click="show_item='design01'">设计器01</el-link>
         </div>
       </el-page-header>      
@@ -13,6 +14,7 @@
     <div class="main">
       <Report01 v-if="show_item==='report01'"></Report01>
       <Report02 v-if="show_item==='report02'"></Report02>
+      <Report03 v-if="show_item==='Report03'"></Report03>
       <Design01 v-if="show_item==='design01'"></Design01>
    </div>
 
@@ -24,10 +26,11 @@
 
 import Report01 from './examples/report01.vue'
 import Report02 from './examples/report02.vue'
+import Report03 from './examples/report03.vue'
 import Design01 from './examples/design01.vue'
 
 export default {
-    components:{Report01, Report02, Design01},
+    components:{Report01, Report02, Report03, Design01},
     data(){
       return {
         initData: 'hello 你好',

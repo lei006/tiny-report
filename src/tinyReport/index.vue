@@ -1,7 +1,7 @@
 <template>
     <div class="tiny-paper-box">
       <div class="tiny-paper rd-f5" ref="report" :style="{'width':report.paper.width + 'px','height':report.paper.width*report.paper.ratio + 'px', fontSize:report.paper.fontsize + 'px'}">
-        <div class="tiny-paper-content input-text" :class="{'tiny-paper-border':(paperModel!=='preview')}"  @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @dragover="onDragOver" @drop="onDrag">
+        <div class="tiny-paper-content input-text" :class="{'tiny-paper-border':(paperModel!=='preview')}"  @mousedown="onMouseDown($event, report.paper)" @mousemove="onMouseMove" @mouseup="onMouseUp" @dragover="onDragOver" @drop="onDrag">
               <report-base-item
                   v-for="(item, key) in report.items"
                   :key='key'
@@ -118,7 +118,8 @@
         },
         tab_index:1,
         activeItem:null,
-        hitItem:false,    //鼠标点击中了一个item
+        clickItem:null,   //点中的
+        hitItem:false,    //鼠标点击中了一个report_item
         // 同步拖动....
         drag:{
           sync: false,
@@ -134,7 +135,8 @@
           isItemEnable:true,    //是否有效
           isShowBackArea:true,  //显示背景
           isShowBorder:true,  //显示边框
-        }
+        },
+        tmp_add_index:1,
       }
     },
   
@@ -158,11 +160,20 @@
       },
       activeItem:{
         handler(newVal, oldVal){
-          this.$emit('activeItemChange', this.report, newVal)        
+          this.$emit('activeItem', newVal)
         },
         deep:true,
         immediate:false,
       },
+      clickItem:{
+        handler(newVal, oldVal){
+          this.$emit('clickItem', newVal)
+        },
+        deep:true,
+        immediate:false,
+      },
+
+
       paperModel:{
         handler(newVal){
           console.log("============>newVal", newVal);
@@ -175,13 +186,7 @@
   
     mounted(){
       
-      //this.AddItemByType("input-text", 150, 30);
-      //this.AddItemByType("label", 120, 30);
-      //this.AddItemByType("image", 180, 80);
-      //this.AddItemByType("ellipse", 130, 40);
-      //this.AddItemByType("rect", 110, 20);
-      //this.AddItemByType("rich-text", 130, 40);
-  
+
   
       window.addEventListener('keydown', ev => {
         if (ev.key === "Control") {
@@ -347,14 +352,10 @@
       onItemMouseDown(report, item, ev){
         this.hitItem = true;
         if(this.paperModel === Var.TINY_REPORT__DESIGN) {
-  
-          //if( (ev.ctrlKey == true) || (ev.shiftKey == true) )
-          {
             item.selectted = true;
             this.activeItem = item;
-  
+            this.clickItem = item;
             this.selectItemsChange();
-          }
         }
       },
       onItemMouseUp(report, item){
@@ -371,9 +372,13 @@
         }
       },
       
-      onMouseDown(ev){
+      onMouseDown(ev, report){
         this.mousedown.offsetX = ev.offsetX;
         this.mousedown.offsetY = ev.offsetY;
+
+        if(this.hitItem == false) {
+          this.clickItem = report;
+        }
       },
       onMouseMove(ev){
    
@@ -398,17 +403,7 @@
           ev.preventDefault();
       },
       onDrag(ev){
-
-        var src = ev.dataTransfer.getData("report_item");//获取src
-        if(!src || src=== "") {
-          return;
-        }
-  
-        let new_item = JSON.parse(src)
-        console.log("onDrag", new_item);
-        ev.preventDefault();
-
-        this.AddReportItem(new_item, ev.offsetX, ev.offsetY);
+        this.$emit("drag", ev);
       },
       eventInputTextChange(data, item){
   
@@ -468,6 +463,7 @@
           this.report.items[i].selectted = false;
         }
         this.activeItem = undefined;
+        this.clickItem = undefined;
       },
 
       AddItemByType(item_type, x, y) {
@@ -503,54 +499,105 @@
   
         if(type_name === "image") {
             friend_name = friend_name || "图像";
-            this.addItem({id:new_id, class:type_name, friend_name, left:x,top:y,width:100,height:100, isActive:true, zindex:0, selectted:false, data: "", ex_data}); 
+            this._add_item({id:new_id, class:type_name, friend_name, left:x,top:y,width:100,height:100, isActive:true, zindex:0, selectted:false, data: "", ex_data}); 
         }
         else if(type_name === "rect") {
-            this.addItem({id:new_id, class:type_name,friend_name, left:x,top:y,width:100,height:100, radius:0, color:'rgb(238, 0, 0)',isActive:true, zindex:0, selectted:false});
+            this._add_item({id:new_id, class:type_name,friend_name, left:x,top:y,width:100,height:100, radius:0, color:'rgb(238, 0, 0)',isActive:true, zindex:0, selectted:false});
         }
         else if(type_name === "qr-code") {
-            this.addItem({id:new_id, class:type_name,friend_name, left:x,top:y,width:100,height:100, isActive:true, zindex:0, selectted:false, data: preset_data, ex_data,sync_id}); 
+            this._add_item({id:new_id, class:type_name,friend_name, left:x,top:y,width:100,height:100, isActive:true, zindex:0, selectted:false, data: preset_data, ex_data,sync_id}); 
         }
         else if(type_name === "label-text") {
             friend_name = friend_name || "标签文本";
-            this.addItem({id:new_id, class: type_name,friend_name, is_no_print, left:x,top:y,width:60,height:20, align,isActive:true, fontfamily,fontweight,fontcolor, fontsize, zindex:0, selectted:false, data:preset_data, ex_data}); 
+            this._add_item({id:new_id, class: type_name,friend_name, is_no_print, left:x,top:y,width:60,height:20, align,isActive:true, fontfamily,fontweight,fontcolor, fontsize, zindex:0, selectted:false, data:preset_data, ex_data}); 
         }
         else if(type_name === "label-data") {
             friend_name = friend_name || "标签数据";
-            this.addItem({id:new_id, class: type_name,friend_name, is_no_print, left:x,top:y,width:60,height:20, align,isActive:true, fontfamily,fontweight,fontcolor, fontsize, zindex:0, selectted:false, data:preset_data, ex_data, sync_id}); 
+            this._add_item({id:new_id, class: type_name,friend_name, is_no_print, left:x,top:y,width:60,height:20, align,isActive:true, fontfamily,fontweight,fontcolor, fontsize, zindex:0, selectted:false, data:preset_data, ex_data, sync_id}); 
         }
         else if(type_name === "ellipse") {
-            this.addItem({id:new_id, class: type_name,friend_name, left:x,top:y,width:100,height:100, color:'rgb(238, 0, 0)',isActive:true, zindex:0, selectted:false}); 
+            this._add_item({id:new_id, class: type_name,friend_name, left:x,top:y,width:100,height:100, color:'rgb(238, 0, 0)',isActive:true, zindex:0, selectted:false}); 
         }
         else if(type_name === "input-text") {
             friend_name = friend_name || "单行输入";
-            this.addItem({id:new_id, class:type_name,friend_name, is_no_print, tab:def_tab, left:x,top:y,width:100,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", ex_data,sync_id}); 
+            this._add_item({id:new_id, class:type_name,friend_name, is_no_print, tab:def_tab, left:x,top:y,width:100,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", ex_data,sync_id}); 
         }
         else if(type_name === "text-area") {
             friend_name = friend_name || "多行输入";
-            this.addItem({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:160,height:50, fontfamily,fontweight,fontcolor, fontsize,isActive:true, zindex:0, selectted:false, data: preset_data, ex_data }); 
+            this._add_item({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:160,height:50, fontfamily,fontweight,fontcolor, fontsize,isActive:true, zindex:0, selectted:false, data: preset_data, ex_data }); 
         }
         else if(type_name === "rich-text") {
             friend_name = friend_name || "富文本";
-            this.addItem({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:260,height:150, isActive:true, zindex:0, selectted:false, data:preset_data + " ", ex_data}); 
+            this._add_item({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:260,height:150, isActive:true, zindex:0, selectted:false, data:preset_data + " ", ex_data}); 
         }
         else if(type_name === "select-date") {
-            this.addItem({id:new_id, class:type_name,friend_name, is_no_print, tab:def_tab, left:x,top:y,width:202,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", dateformat:"yyyyMMdd", def_now:true, ex_data}); 
+            this._add_item({id:new_id, class:type_name,friend_name, is_no_print, tab:def_tab, left:x,top:y,width:202,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", dateformat:"yyyyMMdd", def_now:true, ex_data}); 
         }
         else if(type_name === "select-item") {
-            this.addItem({id:new_id, class:type_name, friend_name, is_no_print, tab:def_tab, left:x,top:y,width:160,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, multiple:false, data: "", preset_data, ex_data });
+            this._add_item({id:new_id, class:type_name, friend_name, is_no_print, tab:def_tab, left:x,top:y,width:160,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, multiple:false, data: "", preset_data, ex_data });
         }
         else if(type_name === "select-cascader") {
-            this.addItem({id:new_id, class:type_name, friend_name, is_no_print, tab:def_tab, left:x,top:y,width:160,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", showall:true, preset_data, ex_data }); 
+            this._add_item({id:new_id, class:type_name, friend_name, is_no_print, tab:def_tab, left:x,top:y,width:160,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", showall:true, preset_data, ex_data }); 
         }
         else{
           console.error("尝试增加一个不支持的类型", type_name);
         }
       },
-      addItem(item){
+
+      add(item_str){
+        try {
+          let item = JSON.parse(item_str);
+          this._add_item(item);
+        } catch (error) {
+          console.log("add  ",error);
+        }
+      },
+      
+      _add_item(item){
+
+        item.id = item.id || "custom_" + stringRandom();
+        item.left = item.left || 20;
+        item.top = item.top || 20;
+        
+
+        //增加选择标记
+        this.$set(item, "selectted", false);
+
+        //增加焦点标记
+        this.$set(item, "isActive", false);
+
+        this.$emit("addItem", item)
+
         this.report.items.push(item);
       },
-  
+      def_items(){
+
+        let def_tab = 1;
+        let fontfamily = "宋体";
+        let fontweight = 400;
+        let backcolor = "#444";
+        let fontcolor = "#444";
+        let fontsize = 14;
+        let align="right";
+        let sync_id = "";
+        let is_no_print = false;    //不打印
+
+        let def_items = {};
+        def_items['image']            = {width:100,height:100, class:"image", friend_name:"图像", is_no_print, data:"", ex_data:""};
+        def_items['rect']             = {width:100,height:100, class:"rect", friend_name:"矩形", is_no_print, radius:0, backcolor};
+        def_items['ellipse']          = {width:100,height:100, class:"ellipse", friend_name:"椭圆", is_no_print, radius:0, backcolor};
+        def_items['qr-code']          = {width:100,height:100, class:"qr-code", friend_name:"二维码", is_no_print, data:"", ex_data:"", sync_id};
+        def_items['label-text']       = {width:100,height:30,  class:"label-text", friend_name:"静态标签", is_no_print, data:"", ex_data:"", fontfamily,fontweight,fontcolor, fontsize, sync_id, align};
+        def_items['label-data']       = {width:100,height:30,  class:"label-data", friend_name:"数据标签", is_no_print, data:"", ex_data:"", fontfamily,fontweight,fontcolor, fontsize, sync_id, align};
+        def_items['input-text']       = {width:100,height:30,  class:"input-text", friend_name:"单行输入", is_no_print, data:"", ex_data:"", fontfamily,fontweight,fontcolor, fontsize, sync_id, tab:def_tab, align};
+        def_items['text-area']        = {width:160,height:50,  class:"text-area", friend_name:"多行输入", is_no_print, data:"", ex_data:"", fontfamily,fontweight,fontcolor, fontsize, tab:def_tab};
+        def_items['rich-text']        = {width:260,height:160, class:"rich-text", friend_name:"富文本", is_no_print, data:"", ex_data:"", fontfamily,fontweight,fontcolor, fontsize, tab:def_tab};
+        def_items['select-date']      = {width:210,height:30,  class:"select-date", friend_name:"选择日期", is_no_print, data:"", ex_data:"", fontfamily,fontweight,fontcolor, fontsize, tab:def_tab, align};
+        def_items['select-item']      = {width:160,height:30,  class:"select-item", friend_name:"远择项", is_no_print, data:"", ex_data:"", fontfamily,fontweight,fontcolor, fontsize, tab:def_tab, align, multiple:false};
+        def_items['select-cascader']  = {width:160,height:30,  class:"select-cascader", friend_name:"级连选择", is_no_print, data:"", ex_data:"", fontfamily,fontweight,fontcolor, fontsize, tab:def_tab, align};
+
+        return def_items;
+      },
       Print(callback){
           let _self = this;
   
@@ -569,8 +616,7 @@
                 }
               });          
           }, 200);
-  
-  
+
       },
   
       selectItemsChange(){
@@ -584,14 +630,15 @@
         this.$emit("selectItems", this.report, select_items);
       },
       deleteSelected(){
-        let select_items = [];
+        let select_item_ids = [];
         for (let i = 0; i < this.report.items.length; i++) {
           const paper_item = this.report.items[i];
           if(paper_item.selectted) {
-            select_items.push(paper_item.id);
+            select_item_ids.push(paper_item.id);
           }
         }
-        this.report.items = this.report.items.filter(item => !select_items.includes(item.id))
+        this.report.items = this.report.items.filter(item => !select_item_ids.includes(item.id))
+        this.$emit("deleteItems", select_item_ids);
       },
   
       //检查选择项改变-并通知外部...
@@ -692,7 +739,6 @@
             Object.assign(tmp_item, new_item)
           }
         }
-  
       }
     }
   }
