@@ -80,20 +80,7 @@
   export default {
     name: 'YcTinyReport',
     components:{ReportBaseItem, TinyRich, TinyImage, TinyQrcode,TinyEllipse, TinySelectItem, TinyRect, TinyLabelText, TinyLabelData, TinyInputText, TinyTextarea, TinySelectDate, TinySelectCascader},
-
-    model: {
-        prop: "reportData",
-        event: "eventReportData"
-    },    
     props: {
-        reportData:{
-            type: Object,
-            default:function(){
-                return {
-                    test:"",
-                }
-            }
-        },
         friendName:{
           type: Boolean,
           default:function(){
@@ -211,6 +198,7 @@
   
     },
     methods:{
+
       dragging(report, item, ev){
   
           item.left = ev.left;

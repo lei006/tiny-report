@@ -20,18 +20,6 @@
             <el-input type="textarea" size="mini" :rows="6" placeholder="请输入内容" v-model="report"> </el-input>
           </div>
         </div>
-        <div class="report-ev-item">
-          <div class="title">数据改变</div>
-          <div class="data">
-            <el-input type="textarea" size="mini" :rows="6" placeholder="请输入内容" v-model="report_data"> </el-input>
-          </div>
-        </div>
-        <div class="report-ev-item">
-          <div class="title">最小数据</div>
-          <div class="data">
-            <el-input type="textarea" size="mini" :rows="6" placeholder="请输入内容" v-model="report_tinydata"> </el-input>
-          </div>
-        </div>
 
 
       </div>
@@ -39,8 +27,6 @@
         <YcTinyReport ref="tinyReport"
           @drag="onReportDrag"
           @reportChange="onReportChange"
-          @dataChange="onReportDataChange"
-          @tinyDataChange="onReportTinyDataChange"
           >
         </YcTinyReport>
       </div>
@@ -84,15 +70,6 @@
           this.report = JSON.stringify(data);
         },
 
-        onReportDataChange(data){
-          this.report_data = JSON.stringify(data);
-        },
-
-        onReportTinyDataChange(data){
-          this.report_tinydata = JSON.stringify(data);
-        },
-
-        
       }
   }
   </script>

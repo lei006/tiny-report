@@ -1,6 +1,7 @@
 import tinyReport from './src/tinyReport/index'
 import tinyDesign from './src/tinyDesign/index'
 
+/*
 import { Cascader,DatePicker,InputNumber,Button,Tree,Dialog,Radio,RadioGroup, RadioButton, Popover, Input, Select,Checkbox,Option,ColorPicker,Image } from 'element-ui';
 import 'element-ui/lib/theme-chalk/cascader.css';
 import 'element-ui/lib/theme-chalk/date-picker.css';
@@ -17,6 +18,13 @@ import 'element-ui/lib/theme-chalk/checkbox.css';
 import 'element-ui/lib/theme-chalk/option.css';
 import 'element-ui/lib/theme-chalk/color-picker.css';
 import 'element-ui/lib/theme-chalk/Image.css';
+*/
+
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import locale from 'element-ui/lib/locale/lang/en'
+
+
 
 // 富文本
 import 'froala-editor/css/froala_editor.pkgd.min.css'
@@ -31,7 +39,8 @@ import VueFroala from 'vue-froala-wysiwyg'
 const components = {
     install: function(Vue) {
 
-
+        Vue.use(ElementUI, { locale })
+        /*
         Vue.component(Cascader.name, Cascader);
         Vue.component(DatePicker.name, DatePicker);
         Vue.component(Input.name, Input);
@@ -49,9 +58,11 @@ const components = {
         Vue.component(Option.name, Option);
         Vue.component(ColorPicker.name, ColorPicker );
         Vue.component(Image.name, Image);
+        */
         console.log("regedit ", tinyReport.name);
         Vue.component(tinyReport.name, tinyReport)
         Vue.component(tinyDesign.name, tinyDesign)
+
 
         Vue.use(VueFroala)
 
