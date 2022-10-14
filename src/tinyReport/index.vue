@@ -79,7 +79,10 @@
 
   export default {
     name: 'YcTinyReport',
-    components:{ReportBaseItem, TinyRich, TinyImage, TinyQrcode,TinyEllipse, TinySelectItem, TinyRect, TinyLabelText, TinyLabelData, TinyInputText, TinyTextarea, TinySelectDate, TinySelectCascader},
+    components:{ReportBaseItem, TinyRich, TinyImage, TinyQrcode,
+            TinyEllipse, TinySelectItem, TinyRect, TinyLabelText, 
+            TinyLabelData, TinyInputText, TinyTextarea, 
+            TinySelectDate, TinySelectCascader},
     props: {
         friendName:{
           type: Boolean,
