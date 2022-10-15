@@ -5,7 +5,7 @@
         <div slot="content">
           <el-link type="primary" @click="show_item='null'">置空</el-link>
           <el-link type="primary" @click="show_item='report01'">报告01</el-link>
-          <el-link type="primary" @click="show_item='report02'">报告02</el-link>
+          <el-link type="primary" @click="show_item='report02'">事件回调</el-link>
           <el-link type="primary" @click="show_item='report03'">报告03</el-link>
           <el-link type="primary" @click="show_item='design01'">设计器01</el-link>
         </div>

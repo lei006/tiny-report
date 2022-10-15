@@ -454,85 +454,6 @@
           this.report.items[i].selectted = false;
         }
         this.activeItem = undefined;
-        this.clickItem = undefined;
-      },
-
-      AddItemByType(item_type, x, y) {
-        let new_item = {};
-        new_item.id = "custom_" + stringRandom();
-        new_item.class = item_type;
-        this.AddReportItem(new_item, x, y);
-      },
-
-      AddReportItem(report_item, x, y) {
-  
-        let new_id = report_item.id;
-        let type_name = report_item.class;
-        let friend_name = report_item.friend_name;
-        let preset_data = report_item.data;
-        let ex_data = report_item.ex_data;
-        let def_tab = 1;
-        let fontfamily = "宋体";
-        let fontweight = 400;
-        let fontcolor = "#444";
-        let fontsize = 14;
-        let align="right";
-        let sync_id = "";
-        let is_no_print = false;    //不打印
-        /*
-        let report_item = {
-            id:new_id,
-            class:field_type,
-            friend_name:"",
-            //data:element.data,
-        };
-        */
-  
-        if(type_name === "image") {
-            friend_name = friend_name || "图像";
-            this._add_item({id:new_id, class:type_name, friend_name, left:x,top:y,width:100,height:100, isActive:true, zindex:0, selectted:false, data: "", ex_data}); 
-        }
-        else if(type_name === "rect") {
-            this._add_item({id:new_id, class:type_name,friend_name, left:x,top:y,width:100,height:100, radius:0, color:'rgb(238, 0, 0)',isActive:true, zindex:0, selectted:false});
-        }
-        else if(type_name === "qr-code") {
-            this._add_item({id:new_id, class:type_name,friend_name, left:x,top:y,width:100,height:100, isActive:true, zindex:0, selectted:false, data: preset_data, ex_data,sync_id}); 
-        }
-        else if(type_name === "label-text") {
-            friend_name = friend_name || "标签文本";
-            this._add_item({id:new_id, class: type_name,friend_name, is_no_print, left:x,top:y,width:60,height:20, align,isActive:true, fontfamily,fontweight,fontcolor, fontsize, zindex:0, selectted:false, data:preset_data, ex_data}); 
-        }
-        else if(type_name === "label-data") {
-            friend_name = friend_name || "标签数据";
-            this._add_item({id:new_id, class: type_name,friend_name, is_no_print, left:x,top:y,width:60,height:20, align,isActive:true, fontfamily,fontweight,fontcolor, fontsize, zindex:0, selectted:false, data:preset_data, ex_data, sync_id}); 
-        }
-        else if(type_name === "ellipse") {
-            this._add_item({id:new_id, class: type_name,friend_name, left:x,top:y,width:100,height:100, color:'rgb(238, 0, 0)',isActive:true, zindex:0, selectted:false}); 
-        }
-        else if(type_name === "input-text") {
-            friend_name = friend_name || "单行输入";
-            this._add_item({id:new_id, class:type_name,friend_name, is_no_print, tab:def_tab, left:x,top:y,width:100,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", ex_data,sync_id}); 
-        }
-        else if(type_name === "text-area") {
-            friend_name = friend_name || "多行输入";
-            this._add_item({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:160,height:50, fontfamily,fontweight,fontcolor, fontsize,isActive:true, zindex:0, selectted:false, data: preset_data, ex_data }); 
-        }
-        else if(type_name === "rich-text") {
-            friend_name = friend_name || "富文本";
-            this._add_item({id:new_id, class:type_name,friend_name, tab:def_tab, left:x,top:y,width:260,height:150, isActive:true, zindex:0, selectted:false, data:preset_data + " ", ex_data}); 
-        }
-        else if(type_name === "select-date") {
-            this._add_item({id:new_id, class:type_name,friend_name, is_no_print, tab:def_tab, left:x,top:y,width:202,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", dateformat:"yyyyMMdd", def_now:true, ex_data}); 
-        }
-        else if(type_name === "select-item") {
-            this._add_item({id:new_id, class:type_name, friend_name, is_no_print, tab:def_tab, left:x,top:y,width:160,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, multiple:false, data: "", preset_data, ex_data });
-        }
-        else if(type_name === "select-cascader") {
-            this._add_item({id:new_id, class:type_name, friend_name, is_no_print, tab:def_tab, left:x,top:y,width:160,height:30, fontfamily,fontweight,fontcolor, align, fontsize,isActive:true, zindex:0, selectted:false, data: "", showall:true, preset_data, ex_data }); 
-        }
-        else{
-          console.error("尝试增加一个不支持的类型", type_name);
-        }
       },
 
       add(item_str){
@@ -605,7 +526,7 @@
                 if(callback){
                   callback(dataURL);
                 }
-              });          
+              });
           }, 200);
 
       },
