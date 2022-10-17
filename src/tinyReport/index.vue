@@ -106,6 +106,7 @@
           },
           items:[]
         },
+        cur_model:"design",
         tab_index:1,
         activeItem:null,
         clickItem:null,   //点中的
@@ -127,6 +128,13 @@
           isShowBorder:true,  //显示边框
         },
         tmp_add_index:1,
+        def_models:{
+              design: {label:"设计",value:"design"},
+              write:{label:"填写",value:"write"},
+              tab:{label:"tab",value:"tab"},
+              preview:{label:"预览",value:"preview"},
+        },
+      
       }
     },
   
@@ -146,7 +154,7 @@
             }, 500);
         },
         deep:true,
-        immediate:false,
+        immediate:true,
       },
       activeItem:{
         handler(newVal, oldVal){
@@ -162,12 +170,16 @@
         deep:true,
         immediate:false,
       },
-
-
+      cur_model:{
+        handler(newVal){
+          this.SetModel(newVal);
+          this.$emit('modelChange', newVal)
+        },
+        immediate:true,
+      },
       paperModel:{
         handler(newVal){
-          console.log("============>newVal", newVal);
-          this.SetModel(newVal);
+          this.cur_model = newVal;
         },
         deep:true,
         immediate:true,
@@ -510,6 +522,11 @@
 
         return def_items;
       },
+
+      get_models(){
+        return this.def_models;
+      },
+
       Print(callback){
           let _self = this;
   

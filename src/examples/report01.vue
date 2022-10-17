@@ -1,6 +1,19 @@
 <template>
     <div class="report-box">
       <div class="left">
+        
+        <div class="report-ev-item">
+          <div class="title">模式</div>
+          <div class="data">
+            <el-row class="components-list">
+              <el-radio-group v-model="report_model" size="mini">
+                <el-radio-button v-for="(item, index) in report_models" :label="index">{{item.label}}</el-radio-button>
+              </el-radio-group>
+            </el-row>
+            <div>{{report_model}}</div>
+          </div>
+        </div>
+
         <div class="report-ev-item">
           <div class="title">控件</div>
           <div class="data">
@@ -25,8 +38,10 @@
       </div>
       <div class="right">
         <YcTinyReport ref="tinyReport"
+          :paperModel="report_model"
           @drag="onReportDrag"
           @reportChange="onReportChange"
+          @modelChange="onReportModelChange"
           >
         </YcTinyReport>
       </div>
@@ -44,10 +59,13 @@
           report:"",
           report_data:"",
           report_tinydata:"",
+          report_model:"",
+          report_models:{},
         }
       },
       mounted(){
         this.report_items = this.$refs.tinyReport.def_items();
+        this.report_models = this.$refs.tinyReport.get_models();
         console.log("tiny-report", this.report_items);
       },
       methods:{
@@ -68,6 +86,9 @@
         },
         onReportChange(data){
           this.report = JSON.stringify(data);
+        },
+        onReportModelChange(model){
+          this.report_model=model;
         },
 
       }
