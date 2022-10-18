@@ -31,6 +31,7 @@
           <div class="title">报告</div>
           <div class="data">
             <el-input type="textarea" size="mini" :rows="6" placeholder="请输入内容" v-model="report"> </el-input>
+            <el-button size="tiny" @click="onSetReport">设置</el-button>
           </div>
         </div>
 
@@ -89,6 +90,10 @@
         },
         onReportModelChange(model){
           this.report_model=model;
+        },
+        onSetReport(){
+
+          this.$refs.tinyReport.setLayout(this.report);
         },
 
       }
