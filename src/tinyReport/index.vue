@@ -12,7 +12,7 @@
                   :height='item.height' 
                   :selectted="item.selectted"
 
-                  v-show="((paperModel === 'preview') && (item.is_no_print === true)) === false"
+                  v-show="( (make_image==true) && (item.is_no_print === true)) === false"
 
                   @dragging="dragging(report, item, $event)" 
                   @dragstop="dragstop(report, item, $event)"
@@ -106,6 +106,7 @@
           },
           items:[]
         },
+        make_image:false,
         cur_model:"design",
         tab_index:1,
         activeItem:null,
@@ -544,14 +545,17 @@
   
           let old_model = _self.paperModel;
           this.SetModel(Var.TINY_REPORT__PREVIEW)
-  
+
+          this.make_image = true;
+
           setTimeout(() => {
               html2canvas(_self.$refs.report, {scale: 3,allowTaint: true,taintTest: true,}).then(canvas => {
                 let dataURL = canvas.toDataURL("image/png");
                 printJS(dataURL, 'image')
   
                 _self.SetModel(old_model)
-  
+                _self.make_image = false;
+
                 if(callback){
                   callback(dataURL);
                 }
