@@ -1,11 +1,10 @@
 <template>
-      <el-date-picker v-if="model==='write' || model=='design' || model=='tab'" size="mini" :disabled="model!=='write'" :format="format" :value-format="format" v-model="inputData" type="date" placeholder="选择日期"></el-date-picker>
-      <div v-else-if="model==='preview'" size="mini">{{inputData}}</div>
+    
+      <el-date-picker v-if="options.isItemShowControl" size="mini" :disabled="!options.isItemEnable" :format="format" :value-format="format" v-model="inputData" type="date" placeholder="选择日期"></el-date-picker>
+      <div v-else-if="!options.isItemShowControl" size="mini">{{inputData}}</div>
 </template>
 
 <script>
-
-import dateFormat, { masks } from "dateformat";
 
 export default {
   name: 'TinySelectDate',
@@ -33,6 +32,9 @@ export default {
         type:Boolean,
         default:false,
       },
+      options:{
+        type: Object,
+      },      
   },
   data () {
     return {

@@ -1,13 +1,13 @@
 <template>
 
   <div class="report-item-box">
-    <el-select v-if="options.isItemEnable" size="mini" :multiple="multiple" :tabindex="tabindex" class="report-item-select"  :class="{'select-disable':!options.isItemEnable}" v-model="inputData" :disabled="!options.isItemEnable" >
+    <el-select v-if="options.isItemShowControl" size="mini" :multiple="multiple" :tabindex="tabindex" class="report-item-select"  :class="{'select-disable':!options.isItemEnable}" v-model="inputData" :disabled="!options.isItemEnable" >
         <el-option v-for="item in selectItems" :key="item" :value="item">
             {{item}}
         </el-option>
     </el-select>
 
-    <div v-if="!options.isItemEnable" class="report-item-select-text" :class="{'select-disable':!options.isItemEnable}" >{{inputData | selectDataFilter}}</div>
+    <div v-if="!options.isItemShowControl" class="report-item-select-text" :class="{'select-disable':!options.isItemShowControl}" >{{inputData | selectDataFilter}}</div>
   </div>
 
 </template>
@@ -27,13 +27,6 @@ export default {
 
       options:{
         type: Object,
-        default: ()=>{
-          return {
-            isShowBorder:false,
-            isItemEnable:true,    //是否有效
-            isShowBackArea:true,  //显示背景
-          }
-        }
       },
       tabindex:{
         type: String,

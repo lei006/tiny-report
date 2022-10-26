@@ -1,5 +1,5 @@
 <template>
-      <input class="report-input-box" :class="{'input-box-border':options.isShowBorder,'input-box-disable':!options.isItemEnable, 'input-box-edit-area':options.isShowBackArea}" :tabindex="tabindex" :disabled="!options.isItemEnable" v-model="inputData" :placeholder="placeholder" />
+      <input class="report-input-box" :class="{'input-box-border':options.isItemShowControl,'input-box-disable':!options.isItemEnable, 'input-box-edit-area':options.isItemShowControl}" :tabindex="tabindex" :disabled="!options.isItemEnable" v-model="inputData" :placeholder="placeholder" />
 </template>
 
 <script>
@@ -15,18 +15,8 @@ export default {
       itemData: {
           type: String
       },
-      model: {
-          type: String
-      },
       options:{
         type: Object,
-        default: ()=>{
-          return {
-            isItemEnable:true,    //是否有效
-            isShowBackArea:true,  //显示背景
-            isShowBorder:true,  //显示边框
-          }
-        }
       },
       tabindex:{
         type: String,
@@ -51,31 +41,6 @@ export default {
         inputData: function (newval) {
           this.$emit('eventItemData',newval);
         },
-        model:{
-            handler(newVal) {
-				console.log("input, model, ", newVal);
-              if(newVal === "design") {
-                this.isItemEnable = false; 	//是否有效
-                this.isShowBackArea = true; //显示背景
-                this.isShowBorder = true;  	//显示边框
-              } else if (newVal === "tab") {
-                this.isItemEnable = false; 	//是否有效
-                this.isShowBackArea = true; //显示背景
-                this.isShowBorder = true;  	//显示边框
-              } else if (newVal === "write") {
-                this.isItemEnable = true; 	//是否有效
-                this.isShowBackArea = true; //显示背景
-                this.isShowBorder = true;  	//显示边框
-              } else {
-                this.isItemEnable = false; 	//是否有效
-                this.isShowBackArea = false; //显示背景
-                this.isShowBorder = false;  	//显示边框
-              }
-            },
-            deep:true,
-            immediate:true,
-        },
-      
   },
 
   methods:{

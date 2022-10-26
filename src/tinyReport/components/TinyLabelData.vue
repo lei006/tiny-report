@@ -24,19 +24,9 @@ export default {
       align:{
         type:String
       },
-      mode:{
-        type:String
-      },
+
       options:{
         type: Object,
-        default: ()=>{
-          return {
-            isAllowResize:false,  //允许调整大小
-            isAllowDrag:true,     //允许拖动
-            isItemEnable:true,    //是否有效
-            isShowBackArea:true,  //显示背景
-          }
-        }
       },
   },
   data () {

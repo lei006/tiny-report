@@ -32,8 +32,8 @@
                         <TinyInputText :options="options" :tabindex="item.tab + ''"  v-else-if="item.class == 'input-text'" v-model="report.items[key].data" @eventItemData="eventInputTextChange($event, report.items[key])"/>
                         <TinyImage :options="options" v-else-if="item.class == 'image'" v-model="report.items[key].data"/>
                         <TinyQrcode :options="options" v-else-if="item.class == 'qr-code'" v-model="report.items[key].data" :color="report.items[key].color"/>
-                        <TinyRect :options="options" v-else-if="item.class == 'rect'"  :radius="report.items[key].radius" :color="report.items[key].color"/>
-                        <TinyEllipse :options="options" v-else-if="item.class == 'ellipse'" :color="report.items[key].color"/>
+                        <TinyRect :options="options" v-else-if="item.class == 'rect'"  :radius="report.items[key].radius" :color="report.items[key].backcolor"/>
+                        <TinyEllipse :options="options" v-else-if="item.class == 'ellipse'" :color="report.items[key].backcolor"/>
                         <TinyTextarea :options="options" :tabindex="item.tab + ''" v-else-if="item.class == 'text-area'" v-model="report.items[key].data"/>
                         <TinyRich :options="options" :tabindex="item.tab + ''" v-else-if="item.class == 'rich-text'" v-model="report.items[key].data"/>
                         <TinySelectDate :options="options" :tabindex="item.tab + ''" v-else-if="item.class == 'select-date'" :def_now="item.def_now" v-model="report.items[key].data"/>
@@ -41,8 +41,8 @@
                         <TinySelectCascader :options="options" :tabindex="item.tab + ''" :showAll="item.showall" v-else-if="item.class == 'select-cascader'" v-model="report.items[key].data" :preset_data="item.preset_data" />
                         <div v-else>不支持组件:{{item.class}}</div>
 
-                      <div v-if="paperModel==='tab' && item.tab" class="report-tab" @click="onBtnTabClick(report, item)">{{item.tab}}</div>
-                      <div v-if="paperModel==='design' && item.friend_name && friendName===true " class="report-tab">{{item.friend_name}}</div>
+                      <div v-if="options.isShowTab && item.tab" class="report-tab" @click="onBtnTabClick(report, item)">{{item.tab}}</div>
+                      <div v-if="options.isShowFriendName && item.friend_name && friendName===true " class="report-tab">{{item.friend_name}}</div>
   
               </report-base-item>
         </div>
@@ -102,7 +102,7 @@
         report:{
           paper:{
             width:640,
-            ratio:1.43,
+            ratio:1.41,
           },
           items:[]
         },
@@ -124,8 +124,12 @@
           isAllowResize:false,  //允许调整大小
           isAllowDrag:true,     //允许拖动
           isItemEnable:true,    //是否有效
+          isItemShowControl:true,   //是否有效
           isShowBackArea:true,  //显示背景
           isShowBorder:true,  //显示边框
+          isShowTab:false,      //显示tab
+          isShowFriendName:false, //显示友名
+          
         },
         tmp_add_index:1,
         def_models:{
@@ -158,14 +162,14 @@
       },
       activeItem:{
         handler(newVal, oldVal){
-          this.$emit('activeItem', newVal)
+          this.$emit('activeItem', newVal, this.report.paper)
         },
         deep:true,
         immediate:false,
       },
       clickItem:{
         handler(newVal, oldVal){
-          this.$emit('clickItem', newVal)
+          this.$emit('clickItem', newVal, this.report.paper)
         },
         deep:true,
         immediate:false,
@@ -432,28 +436,36 @@
           this.options.isAllowResize = true;  //允许调整大小
           this.options.isAllowDrag = true;     //允许拖动
           this.options.isItemEnable = false;    //是否有效
-          this.options.isShowBackArea = true;  //显示背景
+          this.options.isItemShowControl = true;     //是否显示控件
           this.options.isShowBorder = true;  //显示边框
+          this.options.isShowTab = false;
+          this.options.isShowFriendName = true;
         }
         else if (model == Var.TINY_REPORT__WRITE) {
           this.options.isAllowResize = false;  //允许调整大小
           this.options.isAllowDrag = false;     //允许拖动
           this.options.isItemEnable = true;    //是否有效
-          this.options.isShowBackArea = true;  //显示背景
+          this.options.isItemShowControl = true;     //是否录入
           this.options.isShowBorder = true;  //显示边框
+          this.options.isShowTab = false;
+          this.options.isShowFriendName = false;
         }
         else if (model == Var.TINY_REPORT__TAB) {
           this.options.isAllowResize = false;  //允许调整大小
           this.options.isAllowDrag = false;     //允许拖动
           this.options.isItemEnable = false;    //是否有效
-          this.options.isShowBackArea = true;  //显示背景
+          this.options.isItemShowControl = true;     //是否显示控件
           this.options.isShowBorder = true;  //显示边框
+          this.options.isShowTab = true;
+          this.options.isShowFriendName = false;
         }else {
           this.options.isAllowResize = false;  //允许调整大小
           this.options.isAllowDrag = false;     //允许拖动
           this.options.isItemEnable = false;    //是否有效
-          this.options.isShowBackArea = false;  //显示背景
+          this.options.isItemShowControl = false;     //是否显示控件
           this.options.isShowBorder = false;  //显示边框
+          this.options.isShowTab = false;
+          this.options.isShowFriendName = false;
         }
 
         

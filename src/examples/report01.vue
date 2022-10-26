@@ -9,6 +9,7 @@
               <el-radio-group v-model="report_model" size="mini">
                 <el-radio-button v-for="(item, index) in report_models" :label="index">{{item.label}}</el-radio-button>
               </el-radio-group>
+              <el-button size="small" @click="onBtnPrint">打印</el-button>
             </el-row>
             <div>{{report_model}}</div>
           </div>
@@ -95,6 +96,9 @@
 
           this.$refs.tinyReport.setLayout(this.report);
         },
+        onBtnPrint(){
+          this.$refs.tinyReport.Print();
+        }
 
       }
   }

@@ -24,19 +24,8 @@ export default {
       align:{
         type:String
       },
-      mode:{
-        type:String
-      },
       options:{
         type: Object,
-        default: ()=>{
-          return {
-            isAllowResize:false,  //允许调整大小
-            isAllowDrag:true,     //允许拖动
-            isItemEnable:true,    //是否有效
-            isShowBackArea:true,  //显示背景
-          }
-        }
       },
   },
   data () {
@@ -45,19 +34,6 @@ export default {
     }
   },
   methods:{
-    dragging(id, left, top){
-      this.$emit("dragging", id, left, top);
-    },
-    dragstop(id, left, top){
-      this.$emit("dragstop", id, left, top);
-    }, 
-    onMouseDown(){
-      this.$emit("mousedown", this.reportItem);
-    },
-    onResize({left, top, width, height}){
-      this.$emit('resize', {left, top, width, height})
-    },
-
   }
 
 }
