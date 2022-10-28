@@ -1,6 +1,6 @@
 <template>
   <div class="report-item-box" 
-      :class="{'input-box-border':options.isShowBorder,'input-box-disable':!options.isItemEnable, 'input-box-edit-area':options.isShowBackArea}" :tabindex="tabindex">
+      :class="{'input-box-border':options.isShowBorder,'input-box-disable':!options.isItemEnable, 'input-box-edit-area':options.isItemShowControl}" :tabindex="tabindex">
         <TinyRichEditor v-model="editData" placeholder="请输入内容"></TinyRichEditor>
   </div>
 </template>
@@ -23,25 +23,15 @@ export default {
       },
       options:{
         type: Object,
-        default: ()=>{
-          return {
-            isAllowResize:false,  //允许调整大小
-            isAllowDrag:true,     //允许拖动
-            isItemEnable:true,    //是否有效
-            isShowBackArea:true,  //显示背景
-          }
-        }
       },
       tabindex:{
         type: String,
       }
-
-
   },
 
   data () {
     return {
-      editData:"<p>1111111111</p>",
+      editData:"<p></p>",
       disabled:false,
     }
   }, 

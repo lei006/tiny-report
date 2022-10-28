@@ -424,8 +424,8 @@
               }
             }
         }
-  
-        console.log("eventInputTextChange -->", data, item);
+        this.$emit("inputTextChange", item);
+        //console.log("eventInputTextChange -->", data, item);
       },
   
       SetSize(width){
@@ -531,7 +531,7 @@
         def_items['rich-text']        = {width:260,height:160, class:"rich-text", friend_name:"富文本", is_no_print, data:"", ex_data:"", fontfamily,fontweight,fontcolor, fontsize, tab:def_tab};
         def_items['select-date']      = {width:210,height:30,  class:"select-date", friend_name:"选择日期", is_no_print, data:"", ex_data:"", fontfamily,fontweight,fontcolor, fontsize, tab:def_tab, align};
         def_items['select-item']      = {width:160,height:30,  class:"select-item", friend_name:"远择项", is_no_print, data:"", ex_data:"", fontfamily,fontweight,fontcolor, fontsize, tab:def_tab, align, multiple:false};
-        def_items['select-cascader']  = {width:160,height:30,  class:"select-cascader", friend_name:"级连选择", is_no_print, data:"", ex_data:"", fontfamily,fontweight,fontcolor, fontsize, tab:def_tab, align};
+        //def_items['select-cascader']  = {width:160,height:30,  class:"select-cascader", friend_name:"级连选择", is_no_print, data:"", ex_data:"", fontfamily,fontweight,fontcolor, fontsize, tab:def_tab, align};
 
         return def_items;
       },

@@ -73,10 +73,9 @@ export default {
     onDrag(ev){
       ev.preventDefault();
       var src = ev.dataTransfer.getData("report_image");//获取src
-      if(src !== undefined || src === "") {
+      if(src === undefined || src === "") {
         return;
       }
-      console.log("onDrag", src);
       let new_item = JSON.parse(src)
       this.imageData = new_item.thumbnail;
     }

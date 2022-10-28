@@ -7,7 +7,7 @@ v-model:单向绑定，由于富文本监听问题，不能用v-model赋予默�
 </template>
 <script>
 export default {
-    name: 'rich-edit-froala',
+    name: 'tiny-rich-editor',
     model: {
         prop: "modelData",
         event: "eventModelData"
