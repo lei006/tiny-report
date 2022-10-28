@@ -1,5 +1,6 @@
 import tinyReport from './src/tinyReport/index'
 import tinyDesign from './src/tinyDesign/index'
+import tinyRichEditor from './src/tinyRichEditor/index'
 
 /*
 import { Cascader,DatePicker,InputNumber,Button,Tree,Dialog,Radio,RadioGroup, RadioButton, Popover, Input, Select,Checkbox,Option,ColorPicker,Image } from 'element-ui';
@@ -59,11 +60,10 @@ const components = {
         Vue.component(ColorPicker.name, ColorPicker );
         Vue.component(Image.name, Image);
         */
-        console.log("regedit ", tinyReport.name);
         Vue.component(tinyReport.name, tinyReport)
         Vue.component(tinyDesign.name, tinyDesign)
-
-
+        Vue.component(tinyRichEditor.name, tinyRichEditor)
+        console.log(tinyRichEditor.name);
         Vue.use(VueFroala)
 
     }
