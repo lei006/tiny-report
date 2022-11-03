@@ -63,7 +63,6 @@ const components = {
         Vue.component(tinyReport.name, tinyReport)
         Vue.component(tinyDesign.name, tinyDesign)
         Vue.component(tinyRichEditor.name, tinyRichEditor)
-        console.log(tinyRichEditor.name);
         Vue.use(VueFroala)
 
     }
