@@ -549,6 +549,12 @@
           this.make_image = true;
 
           setTimeout(() => {
+
+              this.hideForalaEditorLimte();
+
+
+
+
               html2canvas(_self.$refs.report, {scale: 3,allowTaint: true,taintTest: true,}).then(canvas => {
                 let dataURL = canvas.toDataURL("image/png");
                 printJS(dataURL, 'image')
@@ -563,7 +569,14 @@
           }, 200);
 
       },
-  
+      hideForalaEditorLimte(){
+        var limit_divs = document.querySelectorAll(".fr-wrapper > div[style*='z-index:9999']");
+        for (let i = 0; i < limit_divs.length; i++) {
+          limit_divs[i].style.opacity = 0;
+          limit_divs[i].style.height = '1px';
+          limit_divs[i].style.top = '-100000px';
+        }
+      },
       selectItemsChange(){
         let select_items = [];
         for (let i = 0; i < this.report.items.length; i++) {
@@ -779,7 +792,6 @@
   
   }
   
-  
-  
+
   </style>
   

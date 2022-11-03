@@ -2,7 +2,7 @@
 label:用于给富文本赋予默认值,清空值label=" ",必须加空格,负责不会清空
 v-model:单向绑定，由于富文本监听问题，不能用v-model赋予默认值
   -->
-  <template>
+<template>
     <froala :tag="'textarea'" :config="froalaConfig" v-model="editData"></froala>
 </template>
 <script>
@@ -63,5 +63,17 @@ export default {
     margin: 0px;
     padding: 0px;
 }
+
+.fr-wrapper > div[style*='z-index:9999'] {
+  position: absolute;
+  opacity: 0;
+  top:-1000px;
+  height: 1px;
+}
+
+.fr-wrapper.fr-element {
+  margin-top: -30px;
+}
+
 
 </style>
